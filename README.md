@@ -1,23 +1,3 @@
-# Boops-Boops  
+# porpoise
 
-Mission code for the autonomous submarine, Nemo.
-Copyright (C) 2020 AVBotz
-
-
-## Requirements
-
-
-
-## Compiling
-
-
-
-## Startup
-
-
-
-## Configuration
-
-
-
-
+Porpoise top-level repo with bootstrapping scripts and all that jazz.
