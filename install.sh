@@ -16,21 +16,30 @@ sudo apt-get install ros-eloquent-desktop
 sudo apt-get install python3-colcon-common-extensions
 sudo apt-get install python-rosdep
 
-# Not sure if we need ROS1 - leave as commented
-# # Install ROS1
-# sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-# sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
-# sudo apt-get update
-# sudo apt install ros-melodic-desktop-full ros-melodic-uuv-simulator
+# TODO: Move away from ROS1
+# Install ROS1
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+sudo apt-get update
+sudo apt install ros-melodic-desktop-full ros-melodic-uuv-simulator
 
 . /opt/ros/eloquent/setup.sh
-# . /opt/ros/melodic/setup.sh
 
-sudo rosdep init
+mkdir -p ros2_ws/src
+cd ros2_ws
+if ! [ -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
+	sudo rosdep init
+fi
 rosdep update
 rosdep install -i --from-path src --rosdistro eloquent -y
 
 colcon build
+cd ..
+
+. /opt/ros/melodic/setup.sh
+mkdir -p ros1_ws/src
+catkin_make
+cd ..
 
 echo "-----------------------     "
 echo "Porpoise workpace installed!"

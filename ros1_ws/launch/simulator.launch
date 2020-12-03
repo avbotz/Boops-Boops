@@ -1,0 +1,5 @@
+<!-- ROS launch file for running simulator. -->
+<!-- Follow instructions in simulator section of README. -->
+<launch>
+    <include file="$(find simulator)/launch/controller.launch"/>
+</launch>
