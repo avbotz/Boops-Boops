@@ -4,12 +4,5 @@
 echo "Update package config..."
 git submodule update --init --recursive --remote --rebase
 
-# Build workspace if necessary
-# if ! [ -f install/ ]; then
-#     echo "Build initial workspace..."
-#     colcon build
-# fi
-
-echo "Source setup scripts..."
-. /opt/ros/eloquent/setup.sh
-. ros2_ws/install/setup.sh
+. /opt/ros/melodic/setup.sh
+. ros1_ws/devel/setup.sh
