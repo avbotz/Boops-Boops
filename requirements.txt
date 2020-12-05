@@ -1,3 +1,4 @@
 flask
 argcomplete
 pyserial
+dataclasses

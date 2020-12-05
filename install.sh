@@ -12,7 +12,7 @@ sudo apt-get update && sudo apt-get install curl gnupg2 lsb-release
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 sudo sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
 sudo apt-get update
-sudo apt-get install ros-eloquent-desktop
+sudo apt-get install ros-eloquent-desktop ros-eloquent-ros1-bridge
 sudo apt-get install python3-colcon-common-extensions
 sudo apt-get install python-rosdep
 

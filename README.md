@@ -27,25 +27,31 @@
 
 ## Repo Structure
 
-- README: this readme file
-- clean.sh: Used to clean all build artifacts in both repos
-- install.sh: Used to install dependencies and set up initial repo workspaces
-- models.sh: Used to download ML models
-- requirements.txt: Used for Python dependencies (TODO: Replace with rosdep?)
-- **ros1_ws: ROS1 workspace (important) - contains simulator**
-  - launch: Contains roslaunch files (ros1) used to launch simulator
-  - startup/randomize_props.py: Script used to randomize props within simulator on startup
-  - sub_sim subrepo: Contains simulator
-- **ros2_ws: ROS2 workspace (important) - contains main BB code**
-  - sub_control subrepo: Contains packages for control (python) and service interfaces
-  - sub_mission subrepo: Contains packages for running actual mission tasks
-  - sub_vision subrepo: Contains packages for vision
-- scripts: various convenience scripts (including to run simulator)
-- setup.sh: Sets up ROS2 environment variables etc. (run every time)
-- setup_ros1.sh: Sets up ROS1 environment variables etc. (run every time) (do not mix with ROS2 setup.sh)
+    - README: this readme file
+    - clean.sh: Used to clean all build artifacts in both repos
+    - install.sh: Used to install dependencies and set up initial repo workspaces
+    - models.sh: Used to download ML models
+    - requirements.txt: Used for Python dependencies (TODO: Replace with rosdep?)
+    - **ros1_ws: ROS1 workspace (important) - contains simulator**
+      - launch: Contains roslaunch files (ros1) used to launch simulator
+      - startup/randomize_props.py: Script used to randomize props within simulator on startup
+      - sub_sim subrepo: Contains simulator
+    - **ros2_ws: ROS2 workspace (important) - contains main BB code**
+      - sub_control subrepo: Contains packages for control (python) and service interfaces
+      - sub_mission subrepo: Contains packages for running actual mission tasks
+      - sub_vision subrepo: Contains packages for vision
+    - scripts: various convenience scripts (including to run simulator)
+    - setup.sh: Sets up ROS2 environment variables etc. (run every time)
+    - setup_ros1.sh: Sets up ROS1 environment variables etc. (run every time) (do not mix with ROS2 setup.sh)
 
-ROS1 workspace packages are standard roscpp packages. ROS2 workspace packages are
-standard rclcpp packages unless otherwise stated (sub_control is an rclpy/python package).
+    ROS1 workspace packages are standard roscpp packages. ROS2 workspace packages are
+    standard rclcpp packages unless otherwise stated (sub_control is an rclpy/python package).
+
+## Some Quick Clarifications
+
+    - ROS1 uses the `catkin` build system (e.g. `catkin_make`). ROS2 uses the `colcon` build utility (`colcon build`). Use the respective command for the respective workspaces.
+    - ROS1 bridge is provided by `ros-${DISTRO}-ros1-bridge`. (DISTRO = eloquent for us.)
+    - `dataclasses` may not be available in stdlib if Python is an older version (like the version currently in bionic). Install from requirements.txt to fix this.
 
 ## Setting up a Development Environment
 
