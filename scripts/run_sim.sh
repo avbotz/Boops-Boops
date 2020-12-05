@@ -2,13 +2,17 @@
 # Script to launch the ROS1 simulator, with a bridge to ROS2.
 
 # Start tmux session
-echo "starting tmux..."
+echo "Starting tmux..."
 tmux new-session -d
 
-
-# Setup panes
-tmux selectp -t 0
-tmux splitw -h -p 50
+# Setup 4 panes
+tmux new-session -d
+tmux selectp -t 0    # select the first (0) pane
+tmux splitw -h -p 50 # split it into two halves
+tmux selectp -t 0    # select the first (0) pane
+tmux splitw -v -p 50 # split it into two halves
+tmux selectp -t 2    # select the new, second (2) pane
+tmux splitw -v -p 50 # split it into two halves
 
 # Source setup scripts
 tmux selectp -t 0
@@ -27,9 +31,22 @@ sleep 2
 # Select another pane, start ros1_bridge so ROS2 can connect
 tmux selectp -t 1
 tmux send-keys "cd ros2_ws" C-m
-tmux send-keys "colcon build" C-m
-tmux send-keys "source devel/setup.bash" C-m
+tmux send-keys "source install/setup.sh" C-m
 tmux send-keys "ros2 run ros1_bridge dynamic_bridge" C-m
+
+# Run sub control node
+tmux selectp -t 2
+tmux send-keys "cd ros2_ws" C-m
+tmux send-keys "source install/setup.sh" C-m
+tmux send-keys "ros2 run sub_control service --ros-args -p SIM:=true" C-m
+
+# Prepare 4th pane to run ros2 stuff
+tmux selectp -t 3
+tmux send-keys "cd ros2_ws" C-m
+tmux send-keys "source install/setup.sh" C-m
+echo "Waiting 15 seconds for sim to start..."
+sleep 15
+tmux send-keys 'ros2 service call /control_write sub_control_interfaces/srv/ControlWrite "{data: p 0.15\n}"' C-m
 
 # From here, your ROS2 stuff should work!
 tmux a

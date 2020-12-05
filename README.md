@@ -128,6 +128,6 @@
 
     Testing sub_control (control_state_write):
 
-        `ros2 service call /control_state_write sub_control_interfaces/srv/ControlStateWrite "{ x: 0, y: 0, z: 0, yaw: 0, pitch: 0, roll: 0}"`
+        `ros2 service call /control_write_state sub_control_interfaces/srv/ControlWriteState "{ x: 0, y: 0, z: 0, yaw: 0, pitch: 0, roll: 0}"`
 
     Note that "arguments" is in JSON. Service descriptions are in src/sub_control/sub_control_interfaces/srv.
