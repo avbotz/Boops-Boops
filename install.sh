@@ -23,6 +23,19 @@ sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31
 sudo apt-get update
 sudo apt install ros-melodic-desktop-full ros-melodic-uuv-simulator
 
+# Install Tensorflow for C.
+cd ~/Downloads && wget https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-gpu-linux-x86_64-1.15.0.tar.gz
+cd ~/Downloads && sudo tar -C /usr/local -xzf libtensorflow-gpu-linux-x86_64-1.15.0.tar.gz
+sudo ldconfig
+
+# Download  and install Spinnaker SDK from Craig's google drive
+cd ~/Downloads
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=13OGq0S_xd1bglssQZf8ecPB7ilrTvg93' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=13OGq0S_xd1bglssQZf8ecPB7ilrTvg93" -O ./spinnaker.tar.gz && rm -rf /tmp/cookies.txt
+tar -xzf spinnaker.tar.gz -C .
+cd ~/Downloads/spinnaker-2.0.0.147-amd64
+sudo apt-get install libavcodec57 libavformat57 libswscale4 libswresample2 libavutil55 libusb-1.0-0 libgtkmm-2.4-dev
+sudo sh install_spinnaker.sh
+
 . /opt/ros/eloquent/setup.sh
 
 mkdir -p ros2_ws/src
@@ -38,6 +51,7 @@ cd ..
 
 . /opt/ros/melodic/setup.sh
 mkdir -p ros1_ws/src
+cd ros1_ws
 catkin_make
 cd ..
 
