@@ -26,6 +26,9 @@ sleep 2
 
 # Select another pane, start ros1_bridge so ROS2 can connect
 tmux selectp -t 1
+tmux send-keys "cd ros2_ws" C-m
+tmux send-keys "colcon build" C-m
+tmux send-keys "source devel/setup.bash" C-m
 tmux send-keys "ros2 run ros1_bridge dynamic_bridge" C-m
 
 # From here, your ROS2 stuff should work!
