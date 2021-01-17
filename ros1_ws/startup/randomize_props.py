@@ -1,5 +1,5 @@
 """
-This is a script to add an element of randomness to 
+This is a script to add an element of randomness to
 the props' spawn locations in the simulator to mimic competition settings.
 @author Craig Wang
 6/10/20
@@ -75,7 +75,7 @@ def edit_world_file(file, prop_name, new_loc):
 	line_prepender(file, '<?xml version="1.0"?>')
 
 def randomize_bin_edit_world_file(file, new_loc):
-	""" 
+	"""
 	Randomly chooses between wolf or bat bin
 	"""
 	tree = ET.parse(file)

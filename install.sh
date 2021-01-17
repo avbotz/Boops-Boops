@@ -1,14 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 # Bash script for installing and setting up a ROS2 workspace.
 # This only needs to be run once.
 set -e
+
+ROS_WS_DIR=$(pwd)
 
 # Simple apt-get/pip packages.
 sudo apt-get install libopencv-dev python3-pip
 sudo pip3 install -r requirements.txt
 
 # Install ROS2
-sudo apt-get update && sudo apt-get install curl gnupg2 lsb-release
+sudo apt-get update && sudo apt-get install curl gnupg2 lsb-release git
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 sudo sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
 sudo apt-get update
@@ -35,23 +37,40 @@ tar -xzf spinnaker.tar.gz -C .
 cd ~/Downloads/spinnaker-2.0.0.147-amd64
 sudo apt-get install libavcodec57 libavformat57 libswscale4 libswresample2 libavutil55 libusb-1.0-0 libgtkmm-2.4-dev
 sudo sh install_spinnaker.sh
+cd $ROS_WS_DIR
 
-. /opt/ros/eloquent/setup.sh
+source /opt/ros/eloquent/setup.sh
+
+ROS2_REPOS=( "https://github.com/avbotz/sub_control" "https://github.com/avbotz/sub_vision" "https://github.com/avbotz/sub_mission" )
+ROS1_REPOS=( "https://github.com/avbotz/sub_sim" )
 
 mkdir -p ros2_ws/src
 cd ros2_ws
 if ! [ -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
 	sudo rosdep init
 fi
+
+cd src
+for repo in ${ROS2_REPOS[@]}; do
+	git clone $repo
+done
+cd ..
+
 rosdep update
 rosdep install -i --from-path src --rosdistro eloquent -y
 
 colcon build
 cd ..
 
-. /opt/ros/melodic/setup.sh
+source /opt/ros/melodic/setup.sh
 mkdir -p ros1_ws/src
-cd ros1_ws
+cd ros1_ws/src
+
+for repo in ${ROS1_REPOS[@]}; do
+	git clone $repo
+done
+cd ..
+
 catkin_make
 cd ..
 
