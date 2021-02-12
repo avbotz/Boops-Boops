@@ -2,5 +2,10 @@
 **/install/*
 **/devel/*
 **/log/*
-ros2_ws/
+**/src/*
+**/__pycache__/*
+*.pyc
+gains/*
+models/*
+images/*
 .catkin_workspace
