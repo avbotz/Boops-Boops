@@ -2,5 +2,5 @@
 **/install/*
 **/devel/*
 **/log/*
-ros2_ws/
+**/src/*
 .catkin_workspace
