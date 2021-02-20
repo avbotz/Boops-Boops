@@ -12,7 +12,10 @@ def generate_launch_description():
             package='sub_vision',
             node_executable='vision_node',
             node_name='vision',
-            output='screen'
+            output='screen',
+            parameters=[
+                {"SIM": True}
+            ]
         ),
         Node(
             package='sub_control',
@@ -21,12 +24,15 @@ def generate_launch_description():
             output='screen',
             parameters=[
                 {"SIM": True}
-            ],
+            ]
         ),
         Node(
             package='sub_mission',
             node_executable='mission_node',
             node_name='mission',
-            output='screen'
+            output='screen',
+            parameters=[
+                {"SIM": True}
+            ],
         )
     ])

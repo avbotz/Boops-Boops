@@ -30,7 +30,7 @@ ROS_WS_DIR=$(pwd)
 # cd ~/Downloads && sudo tar -C /usr/local -xzf libtensorflow-gpu-linux-x86_64-1.15.0.tar.gz
 # sudo ldconfig
 
-# # Download  and install Spinnaker SDK from Craig's google drive
+# # Download and install Spinnaker SDK from Craig's google drive
 # cd ~/Downloads
 # wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=13OGq0S_xd1bglssQZf8ecPB7ilrTvg93' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=13OGq0S_xd1bglssQZf8ecPB7ilrTvg93" -O ./spinnaker.tar.gz && rm -rf /tmp/cookies.txt
 # tar -xzf spinnaker.tar.gz -C .
@@ -62,17 +62,17 @@ cd ros2_ws
 colcon build
 cd ..
 
-source /opt/ros/melodic/setup.sh
-mkdir -p ros1_ws/src
-cd ros1_ws/src
+# source /opt/ros/melodic/setup.sh
+# mkdir -p ros1_ws/src
+# cd ros1_ws/src
 
-for repo in ${ROS1_REPOS[@]}; do
-	git clone $repo
-done
-cd ..
+# for repo in ${ROS1_REPOS[@]}; do
+# 	git clone $repo
+# done
+# cd ..
 
-catkin_make
-cd ..
+# catkin_make
+# cd ..
 
 echo "-----------------------     "
 echo "Boops-Boops workpace installed!"

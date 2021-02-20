@@ -3,4 +3,6 @@
 **/devel/*
 **/log/*
 **/src/*
+images/*
+models/*
 .catkin_workspace

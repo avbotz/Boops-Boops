@@ -23,13 +23,15 @@ sleep 2
 
 # Select another pane, start ros1_bridge so ROS2 can connect
 tmux selectp -t 1
+tmux send-keys "source setup_ros1.sh" C-m
 tmux send-keys "source setup.sh" C-m
 tmux send-keys "ros2 run ros1_bridge dynamic_bridge" C-m
 
-# # Run ros 2 nodes (vision, control, mission)
-# tmux selectp -t 2
-# tmux send-keys "source setup.sh" C-m
-# tmux send-keys "ros2 launch ros2_ws/launch/launch_sim.py" C-m
+# # Run ros2 nodes (vision, control, mission)
+sleep 8
+tmux selectp -t 2
+tmux send-keys "source setup.sh" C-m
+tmux send-keys "ros2 launch ros2_ws/launch/launch_sim.py" C-m
 
 # From here, your ROS2 stuff should work!
 tmux a
