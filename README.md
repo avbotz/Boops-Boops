@@ -61,7 +61,8 @@
 
     `ros2 launch ros2_ws/launch/launch_mission.py`
        This will launch the image acquisition, vision, control, and mission nodes 
-       in a standard mission or pool test to pilot the sub.
+       in a standard mission or pool test to pilot the sub. Make sure the correct 
+       competition pool is set in sub_mission's config.hpp.
 
     `ros2 launch ros2_ws/launch/launch_tuning.py`
        Before you do this, make sure you have uncommented the pid_tuning_sequence()

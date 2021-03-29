@@ -8,9 +8,9 @@ tmux new-session -d
 # Setup 3 panes
 tmux new-session -d
 tmux selectp -t 0    # select the first (0) pane
-tmux splitw -h -p 50 # split it into two halves
-tmux selectp -t 1    # select the second (1) pane
-tmux splitw -p 50    # split it into two halves
+tmux splitw -h -p 50 # split it in half down the middle
+tmux selectp -t 0    # select the first (0) pane
+tmux splitw -p 50    # split it in half vertically
 
 # Start ROS1 simulator.
 tmux selectp -t 0
