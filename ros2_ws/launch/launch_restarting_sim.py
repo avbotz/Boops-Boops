@@ -31,11 +31,17 @@ def generate_launch_description():
         ),
         Node(
             package='sub_mission',
-            node_executable='restart_node',
-            node_name='restart',
+            node_executable='mission_node',
+            node_name='mission',
             output='screen',
             parameters=[
                 {"SIM": True}
             ],
+        ),
+        Node(
+            package='sub_mission',
+            node_executable='restart_runner',
+            node_name='restart_runner',
+            output='screen',
         )
     ])

@@ -1,6 +1,6 @@
 """
 For now, it's necessary to launch the Gazebo simulator through the ros1 workspace.
-This file is to run mission, control, vision nodes to work with the simulator
+This file is to run mission, control, vision nodes to work with the simulator.
 """
 
 from launch import LaunchDescription
@@ -34,5 +34,11 @@ def generate_launch_description():
             parameters=[
                 {"SIM": True}
             ],
+        ),
+        Node(
+            package='sub_mission',
+            node_executable='mission_runner',
+            node_name='mission_runner',
+            output='screen',
         )
     ])
