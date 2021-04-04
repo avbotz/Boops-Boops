@@ -35,7 +35,13 @@ def generate_launch_description():
             package='sub_mission',
             node_executable='mission_node',
             node_name='mission',
-            output='screen'
+            output='screen',
+            parameters=[
+                {"GATE": True},
+                {"BINS": True},
+                {"TARGET": True},
+                {"OCTAGON": True}
+            ]
         ),
         Node(
             package='sub_mission',
