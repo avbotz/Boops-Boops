@@ -1,7 +1,7 @@
 """
 This file is to run mission_node (controlled by restart_runner node), 
 control_node, vision_node, and acquisition_node for the sub to complete 
-the mission (either competition or at a pool test).
+the mission in POOL B (either competition or at a pool test).
 
 This is recommended for competition because if we decide to restart our run, 
 the kill switch will kill the mission, and when the kill switch is turned on again,
@@ -33,20 +33,15 @@ def generate_launch_description():
         ),
         Node(
             package='sub_mission',
-            node_executable='mission_node',
+            node_executable='restart_node',
             node_name='mission',
             output='screen',
             parameters=[
                 {"GATE": True},
                 {"BINS": True},
                 {"TARGET": True},
-                {"OCTAGON": True}
+                {"OCTAGON": True},
+                {"POOL_B": True}
             ]
-        ),
-        Node(
-            package='sub_mission',
-            node_executable='restart_runner',
-            node_name='restart_runner',
-            output='screen',
         )
     ])

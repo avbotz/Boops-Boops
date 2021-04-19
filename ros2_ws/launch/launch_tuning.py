@@ -27,13 +27,8 @@ def generate_launch_description():
             node_name='mission',
             output='screen',
             parameters=[
-                {"PID_TUNING_SEQUENCE": True}
+                {"PID_TUNING_SEQUENCE": True},
+                {"POOL_A", True}
             ]
-        ),
-        Node(
-            package='sub_mission',
-            node_executable='mission_runner',
-            node_name='mission_runner',
-            output='screen',
         )
     ])

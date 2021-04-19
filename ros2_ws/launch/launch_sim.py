@@ -32,17 +32,12 @@ def generate_launch_description():
             node_name='mission',
             output='screen',
             parameters=[
-                {"SIM": True},
                 {"GATE": True},
                 {"BINS": True},
                 {"TARGET": True},
-                {"OCTAGON": True}
+                {"OCTAGON": True},
+                {"POOL_B": True},
+                {"SIM": True}
             ]
-        ),
-        Node(
-            package='sub_mission',
-            node_executable='mission_runner',
-            node_name='mission_runner',
-            output='screen',
         )
     ])

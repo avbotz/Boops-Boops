@@ -59,19 +59,43 @@
        so you have made your edits and compiled them.
     2. Run one of the following launch commands:
 
-    `ros2 launch ros2_ws/launch/launch_mission.py`
+    Competition Run:
+    `ros2 launch ros2_ws/launch/launch_restarting_mission_A.py` or
+    `ros2 launch ros2_ws/launch/launch_restarting_mission_B.py` or
+    `ros2 launch ros2_ws/launch/launch_restarting_mission_C.py` or
+    `ros2 launch ros2_ws/launch/launch_restarting_mission_D.py` 
+       First choose the command with the correct pool that the sub will run in.
        This will launch the image acquisition, vision, control, and mission nodes 
-       in a standard mission or pool test to pilot the sub. Make sure the correct 
-       competition pool is set in sub_mission's config.hpp.
+       in a competition run. The difference between restarting_mission and the 
+       normal mission is that if the kill switch kills the sub, restart_node
+       will stop the mission code from running. When the kill switch turns on the
+       sub again, restart_node will restart the mission code from the beginning.
+       This is useful for when a competition run is botched, and the diver kills the 
+       sub and pushes it back to the start, where restart_node will automatically
+       restart the mission. 
 
+    Standard Mission Run:
+    `ros2 launch ros2_ws/launch/launch_restarting_mission_A.py` or
+    `ros2 launch ros2_ws/launch/launch_restarting_mission_B.py` or
+    `ros2 launch ros2_ws/launch/launch_restarting_mission_C.py` or
+    `ros2 launch ros2_ws/launch/launch_restarting_mission_D.py` 
+       First choose the command with the correct competition pool that the sub 
+       will run in. This will launch the image acquisition, vision, control, and 
+       mission nodes in a standard mission or pool test to pilot the sub.
+
+    Prelim:
+    `ros2 launch ros2_ws/launch/launch_prelim.py
+       This will launch the control and mission nodes to have the sub move a set
+       of movements to check if the sub is running smoothly.
+
+    PID Tuning Session:
     `ros2 launch ros2_ws/launch/launch_tuning.py`
-       Before you do this, make sure you have uncommented the pid_tuning_sequence()
-       function in mission.cpp and have run the compile script beforehand.
        This will launch the control, motor gains tuning GUI, and mission nodes to 
        command the sub to move in a set pattern to have the software member adjust
        the aggressiveness of the motors using the GUI, in order to tune for gains 
        that allow the sub to move accurately and smoothly.
 
+    Simulator:
     `./scripts/run_sim.sh`
        This will start a tmux session that will run the ros1 simulator as well as 
        launch the vision, control, and mission nodes in simulation mode to simulate
@@ -193,6 +217,10 @@
     - ROS1 uses the `catkin` build system (e.g. `catkin_make`). ROS2 uses the `colcon` build utility (`colcon build`). Use the respective command for the respective workspaces.
     - ROS1 bridge is provided by `ros-${DISTRO}-ros1-bridge`. (DISTRO = eloquent for us.)
     - `dataclasses` may not be available in stdlib if Python is an older version (like the version currently in bionic). Install from requirements.txt to fix this.
+
+## Questions?
+
+    Contact Vincent Wang, Craig Wang, or Phoebe Tang through Slack or email.
 
 ## Final Words
 

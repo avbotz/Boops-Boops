@@ -20,13 +20,8 @@ def generate_launch_description():
             node_name='mission',
             output='screen',
             parameters=[
-                {"PRELIM": True}
+                {"PRELIM": True},
+                {"POOL_A": True}
             ]
-        ),
-        Node(
-            package='sub_mission',
-            node_executable='mission_runner',
-            node_name='mission_runner',
-            output='screen',
         )
     ])
