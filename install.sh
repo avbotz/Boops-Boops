@@ -9,6 +9,13 @@ ROS_WS_DIR=$(pwd)
 sudo apt-get install libopencv-dev python3-pip
 sudo pip3 install -r requirements.txt
 
+# TODO: Move away from ROS1
+# Install ROS1
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+sudo apt-get update
+sudo apt install ros-melodic-desktop-full ros-melodic-uuv-simulator
+
 # Install ROS2
 sudo apt-get update && sudo apt-get install curl gnupg2 lsb-release git
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
@@ -18,19 +25,13 @@ sudo apt-get install ros-eloquent-desktop ros-eloquent-ros1-bridge
 sudo apt-get install python3-colcon-common-extensions
 sudo apt-get install python-rosdep
 
-# TODO: Move away from ROS1
-# Install ROS1
-sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
-sudo apt-get update
-sudo apt install ros-melodic-desktop-full ros-melodic-uuv-simulator
-
 # Install Tensorflow for C.
 cd ~/Downloads && wget https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-gpu-linux-x86_64-1.15.0.tar.gz
 cd ~/Downloads && sudo tar -C /usr/local -xzf libtensorflow-gpu-linux-x86_64-1.15.0.tar.gz
 sudo ldconfig
 
 # Download ML models from Craig's Google Drive
+cd $ROS_WS_DIR
 ./models.sh
 
 # Download and install Spinnaker SDK from Craig's google drive
