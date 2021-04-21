@@ -21,11 +21,9 @@
        This will download BB.
     3. Run `./install.sh`. 
        This will install necessary dependencies, including 
-       both ROS1 Melodic and ROS2 Eloquent, also building the ROS workspaces. 
-       Only do this once.
-    4. Run `./models.sh`. 
-       This will download the current machine learning (ML)
-       models that are being used for the sub's vision to detect objects. 
+       both ROS1 Melodic and ROS2 Eloquent, also building the ROS workspaces.
+       This will also download the current machine learning (ML)
+       models that are being used for the sub's vision to detect objects
        Only do this once.
     4. Source the ROS2 setup script with `source setup.sh`. 
        This is necessary every time you open a new terminal to work with ROS2.
