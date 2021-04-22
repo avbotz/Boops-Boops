@@ -73,18 +73,31 @@
        restart the mission. 
 
     Standard Mission Run:
-    `ros2 launch ros2_ws/launch/launch_restarting_mission_A.py` or
-    `ros2 launch ros2_ws/launch/launch_restarting_mission_B.py` or
-    `ros2 launch ros2_ws/launch/launch_restarting_mission_C.py` or
-    `ros2 launch ros2_ws/launch/launch_restarting_mission_D.py` 
+    `ros2 launch ros2_ws/launch/launch_mission_A.py` or
+    `ros2 launch ros2_ws/launch/launch_mission_B.py` or
+    `ros2 launch ros2_ws/launch/launch_mission_C.py` or
+    `ros2 launch ros2_ws/launch/launch_mission_D.py` 
        First choose the command with the correct competition pool that the sub 
        will run in. This will launch the image acquisition, vision, control, and 
        mission nodes in a standard mission or pool test to pilot the sub.
 
     Prelim:
-    `ros2 launch ros2_ws/launch/launch_prelim.py
+    `ros2 launch ros2_ws/launch/launch_prelim.py`
        This will launch the control and mission nodes to have the sub move a set
        of movements to check if the sub is running smoothly.
+
+    Pool Test:
+    `ros2 launch ros2_ws/launch/launch_pool_test.py`
+       This will launch the acquisition, vision, control, and mission nodes
+       to execute whatever commands are located in the pool_test() function 
+       in sub_mission's function.cpp.
+
+    Vision Test:
+    `ros2 launch ros2_ws/launch/launch_pool_test.py`
+       This will launch the acquisition, vision, control, and mission nodes
+       to execute whatever commands are located in the vision_test() function 
+       in sub_mission's function.cpp, which might be testing down camera 
+       object detection for example.
 
     PID Tuning Session:
     `ros2 launch ros2_ws/launch/launch_tuning.py`

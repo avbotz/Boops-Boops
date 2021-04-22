@@ -39,7 +39,7 @@ def generate_launch_description():
                 {"BINS": True},
                 {"TARGET": True},
                 {"OCTAGON": True},
-                {"POOL_B": True}.
+                {"POOL_B": True},
                 {"SIM": True}
             ]
         )
