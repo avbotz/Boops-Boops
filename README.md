@@ -23,7 +23,7 @@
        This will install necessary dependencies, including 
        both ROS1 Melodic and ROS2 Eloquent, also building the ROS workspaces.
        This will also download the current machine learning (ML)
-       models that are being used for the sub's vision to detect objects
+       models that are being used for the sub's vision to detect objects.
        Only do this once.
     4. Source the ROS2 setup script with `source setup.sh`. 
        This is necessary every time you open a new terminal to work with ROS2.
@@ -110,10 +110,9 @@
     `./scripts/run_sim.sh`
        This will start a tmux session that will run the ros1 simulator as well as 
        launch the vision, control, and mission nodes in simulation mode to simulate
-       what a competition run might look like in the simulator. The simulation is 
-       useful for testing new mission movements and catch possible bugs or see if
-       current approaches for completing the competition mission are performed 
-       accurately by the sub.
+       what a competition run might look like. The simulation is useful for testing 
+       new mission movements and catching possible bugs or seeing if current approaches 
+       for completing the competition mission are performed accurately by the sub.
 
 ## Running Nodes
 
