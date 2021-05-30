@@ -19,7 +19,7 @@ def generate_launch_description():
             package='sub_control',
             node_executable='tuning',
             node_name='tuning',
-            output='screen'
+            output='screen',
         ),
         Node(
             package='sub_mission',
@@ -28,7 +28,7 @@ def generate_launch_description():
             output='screen',
             parameters=[
                 {"PID_TUNING_SEQUENCE": True},
-                {"POOL_A", True}
+                {"POOL_A": True}
             ]
         )
     ])

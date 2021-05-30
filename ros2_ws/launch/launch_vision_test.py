@@ -9,6 +9,18 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
+            package='sub_vision',
+            node_executable='acquisition_node',
+            node_name='acquisition',
+            output='screen'
+        ),
+        Node(
+            package='sub_vision',
+            node_executable='vision_node',
+            node_name='vision',
+            output='screen'
+        ),
+        Node(
             package='sub_control',
             node_executable='service',
             node_name='control',
