@@ -10,26 +10,22 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='sub_vision',
-            node_executable='acquisition_node',
-            node_name='acquisition',
+            node_executable='acquisition',
             output='screen'
         ),
         Node(
             package='sub_vision',
-            node_executable='vision_node',
-            node_name='vision',
+            node_executable='vision',
             output='screen'
         ),
         Node(
             package='sub_control',
             node_executable='service',
-            node_name='control',
             output='screen'
         ),
         Node(
             package='sub_mission',
-            node_executable='mission_node',
-            node_name='mission',
+            node_executable='mission',
             output='screen',
             parameters=[
                 {"GATE": True},
@@ -38,5 +34,12 @@ def generate_launch_description():
                 {"OCTAGON": True},
                 {"POOL_D": True}
             ]
+        )
+
+        # Launch image display
+        Node(
+            package='rqt_image_view',
+            node_executable='rqt_image_view',
+            output='screen'
         )
     ])

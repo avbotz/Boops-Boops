@@ -11,13 +11,11 @@ def generate_launch_description():
         Node(
             package='sub_control',
             node_executable='service',
-            node_name='control',
             output='screen'
         ),
         Node(
             package='sub_mission',
-            node_executable='mission_node',
-            node_name='mission',
+            node_executable='mission',
             output='screen',
             parameters=[
                 {"PRELIM": True},
