@@ -180,6 +180,17 @@
     3. Navigate to the github website and submit a pull request using your branch.
        If it is suitable, it will be approved and merged into the main BB branch!
 
+## Pool Test Procedure
+
+    1. Setup sub, turn on, and connect sub to router. Ensure kill is OFF.
+    2. Connect own computer to AVBotz network.
+    3. SSH into sub, "ssh user@192.168.2.50".
+    4. Put sub into water without breaking a motor.
+    5. Follow Nautical README instructions. Pray that the DVL doesn't hang.
+    6. Follow Boops-Boops "Running the Code" instructions with one of the common node combinations.
+    7. Unplug tether if this is an autonomous run.
+    8. Turn kill switch ON to begin mission if that is running.
+
 ## Repo Structure
 
     - README: this readme file
