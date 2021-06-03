@@ -101,8 +101,8 @@
 
     PID Tuning Session:
     `ros2 launch ros2_ws/launch/launch_tuning.py`
-       This will launch the control, motor gains tuning GUI, and mission nodes to 
-       command the sub to move in a set pattern to have the software member adjust
+       This will launch the control and motor gains tuning GUI nodes to 
+       remote control the sub, while the software member adjusts
        the aggressiveness of the motors using the GUI, in order to tune for gains 
        that allow the sub to move accurately and smoothly.
 

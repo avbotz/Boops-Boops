@@ -1,6 +1,6 @@
 """
-This file is to run mission_node, control_node, and tuning_node
-for the sub in the simto repeat a predefined movement sequence while 
+This file is to run control_node and tuning_node
+in the sim to remote control Nemo while 
 tuning the motor gains using tuning_node's gui. 
 """
 
@@ -20,18 +20,6 @@ def generate_launch_description():
         Node(
             package='sub_control',
             node_executable='tuning',
-            output='screen',
-            parameters=[
-                {"SIM": True}
-            ]
-        ),
-        Node(
-            package='sub_mission',
-            node_executable='mission',
-            output='screen',
-            parameters=[
-                {"PID_TUNING_SEQUENCE": True},
-                {"POOL_A": True}
-            ]
+            output='screen'
         )
     ])
