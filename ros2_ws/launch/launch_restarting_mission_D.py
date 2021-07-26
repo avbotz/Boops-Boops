@@ -39,7 +39,7 @@ def generate_launch_description():
                 {"OCTAGON": True},
                 {"POOL_D": True}
             ]
-        )
+        ),
 
         # Launch image display
         Node(

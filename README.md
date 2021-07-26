@@ -90,13 +90,13 @@
     `ros2 launch ros2_ws/launch/launch_pool_test.py`
        This will launch the acquisition, vision, control, and mission nodes
        to execute whatever commands are located in the pool_test() function 
-       in sub_mission's function.cpp.
+       in sub_mission's tasks.cpp.
 
     Vision Test:
     `ros2 launch ros2_ws/launch/launch_pool_test.py`
        This will launch the acquisition, vision, control, and mission nodes
        to execute whatever commands are located in the vision_test() function 
-       in sub_mission's function.cpp, which might be testing down camera 
+       in sub_mission's tasks.cpp, which might be testing down camera 
        object detection for example.
 
     PID Tuning Session:

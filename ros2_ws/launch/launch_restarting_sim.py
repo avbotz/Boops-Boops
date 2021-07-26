@@ -39,7 +39,7 @@ def generate_launch_description():
                 {"POOL_B": True},
                 {"SIM": True}
             ]
-        )
+        ),
 
         # Launch image display
         Node(

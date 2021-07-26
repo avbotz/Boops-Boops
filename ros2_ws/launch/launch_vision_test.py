@@ -31,7 +31,7 @@ def generate_launch_description():
                 {"VISION_TEST": True},
                 {"POOL_A": True}
             ]
-        )
+        ),
 
         # Launch image display
         Node(

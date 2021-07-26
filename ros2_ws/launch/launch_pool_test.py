@@ -32,7 +32,7 @@ def generate_launch_description():
                 {"POOL_TEST": True},
                 {"POOL_A": True}
             ]
-        )
+        ),
 
         # Launch image display
         Node(
