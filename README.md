@@ -8,6 +8,10 @@
     sending control commands to the microcontroller, running computer
     vision models, running competition tasks and more.
 
+## Documentation
+
+[Documentation](https://github.com/avbotz/Boops-Boops/wiki) is right here. Feel free to contribute; contributions are much appreciated and will help transfer knowledge to the next generation of Botz members. (This is where we put detailed explanations of individual files. For instructions on installation and usage, follow the text below instead.)
+
 ## Setting up a Development Environment
 
     Setting up a Boops-Boops development environment is pretty simple.
