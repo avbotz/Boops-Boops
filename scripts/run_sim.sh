@@ -18,7 +18,7 @@ tmux send-keys "source /opt/ros/melodic/setup.sh" C-m
 tmux send-keys "cd ros1_ws" C-m
 tmux send-keys "catkin_make" C-m # If not built, build
 tmux send-keys "source devel/setup.bash" C-m # Source local setup so it finds sim
-tmux send-keys "roslaunch launch/simulator.launch" C-m
+tmux send-keys "roslaunch src/sub_sim/launch/simulator.launch" C-m
 sleep 2
 
 # Select another pane, start ros1_bridge so ROS2 can connect
