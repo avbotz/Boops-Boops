@@ -10,7 +10,7 @@
 
 ## Documentation
 
-[Documentation](https://github.com/avbotz/Boops-Boops/wiki) is right here. Feel free to contribute; contributions are much appreciated and will help transfer knowledge to the next generation of Botz members. (This is where we put detailed explanations of individual files. For instructions on installation and usage, follow the text below instead.)
+[Documentation](./docs) is right here. Feel free to contribute; contributions are much appreciated and will help transfer knowledge to the next generation of Botz members. (This is where we put detailed explanations of individual files. For instructions on installation and usage, follow the text below instead.)
 
 ## Setting up a Development Environment
 
@@ -47,7 +47,8 @@
 
     1. Open a text editor, make your desired changes to the code. Make sure to save
        once you make the changes.
-    2. Run `./compile.sh` to compile all of the code in the ros2 workspace.
+    2. Run `./compile.sh` to compile all of the code in the ros2 workspace
+       (necessary for every time you edit the code, or if it hasn't been compiled yet).
     
     You're done! Follow the next section to see how to run the code base.
     Repeat this process for every set of changes that you make before you 
