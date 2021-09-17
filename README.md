@@ -146,7 +146,7 @@
     Simulated Image Collection Run
     `./scripts/run_sim_remote_control_image_collection.sh`       or
     `./scripts/run_sim_remote_control_image_collection.sh front` or
-    `./scripts/run_sim_remote_control_image_collection.sh`
+    `./scripts/run_sim_remote_control_image_collection.sh down`
        First choose the command with the correct camera that you want to collect
        images for; the first command will log images for both cameras, the second 
        for the front camera, and the third for the down camera. This will launch 
