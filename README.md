@@ -63,14 +63,14 @@
     2. Run one of the following launch commands:
 
     Competition Run:
-    `ros2 launch ros2_ws/launch/launch_restarting_mission_A_heads.py` or
-    `ros2 launch ros2_ws/launch/launch_restarting_mission_A_tails.py` or
-    `ros2 launch ros2_ws/launch/launch_restarting_mission_B_heads.py` or
-    `ros2 launch ros2_ws/launch/launch_restarting_mission_B_tails.py` or
-    `ros2 launch ros2_ws/launch/launch_restarting_mission_C_heads.py` or
-    `ros2 launch ros2_ws/launch/launch_restarting_mission_C_tails.py` or
-    `ros2 launch ros2_ws/launch/launch_restarting_mission_D_heads.py` or
-    `ros2 launch ros2_ws/launch/launch_restarting_mission_D_tails.py` 
+    `ros2 launch ros2_ws/launch/restarting_mission_A_heads.py` or
+    `ros2 launch ros2_ws/launch/restarting_mission_A_tails.py` or
+    `ros2 launch ros2_ws/launch/restarting_mission_B_heads.py` or
+    `ros2 launch ros2_ws/launch/restarting_mission_B_tails.py` or
+    `ros2 launch ros2_ws/launch/restarting_mission_C_heads.py` or
+    `ros2 launch ros2_ws/launch/restarting_mission_C_tails.py` or
+    `ros2 launch ros2_ws/launch/restarting_mission_D_heads.py` or
+    `ros2 launch ros2_ws/launch/restarting_mission_D_tails.py` 
        First choose the command with the correct coin flip result and pool that 
        the sub will run in. This will launch the image acquisition, vision, control, 
        and mission nodes in a competition run. The difference between restarting_mission 
@@ -82,45 +82,56 @@
        restart the mission. 
 
     Standard Mission Run:
-    `ros2 launch ros2_ws/launch/launch_mission_A_heads.py` or
-    `ros2 launch ros2_ws/launch/launch_mission_A_tails.py` or
-    `ros2 launch ros2_ws/launch/launch_mission_B_heads.py` or
-    `ros2 launch ros2_ws/launch/launch_mission_B_tails.py` or
-    `ros2 launch ros2_ws/launch/launch_mission_C_heads.py` or
-    `ros2 launch ros2_ws/launch/launch_mission_C_tails.py` or
-    `ros2 launch ros2_ws/launch/launch_mission_D_heads.py` or
-    `ros2 launch ros2_ws/launch/launch_mission_D_tails.py` 
+    `ros2 launch ros2_ws/launch/mission_A_heads.py` or
+    `ros2 launch ros2_ws/launch/mission_A_tails.py` or
+    `ros2 launch ros2_ws/launch/mission_B_heads.py` or
+    `ros2 launch ros2_ws/launch/mission_B_tails.py` or
+    `ros2 launch ros2_ws/launch/mission_C_heads.py` or
+    `ros2 launch ros2_ws/launch/mission_C_tails.py` or
+    `ros2 launch ros2_ws/launch/mission_D_heads.py` or
+    `ros2 launch ros2_ws/launch/mission_D_tails.py` 
        First choose the command with the correct coin flip result and competition 
        pool that the sub will run in. This will launch the image acquisition, 
        vision, control, and mission nodes in a standard mission or pool test to 
        pilot the sub.
 
+    Image Collection Run:
+    `ros2 launch ros2_ws/launch/remote_control_image_collection.py`       or 
+    `ros2 launch ros2_ws/launch/remote_control_image_collection_front.py` or 
+    `ros2 launch ros2_ws/launch/remote_control_image_collection_down.py`
+       First choose the command with the correct camera that you want to collect
+       images for; the first command will log images for both cameras, the second 
+       for the front camera, and the third for the down camera. This will launch
+       the image acquisition, vision, control, and tuning nodes to remote control
+       Nemo as images are automatically being logged. (Can be used in competition pool
+       or pool tests to collect images to train ML models with)
+
     Prelim:
-    `ros2 launch ros2_ws/launch/launch_prelim.py`
+    `ros2 launch ros2_ws/launch/prelim.py`
        This will launch the control and mission nodes to have the sub move a set
        of movements to check if the sub is running smoothly.
 
     Pool Test:
-    `ros2 launch ros2_ws/launch/launch_pool_test.py`
+    `ros2 launch ros2_ws/launch/pool_test.py`
        This will launch the acquisition, vision, control, and mission nodes
        to execute whatever commands are located in the pool_test() function 
        in sub_mission's tasks.cpp.
 
     Vision Test:
-    `ros2 launch ros2_ws/launch/launch_vision_test.py`
+    `ros2 launch ros2_ws/launch/vision_test.py`
        This will launch the acquisition, vision, control, and mission nodes
        to execute whatever commands are located in the vision_test() function 
        in sub_mission's tasks.cpp, which might be testing down camera 
        object detection for example.
 
     PID Tuning Session:
-    `ros2 launch ros2_ws/launch/launch_tuning.py`
+    `ros2 launch ros2_ws/launch/tuning.py`
        This will launch the control and motor gains tuning GUI nodes to 
        remote control the sub, while the software member adjusts
        the aggressiveness of the motors using the GUI, in order to tune for gains 
        that allow the sub to move accurately and smoothly.
 
-    Simulator:
+    Simulated Mission Run:
     `./scripts/run_sim.sh`       or
     `./scripts/run_sim_heads.sh` or
     `./scripts/run_sim_tails.sh` 
@@ -131,6 +142,17 @@
        for completing the competition mission are performed accurately by the sub.
        When you are finished, kill the simulator by clicking on the terminal, 
        pressing "Ctrl-B", pressing "D", and entering `./scripts/kill_sim.sh`.
+
+    Simulated Image Collection Run
+    `./scripts/run_sim_remote_control_image_collection.sh`       or
+    `./scripts/run_sim_remote_control_image_collection.sh front` or
+    `./scripts/run_sim_remote_control_image_collection.sh down`
+       First choose the command with the correct camera that you want to collect
+       images for; the first command will log images for both cameras, the second 
+       for the front camera, and the third for the down camera. This will launch 
+       the control, tuning, and vision nodes in the simulator to remote control
+       Nemo as images are automatically being logged. (Can be used for collecting
+       sim images to train ML models with)
 
 ## Running Nodes
 

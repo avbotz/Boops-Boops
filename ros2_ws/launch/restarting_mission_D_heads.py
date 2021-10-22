@@ -21,7 +21,11 @@ def generate_launch_description():
         Node(
             package='sub_vision',
             node_executable='vision',
-            output='screen'
+            output='screen',
+            parameters=[
+                {"LOG_FRONT": False},
+                {"LOG_DOWN": False},
+            ]
         ),
         Node(
             package='sub_control',
@@ -39,7 +43,7 @@ def generate_launch_description():
                 {"TARGET": True},
                 {"OCTAGON": True},
                 {"POOL_D": True},
-                {"TAILS": True}
+                {"HEADS": True}
             ]
         ),
 

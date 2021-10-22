@@ -1,6 +1,6 @@
 """
 This file is to run mission_node, control_node, vision_node, and acquisition_node 
-for the sub to complete the mission in POOL B (either competition or at a pool test)
+for the sub to complete the mission in POOL A (either competition or at a pool test)
 """
 
 from launch import LaunchDescription
@@ -16,7 +16,11 @@ def generate_launch_description():
         Node(
             package='sub_vision',
             node_executable='vision',
-            output='screen'
+            output='screen',
+            parameters=[
+                {"LOG_FRONT": False},
+                {"LOG_DOWN": False},
+            ]
         ),
         Node(
             package='sub_control',
@@ -33,7 +37,7 @@ def generate_launch_description():
                 {"BINS": True},
                 {"TARGET": True},
                 {"OCTAGON": True},
-                {"POOL_B": True},
+                {"POOL_A": True},
                 {"TAILS": True}
             ]
         ),

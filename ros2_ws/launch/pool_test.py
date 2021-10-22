@@ -1,11 +1,7 @@
 """
-This file is to run mission_node (controlled by restart_runner node), 
-control_node, vision_node, and acquisition_node for the sub to complete 
-the mission in POOL C (either competition or at a pool test).
-
-This is recommended for competition because if we decide to restart our run, 
-the kill switch will kill the mission, and when the kill switch is turned on again,
-the mission will restart (which won't happen with the normal launch_mission.py)
+This file is to run mission_node, control node, vision_node, and acquisition_node
+for the sub to execute whatever commands are in the pool_test() function
+in functions.cpp
 """
 
 from launch import LaunchDescription
@@ -21,7 +17,11 @@ def generate_launch_description():
         Node(
             package='sub_vision',
             node_executable='vision',
-            output='screen'
+            output='screen',
+            parameters=[
+                {"LOG_FRONT": False},
+                {"LOG_DOWN": False},
+            ]
         ),
         Node(
             package='sub_control',
@@ -30,16 +30,11 @@ def generate_launch_description():
         ),
         Node(
             package='sub_mission',
-            node_executable='restart',
+            node_executable='mission',
             output='screen',
             parameters=[
-                {"COIN_FLIP": True}
-                {"GATE": True},
-                {"BINS": True},
-                {"TARGET": True},
-                {"OCTAGON": True},
-                {"POOL_C": True},
-                {"HEADS": True}
+                {"POOL_TEST": True},
+                {"POOL_A": True}
             ]
         ),
 

@@ -1,6 +1,7 @@
 """
-This file is to run mission_node, vision_node, and control_node
-for the sub to test its down camera and object detection.
+This file is to run control_node, tuning node,
+and vision node to remote control Nemo while 
+images are being logged from only the down camera.
 """
 
 from launch import LaunchDescription
@@ -9,6 +10,16 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
+            package='sub_control',
+            node_executable='service',
+            output='screen'
+        ),
+        Node(
+            package='sub_control',
+            node_executable='tuning',
+            output='screen'
+        ),
+        Node(
             package='sub_vision',
             node_executable='acquisition',
             output='screen'
@@ -16,20 +27,9 @@ def generate_launch_description():
         Node(
             package='sub_vision',
             node_executable='vision',
-            output='screen'
-        ),
-        Node(
-            package='sub_control',
-            node_executable='service',
-            output='screen'
-        ),
-        Node(
-            package='sub_mission',
-            node_executable='mission',
             output='screen',
             parameters=[
-                {"VISION_TEST": True},
-                {"POOL_A": True}
+                {"LOG_DOWN": True},
             ]
         ),
 
