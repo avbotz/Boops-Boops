@@ -10,4 +10,4 @@
 
 echo "Source setup scripts..."
 . /opt/ros/eloquent/setup.sh
-. ros2_ws/install/setup.sh
+. ros2_ws/install/local_setup.sh
