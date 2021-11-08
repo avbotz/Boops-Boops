@@ -6,7 +6,6 @@ echo "Starting tmux..."
 tmux new-session -d
 
 # Setup 3 panes
-tmux new-session -d
 tmux selectp -t 0    # select the first (0) pane
 tmux splitw -h -p 50 # split it in half down the middle
 tmux selectp -t 0    # select the first (0) pane
@@ -30,6 +29,7 @@ tmux send-keys "ros2 run ros1_bridge dynamic_bridge" C-m
 # # Run ros2 nodes (vision, control, mission)
 sleep 8
 tmux selectp -t 2
+tmux send-keys "unset PYTHONPATH" C-m
 tmux send-keys "source setup.sh" C-m
 tmux send-keys "ros2 launch ros2_ws/launch/sim.py" C-m
 
