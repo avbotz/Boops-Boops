@@ -12,7 +12,7 @@ def generate_launch_description():
         Node(
             package='sub_control',
             node_executable='service',
-            output='screen'
+            output='screen',
         ),
         Node(
             package='sub_control',

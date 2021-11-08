@@ -31,7 +31,7 @@ tmux send-keys "ros2 run ros1_bridge dynamic_bridge" C-m
 sleep 8
 tmux selectp -t 2
 tmux send-keys "source setup.sh" C-m
-tmux send-keys "ros2 launch ros2_ws/launch/launch_sim_heads.py" C-m
+tmux send-keys "ros2 launch ros2_ws/launch/sim_heads.py" C-m
 
 # From here, your ROS2 stuff should work!
 tmux a
