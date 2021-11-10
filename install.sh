@@ -25,6 +25,9 @@ sudo apt-get install ros-eloquent-desktop ros-eloquent-ros1-bridge
 sudo apt-get install python3-colcon-common-extensions
 sudo apt-get install python-rosdep
 
+# Install tmux
+sudo apt-get install tmux
+
 # Install Tensorflow for C.
 cd ~/Downloads && wget https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-gpu-linux-x86_64-1.15.0.tar.gz
 cd ~/Downloads && sudo tar -C /usr/local -xzf libtensorflow-gpu-linux-x86_64-1.15.0.tar.gz
