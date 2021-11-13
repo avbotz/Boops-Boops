@@ -9,3 +9,4 @@ gains/*
 models/*
 images/*
 .catkin_workspace
+*.log

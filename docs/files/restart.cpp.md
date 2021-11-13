@@ -1,8 +1,8 @@
 This is like mission.cpp as it sets up a high-level node to run all of the competition movement instructions, but this is mainly used for legit competition runs. The reason why this node is needed because in competition, sometimes runs may not turn out as successful as we would have liked, so we tell the diver to retrieve the sub and bring it back to the beginning for a second run. This code helps the process because if it detects that the diver has flipped the kill switch to turn off the sub, it will stop the execution of the code. When the sub is turned on again, it will restart all of the mission functions from the very beginning, which makes it convenient to use, as it automatically restarts the mission navigation.
 
-## Function Breakdown
+# Function Breakdown
 
-#### int main(int argc, char** argv)
+## int main(int argc, char** argv)
 
 This is the function that will get called when ROS2 runs the `restart_node`. This code is slightly more complicated than that of `mission_node`, as it needs to run a child process that executes the competition functions, while it sets up a parent process to monitor the status of the submarine and tell the child to halt and restart if necessary. 
 

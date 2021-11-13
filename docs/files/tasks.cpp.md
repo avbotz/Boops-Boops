@@ -7,9 +7,9 @@ Before we start the function breakdown, let's clear up a few things.
 
 With that said, let's get started. :100: 
 
-## Function Breakdown
+# Function Breakdown
 
-#### void coin_flip() :construction: WORK IN PROGRESS
+## void coin_flip() :construction: WORK IN PROGRESS
 
 In the competition, we can choose to attempt the coin flip task, where the AUV is deployed in a random orientation and we must first orient it correctly towards the tasks. In this instance, we attempt to use our hydrophones system to get the angle to the octagon and follow that route. This is currently a work in progress.
 
@@ -18,7 +18,7 @@ In the competition, we can choose to attempt the coin flip task, where the AUV i
 3. If the angle to the octagon is valid, then we tell the sub to turn to that angle.
 4. Finally, `control_client::write("x\n");` tells Nautical to clean its variables and set the origin point (0, 0, 0, 0, 0, 0) as the sub's current position.
 
-#### void gate()
+## void gate()
 
 This function controls the AUV to pass through the gate in competition, using our ML models to detect the gate and give us the angle to move through it.
 
@@ -30,7 +30,7 @@ This function controls the AUV to pass through the gate in competition, using ou
 6. Orient the sub to continue through the rest of the course depending on which competition pool we are in.
 7. Move forward to continue through the course.
 
-#### void bins()
+## void bins()
 
 This function controls the AUV to navigate from the gate to the bins, position the AUV above the bins, and drop our markers (balls) into the bins. The reason why we attempt bins before targets, which are closer to the gate, is because touching the backside of the targets yields more points, so we opt to attempt bins first then touch the backside of the targets.
 
@@ -46,7 +46,7 @@ This function controls the AUV to navigate from the gate to the bins, position t
 10. Continuously align the sub for the last time, setting the AUV up for the marker drop.
 11. Drop the balls (markers).
 
-#### void target()
+## void target()
 
 This function controls the sub to navigate from the bins to the buoys, utilizing the vision system to detect the buoys and orienting the AUV to ram them.
 
@@ -66,7 +66,7 @@ This function controls the sub to navigate from the bins to the buoys, utilizing
 14. Repeat steps 6-12 for the second target.
 15. Return back above the bins.
 
-#### void octagon()
+## void octagon()
 
 This function controls the AUV to navigate underneath the octagon and surface within it, using the FPGA's angle and coordinate calculations.
 
@@ -78,19 +78,19 @@ This function controls the AUV to navigate underneath the octagon and surface wi
 6. Wait for the sub to reach the surface.
 7. Kill the sub.
 
-#### void prelim()
+## void prelim()
 
 This function contains a list of fundamental movements that we can use to check if the sub is working correctly. If you'd like to execute this function, use `ros2 launch ros2_ws/launch/launch_prelim.py`.
 
-#### void pool_test()
+## void pool_test()
 
 This function is where the software user can put the commands of what they would like the sub to do in a pool test. If you'd like to execute this function, use `ros2 launch ros2_ws/launch/launch_pool_test.py`.
 
-#### void vision_test()
+## void vision_test()
 
 This function tests the vision capabilities of the sub by first submerging the sub and then aligning the sub above the bins. If you'd like to execute this function, use `ros2 launch ros2_ws/launch/launch_vision_test.py`.
 
-#### void pid_tuning_sequence()
+## void pid_tuning_sequence()
 
 This function was originally a movement sequence for the sub to test its axes of control for the software user to edit the PID gains (the aggressiveness of the motors) to have the sub move smoothly and accurately, though it is now deprecated in favor of `sub_control`'s new `tuning.py` node where the user can remote-control the sub.
 

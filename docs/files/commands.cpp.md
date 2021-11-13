@@ -1,8 +1,8 @@
 `commands.cpp` contains helper functions that assist in moving the sub through the competition course in `tasks.cpp`. See the beginning of `tasks.cpp` for clearing up some aspects of the code.
 
-## Function Breakdown
+# Function Breakdown
 
-#### float align(int attempts, Task task, int camera)
+## float align(int attempts, int task, int camera)
 
 This function returns the angle to a competition object, as it can take multiple detections and average out their angles to return the average angle to the object (for more stability/accuracy). This function does not physically move the sub, despite its name.
 
@@ -12,26 +12,26 @@ This function returns the angle to a competition object, as it can take multiple
 4. Use `angleAdd` function to turn the relative angle into an absolute angle and return it. (angleAdd makes sure that the sum is within [-180, 180] degrees.
 
 Inputs:
-* int attempts: The number of detections you want to use to find the average angle to the object.
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
+* int attempts: the number of detections you want to use to find the average angle to the object.
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
-* float: The absolute angle that the sub can orient to to face the object.
+* float: the absolute angle that the sub can orient to to face the object.
 
-#### float relativeAlign(int attempts, Task task, int camera)
+## float relativeAlign(int attempts, int task, int camera)
 
 This is the same as `align()`, except that instead of outputting the absolute angle, we output the relative angle (steps 1-3 of `align()`).
 
 Inputs:
-* int attempts: The number of detections you want to use to find the average angle to the object.
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
+* int attempts: the number of detections you want to use to find the average angle to the object.
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
-* float: The relative angle that the sub can orient to to face the object.
+* float: the relative angle that the sub can orient to to face the object.
 
-#### float sweepCheck(int attempts, Task task, int camera)
+## float sweepCheck(int attempts, int task, int camera)
 
 This function tries to look for a competition object, and if it can't find it, it will turn left and right to look for it. Ultimately, it will attempt to return the absolute angle to the object.
 
@@ -40,14 +40,14 @@ This function tries to look for a competition object, and if it can't find it, i
 3. If all of our search angles failed, then return an invalid angle.
 
 Inputs:
-* int attempts: The number of detections you want to use to find the average angle to the object.
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
+* int attempts: the number of detections you want to use to find the average angle to the object.
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
-* float: The absolute angle that the sub can orient to to face the object.
+* float: the absolute angle that the sub can orient to to face the object.
 
-#### float forwardSweepCheck(int attempts, Task task, int camera, int num_sweeps)
+## float forwardSweepCheck(int attempts, int task, int camera, int num_sweeps)
 
 This function tries to look for a competition object, and if it can't find it, it will turn left and right to look for it. If it still can't find it on the first sweep, it will move forward and sweep again. Ultimately, it will attempt to return the absolute angle to the object.
 
@@ -56,15 +56,15 @@ This function tries to look for a competition object, and if it can't find it, i
 3. If all of our sweeps failed, then return an invalid angle.
 
 Inputs:
-* int attempts: The number of detections you want to use to find the average angle to the object.
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
-* int num_sweeps: The number of total sweeps the sub should do to look for the object. (If `num_sweeps = 4`, then it will sweep 4 times, moving forward 3 times.)
+* int attempts: the number of detections you want to use to find the average angle to the object.
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
+* int num_sweeps: the number of total sweeps the sub should do to look for the object. (If `num_sweeps = 4`, then it will sweep 4 times, moving forward 3 times.)
 
 Outputs:
-* float: The absolute angle that the sub can orient to to face the object.
+* float: the absolute angle that the sub can orient to to face the object.
 
-#### float distance(int attempts, Task task, int camera)
+## float distance(int attempts, int task, int camera)
 
 This function returns the distance to a competition object, as it can take multiple detections and average out their distances to return the average distance to the object (for more stability/accuracy). 
 
@@ -73,14 +73,14 @@ This function returns the distance to a competition object, as it can take multi
 3. Calculate the average distance to the object.
 
 Inputs:
-* int attempts: The number of detections you want to use to find the average distance to the object.
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
+* int attempts: the number of detections you want to use to find the average distance to the object.
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
-* float: The distance (in meters) to the object.
+* float: the distance (in meters) to the object.
 
-#### float distAndAlign(int attempts, Task task, int camera)
+## float distAndAlign(int attempts, int task, int camera)
 
 This function returns the distance to a competition object, but instead of relying on the distance from detections, we move the sub and use math to calculate the distance. However, even though it is hella cool and looks aesthetic in the simulator, this method is deprecated because small inaccuracies of horizontal movement can significantly disrupt the distance calculation.
 
@@ -95,26 +95,26 @@ This function returns the distance to a competition object, but instead of relyi
 9. Calculate and return the distance to the object (using the triangles we created).
 
 Inputs:
-* int attempts: The number of detections you want to use to find the average angle to the object.
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
+* int attempts: the number of detections you want to use to find the average angle to the object.
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
-* float: The distance (in meters) to the object.
+* float: the distance (in meters) to the object.
 
-#### bool isValidDistance(float dist)
+## bool isValidDistance(float dist)
 
 This function sees if a detected/calculated distance is valid or sus.
 
 1. If the 0 < distance < 17.5, then the distance is good. Otherwise, it's kinda sus ngl.
 
 Inputs:
-* float dist: The distance that is being checked.
+* float dist: the distance that is being checked.
 
 Outputs:
 * bool: true or false depending on whether or not the distance is valid.
 
-#### State forwardAlign(float max_dist, Task task, int camera, float timeout)
+## State forwardAlign(float max_dist, int task, int camera, float timeout)
 
 This function continuously moves the sub forward while taking numerous vision detections to readjust the trajectory to an object. Then, when the object is close enough, this function sets the sub to move 2 meters through the object.
 
@@ -131,15 +131,15 @@ This function continuously moves the sub forward while taking numerous vision de
 11. If we took too long or traveled too far, return the current state of the sub.
 
 Inputs:
-* float max_dist: The maximum distance we allow the sub to travel from where the function was called (so we don't have the sub moving like 100 meters forward and crashing into the wall if it can't find the object).
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
-* float timeout: The maximum number of seconds you want the function to run for (so we don't wait for 20 minutes if the sub gets stuck somewhere and can't move forward).
+* float max_dist: the maximum distance we allow the sub to travel from where the function was called (so we don't have the sub moving like 100 meters forward and crashing into the wall if it can't find the object).
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
+* float timeout: the maximum number of seconds you want the function to run for (so we don't wait for 20 minutes if the sub gets stuck somewhere and can't move forward).
 
 Outputs:
-* State: The final state that the sub was set to be at (or if it failed, the final state of the sub).
+* State: the final state that the sub was set to be at (or if it failed, the final state of the sub).
 
-#### Coordinate downAlign(int attempts, Task task, int camera)
+## Coordinate downAlign(int attempts, int task, int camera)
 
 This function uses the down camera and calculates the coordinates that the sub needs to move to in order to align with something below it (such as the bins). (This function does not actually move the sub; it only calculates the coordinates that it should move to.)
 
@@ -156,14 +156,14 @@ This function uses the down camera and calculates the coordinates that the sub n
 11. Average the x and y coordinates and return the averages.
 
 Inputs:
-* int attempts: The number of detections you want to use to find the average coordinates of the object.
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
+* int attempts: the number of detections you want to use to find the average coordinates of the object.
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
-* Coordinate: The absolute x and y coordinates of the object under the sub.
+* Coordinate: the absolute x and y coordinates of the object under the sub.
 
-#### bool frontContinuousAlign(float min_seconds, Task task, int camera, float thres)
+## bool frontContinuousAlign(float min_seconds, int task, int camera, float thres)
 
 This function continuously aligns the sub to an object in front of it, except instead of using angles and turning the sub to align, it uses offsets to move the sub horizontally and vertically to align. 
 
@@ -172,15 +172,15 @@ This function continuously aligns the sub to an object in front of it, except in
 3. Return true if we successfully aligned, or return False if it was unsuccessful.
 
 Inputs: 
-* float min_seconds: The minimum amount of seconds that you want the sub to vertically align and horizontally align (the minimum seconds applies to each one, not both combined).
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
-* float thres: The threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
+* float min_seconds: the minimum amount of seconds that you want the sub to vertically align and horizontally align (the minimum seconds applies to each one, not both combined).
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
+* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
 Outputs:
-* bool: Returns true or false depending on whether or not the alignments were successful.
+* bool: returns true or false depending on whether or not the alignments were successful.
 
-#### bool frontContinuousValign(float min_seconds, Task task, int camera, float thres)
+## bool frontContinuousValign(float min_seconds, int task, int camera, float thres)
 
 This function continuously calls for detections to vertically readjust the sub so that it is at the same z as the detected object.
 
@@ -200,15 +200,15 @@ This function continuously calls for detections to vertically readjust the sub s
 14. If the alignment was unsuccessful (couldn't detect the object, or we took too long), return false.
 
 Inputs: 
-* float min_seconds: The minimum amount of seconds that you want the sub to vertically align (the minimum seconds applies to each one, not both combined).
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
-* float thres: The threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
+* float min_seconds: the minimum amount of seconds that you want the sub to vertically align (the minimum seconds applies to each one, not both combined).
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
+* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
 Outputs:
-* bool: Returns true or false depending on if the alignment was successful or not.
+* bool: returns true or false depending on if the alignment was successful or not.
 
-#### bool frontContinuousHalign(float min_seconds, Task task, int camera, float thres)
+## bool frontContinuousHalign(float min_seconds, int task, int camera, float thres)
 
 This function continuously calls for detections to horizontally readjust the sub so that it is directly facing the object straight on.
 
@@ -228,15 +228,15 @@ This function continuously calls for detections to horizontally readjust the sub
 14. If the alignment was unsuccessful (couldn't detect the object, or we took too long), return false.
 
 Inputs: 
-* float min_seconds: The minimum amount of seconds that you want the sub to horizontally align (the minimum seconds applies to each one, not both combined).
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
-* float thres: The threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
+* float min_seconds: the minimum amount of seconds that you want the sub to horizontally align (the minimum seconds applies to each one, not both combined).
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
+* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
 Outputs:
-* bool: Returns true or false depending on if the alignment was successful or not.
+* bool: returns true or false depending on if the alignment was successful or not.
 
-#### bool frontConsecutiveAngleAlign(int attempts, Task task, int camera)
+## bool frontConsecutiveAngleAlign(int attempts, int task, int camera)
 
 This function takes the angle to an object, turns towards the object, and repeats that process a user-specified amount of times. (This function is if you want to be extra careful that you aligned correctly.)
 
@@ -246,14 +246,14 @@ This function takes the angle to an object, turns towards the object, and repeat
 4. Return false if our alignment was unsuccessful (if any angle was every invalid).
 
 Inputs:
-* int attempts: The number of detections you want to use to find the average angle to the object. In this case, also the amount of times you want to turn towards the object.
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
+* int attempts: the number of detections you want to use to find the average angle to the object. In this case, also the amount of times you want to turn towards the object.
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
-* bool: Returns true or false depending on whether or not the consecutive alignment was successful.
+* bool: returns true or false depending on whether or not the consecutive alignment was successful.
 
-#### bool downContinuousAlign(float min_seconds, Task task, int camera, float thres)
+## bool downContinuousAlign(float min_seconds, int task, int camera, float thres)
 
 This function continuously calculates the offsets to align with an object underneath the sub and readjusts the sub's position to move above that object. 
 
@@ -274,15 +274,15 @@ This function continuously calculates the offsets to align with an object undern
 15. If the alignment was unsuccessful (couldn't detect the object, or we took too long), return false.
 
 Inputs: 
-* float min_seconds: The minimum amount of seconds that you want the sub to align for.
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
-* float thres: The threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
+* float min_seconds: the minimum amount of seconds that you want the sub to align for.
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
+* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
 Outputs:
-* bool: Returns true or false depending on if the alignment was successful or not.
+* bool: returns true or false depending on if the alignment was successful or not.
 
-#### bool testObjIsCentered(int attempts, Task task, int camera, float thres)
+## bool testObjIsCentered(int attempts, int task, int camera, float thres)
 
 This function uses the vision system to test if an object is centered in front of the sub's front or down camera.
 
@@ -294,30 +294,30 @@ This function uses the vision system to test if an object is centered in front o
 6. If the object is centered satisfactorily within the threshold, then return true. Otherwise, return false.
 
 Inputs: 
-* int attempts: The number of detections you want to use to find the average angle to the object.
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
-* float thres: The threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
+* int attempts: the number of detections you want to use to find the average angle to the object.
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
+* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
 Outputs:
-* bool: Returns true or false depending on whether or not the object is centered in the camera.
+* bool: returns true or false depending on whether or not the object is centered in the camera.
 
-#### bool objIsCentered(float r, float c, int camera, float thres)
+## bool objIsCentered(float r, float c, int camera, float thres)
 
 This function is a helper function that takes the pixels that an object was detected at and calculates if it is centered within the image or not.
 
 1. Check to see if the object is both vertically aligned and horizontally aligned. If both are satisfied, then return true.
 
 Inputs:
-* float r: The row of the pixel of the detection (the y coordinate).
-* float c: The column of the pixel of the detection (the x coordinate).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
-* float thres: The threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
+* float r: the row of the pixel of the detection (the y coordinate).
+* float c: the column of the pixel of the detection (the x coordinate).
+* int camera: which camera the detection should be on (FRONT, DOWN).
+* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
 Outputs:
-* bool: Returns true or false depending on whether or not the object is centered in the camera.
+* bool: returns true or false depending on whether or not the object is centered in the camera.
 
-#### bool isValigned(float r, int camera, float thres)
+## bool isValigned(float r, int camera, float thres)
 
 This function takes in the r (row/y) coordinate of the pixel of the detection and checks if it is in the middle of the image.
 
@@ -328,11 +328,11 @@ This function takes in the r (row/y) coordinate of the pixel of the detection an
 5. Return true if the pixel's row is in the sweet spot, or return false if the row is outside of the sweet spot.
 
 Inputs:
-* float r: The row of the pixel of the detection (the y coordinate).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
-* float thres: The threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
+* float r: the row of the pixel of the detection (the y coordinate).
+* int camera: which camera the detection should be on (FRONT, DOWN).
+* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
-#### bool isHaligned(float r, int camera, float thres)
+## bool isHaligned(float r, int camera, float thres)
 
 This function takes in the c (column/x) coordinate of the pixel of the detection and checks if it is in the middle of the image.
 
@@ -343,14 +343,14 @@ This function takes in the c (column/x) coordinate of the pixel of the detection
 5. Return true if the pixel's column is in the sweet spot, or return false if the column is outside of the sweet spot.
 
 Inputs:
-* float c: The column of the pixel of the detection (the x coordinate).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
-* float thres: The threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
+* float c: the column of the pixel of the detection (the x coordinate).
+* int camera: which camera the detection should be on (FRONT, DOWN).
+* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
 Outputs:
-* bool: Returns true or false depending on whether or not the object is centered in the camera.
+* bool: returns true or false depending on whether or not the object is centered in the camera.
 
-#### void setForward(float dist)
+## void setForward(float dist)
 
 This function tells the sub to move forward `dist` meters and waits for the sub to reach that position.
 
@@ -359,9 +359,9 @@ This function tells the sub to move forward `dist` meters and waits for the sub 
 3. Move to the desired location.
 
 Inputs:
-* float dist: The number of meters that you want the sub to move forward.
+* float dist: the number of meters that you want the sub to move forward.
 
-#### void setHorizontal(float dist)
+## void setHorizontal(float dist)
 
 This function tells the sub to move horizontally `dist` meters and waits for the sub to reach that position. Positive meters tell the sub to go right, and negative meters tell the sub to go left.
 
@@ -370,9 +370,9 @@ This function tells the sub to move horizontally `dist` meters and waits for the
 3. Move to the desired location.
 
 Inputs:
-* float dist: The number of meters that you want the sub to move horizontally.
+* float dist: the number of meters that you want the sub to move horizontally.
 
-#### void setForwardAtDepth(float dist, float depth)
+## void setForwardAtDepth(float dist, float depth)
 
 This function tells the sub to move forward `dist` meters at `depth` meters below the surface.
 
@@ -383,10 +383,10 @@ This function tells the sub to move forward `dist` meters at `depth` meters belo
 5. Move to the desired location.
 
 Inputs:
-* float dist: The number of meters that you want the sub to move forward.
-* float depth: The number of meters below the surface that you want the sub to move at.
+* float dist: the number of meters that you want the sub to move forward.
+* float depth: the number of meters below the surface that you want the sub to move at.
 
-#### void setHorizontalAtDepth(float dist, float depth)
+## void setHorizontalAtDepth(float dist, float depth)
 
 This function tells the sub to move horizontally `dist` meters at `depth` meters below the surface. Positive `dist` moves the sub to the right, whereas negative `dist` moves the sub to the left.
 
@@ -397,10 +397,10 @@ This function tells the sub to move horizontally `dist` meters at `depth` meters
 5. Move to the desired location.
 
 Inputs:
-* float dist: The number of meters that you want the sub to move horizontally.
-* float depth: The number of meters below the surface that you want the sub to move at.
+* float dist: the number of meters that you want the sub to move horizontally.
+* float depth: the number of meters below the surface that you want the sub to move at.
 
-#### void setAngle(float angle)
+## void setAngle(float angle)
 
 This function tells the sub to turn to an absolute angle. (The difference between absolute and relative angles is that 90 absolute degrees means 90 degrees from the origin/the sub's initial state when it powered on, whereas 90 relative degrees means 90 degrees from the sub's current position.)
 
@@ -409,10 +409,10 @@ This function tells the sub to turn to an absolute angle. (The difference betwee
 3. Move to that desired state.
 
 Inputs:
-* float angle: The absolute angle that we want the sub to turn to.
+* float angle: the absolute angle that we want the sub to turn to.
 
 
-#### void addAngle(float angle)
+## void addAngle(float angle)
 
 This function tells the sub to turn `angle` degrees from its current position. (The difference between absolute and relative angles is that 90 absolute degrees means 90 degrees from the origin/the sub's initial state when it powered on, whereas 90 relative degrees means 90 degrees from the sub's current position.)
 
@@ -421,9 +421,9 @@ This function tells the sub to turn `angle` degrees from its current position. (
 3. Move to that desired state.
 
 Inputs:
-* float angle: The relative angle that we want to turn the sub.
+* float angle: the relative angle that we want to turn the sub.
 
-#### void setDepth(float depth, float acceptable_error)
+## void setDepth(float depth, float acceptable_error)
 
 This function tells the sub to move to a certain depth (measured from the bottom, so basically altitude).
 
@@ -431,10 +431,10 @@ This function tells the sub to move to a certain depth (measured from the bottom
 2. Wait until we are close enough to the desired depth. When we are close enough, the function automatically finishes.
 
 Inputs:
-* float depth: The depth (measured in meters from the bottom/floor) that we want the sub to move to.
-* float acceptable_error: The number of meters from the desired depth that we are OK with the sub being at. (The default is 0.75 meters.
+* float depth: the depth (measured in meters from the bottom/floor) that we want the sub to move to.
+* float acceptable_error: the number of meters from the desired depth that we are OK with the sub being at. (The default is 0.75 meters.
 
-#### void continuousSpin(int num_rotations)
+## void continuousSpin(int num_rotations)
 
 This function controls the sub to continuously spin in place for `num_rotations` amount of rotations (1 rotation is 360 degrees). It achieves this affect by continuously telling the sub to turn 90 degrees from its current position in a while loop, which makes the sub continuously turn (like a holding a carrot in front of a pig in Minecraft to have the pig continuously move forward).
 
@@ -451,18 +451,18 @@ This function controls the sub to continuously spin in place for `num_rotations`
 11. Repeat steps 5-10 until we have spun enough.
 
 Inputs:
-* int num_rotations: The number of full, 360 degree rotations that we want the sub to complete. (The sub will not pause between rotations.)
+* int num_rotations: the number of full, 360 degree rotations that we want the sub to complete. (The sub will not pause between rotations.)
 
-#### bool isValidAngle(float angle)
+## bool isValidAngle(float angle)
 
 This function sees if the inputted angle is valid or sus.
 
 1. If the angle is between -240 and 240 degrees, then it's good so return true. Otherwise, it's sus and the function will return false. (The range is not between -360 and 360 because we only use -180 to 180.)
 
 Inputs:
-* float angle: The angle that we want to check the validity of.
+* float angle: the angle that we want to check the validity of.
 
-#### void setCoordinate(Coordinate coordinate)
+## void setCoordinate(Coordinate coordinate)
 
 This function tells the sub to move to the user's inputted absolute coordinates (coordinates measured from the origin).
 
@@ -471,9 +471,9 @@ This function tells the sub to move to the user's inputted absolute coordinates 
 3. Move to those coordinates (the `move` function waits until the sub arrives, then the code continues).
 
 Inputs:
-* Coordinate coordinate: The coordinate object that contains attributes `x` and `y` constituting a set of coordinates.
+* Coordinate coordinate: the coordinate object that contains attributes `x` and `y` constituting a set of coordinates.
 
-#### void addCoordinate(Coordinate coordinate)
+## void addCoordinate(Coordinate coordinate)
 
 This function tells the sub to move to the user's inputted relative coordinates (coordinates measured from the sub's current position).
 
@@ -482,27 +482,27 @@ This function tells the sub to move to the user's inputted relative coordinates 
 3. Move to the absolute coordinates (the `move` function waits until the sub arrives, then the code continues).
 
 Inputs:
-* Coordinate coordinate: The Coordinate object that contains attributes `x` and `y` constituting a set of coordinates.
+* Coordinate coordinate: the Coordinate object that contains attributes `x` and `y` constituting a set of coordinates.
 
-#### bool isValidCoordinate(Coordinate coordinate)
+## bool isValidCoordinate(Coordinate coordinate)
 
 This function checks to see if a pair of absolute coordinates are legit or sus.
 
 1. If both the x and y coordinates are within -50 and 50 meters, then the coordinates are good so return true. Otherwise, the function will return false.
 
 Inputs:
-* Coordinate coordinate: The Coordinate object that containing attributes `x` and `y` that are going to be checked.
+* Coordinate coordinate: the Coordinate object that containing attributes `x` and `y` that are going to be checked.
 
-#### bool isValidOffsetCoordinate(Coordinate coordinate)
+## bool isValidOffsetCoordinate(Coordinate coordinate)
 
 This function checks to see if a pair of relative coordinates are legit or sus.
 
 1. If both the x and y coordinates are within -7 and 7 meters, then the coordinates are good so return true. Otherwise, the function will return false.
 
 Inputs:
-* Coordinate coordinate: The Coordinate object that containing attributes `x` and `y` that are going to be checked.
+* Coordinate coordinate: the Coordinate object that containing attributes `x` and `y` that are going to be checked.
 
-#### void warmupInference(int attempts, Task task, int camera)
+## void warmupInference(int attempts, int task, int camera)
 
 This function makes a request to detect the user-specified object. This will warmup the ML model to have the ML model to reach a zone and increase its speed in later inferences.
 
@@ -510,18 +510,18 @@ This function makes a request to detect the user-specified object. This will war
 2. Repeat step 1 for the user-specified amount of `attempts`.
 
 Inputs:
-* int attempts: The number of detections you want to have the model run.
-* Task task: The object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
-* int camera: Which camera the detection should be on (FRONT, DOWN).
+* int attempts: the number of detections you want to have the model run.
+* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int camera: which camera the detection should be on (FRONT, DOWN).
 
-#### void disableAltitudeControl()
+## void disableAltitudeControl()
 
 This function tells Nautical to stop maintaining the depth from the bottom and instead maintain depth from the surface.
 
 1. Set an invalid depth from the bottom to force Nautical to maintain depth from the surface.
 2. Wait for the changes to take effect.
 
-#### void dropBalls()
+## void dropBalls()
 
 This function tells Nautical to drop the balls (markers), usually used to drop the balls into the bins.
 
@@ -532,7 +532,7 @@ This function tells Nautical to drop the balls (markers), usually used to drop t
 5. Wait for the droppers to close.
 6. Repeat steps 1-5 again to make sure that we drop the balls.
 
-#### void move(const State dest)
+## void move(const State dest)
 
 This function tells the sub to move to the user-specified state, and it waits until the sub reaches the destination before terminating the itself. Note: This function does not wait for the sub to reach a z coordinate, as we normally set our depth using `setDepth` with depth being measured from the bottom.
 
@@ -543,4 +543,4 @@ This function tells the sub to move to the user-specified state, and it waits un
 5. Otherwise, this means that we are close enough to the desired state, so we can set `quit` to true to escape the while loop and terminate the function.
 
 Inputs:
-* const State dest: The destination state (absolute coordinates) that we want the sub to move to.
+* const State dest: the destination state (absolute coordinates) that we want the sub to move to.

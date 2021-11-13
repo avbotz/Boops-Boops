@@ -1,1 +1,0 @@
-![](https://images.theconversation.com/files/309473/original/file-20200110-97158-jlamxn.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop)
