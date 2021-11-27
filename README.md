@@ -39,6 +39,9 @@
       running in ROS1 is the simulator. If you need to work on the simulator
       or another ROS1 package, `source setup_ros1.sh` instead of `setup.sh`.
     - For further info on ROS1, refer to official documentation.
+    - If you have **already installed** the dependencies for BB, and you are only
+      re-cloning the repository for some reason, you can skip installing ROS and
+      other dependencies by running `./install.sh skip-install` instead of `./install.sh`.
 
 ## Making Changes
 
