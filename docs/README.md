@@ -5,6 +5,7 @@ Welcome to the Boops-Boops :dolphin: wiki! Here you will find in depth explanati
 * [sub_control](./files/sub_control.md)
 * [sub_vision](./files/sub_vision.md)
 * [sub_sim](./files/sub_sim.md)
+* [Miscellaneous tutorials](./files/tutorials.md)
 
 ## Overview:
 
