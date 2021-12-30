@@ -34,8 +34,8 @@ def generate_launch_description():
             parameters=[
                 {"COIN_FLIP": True}
                 {"GATE": True},
-                {"BINS": True},
                 {"TARGET": True},
+                {"BINS": True},
                 {"OCTAGON": True},
                 {"POOL_A": True},
                 {"TAILS": True}

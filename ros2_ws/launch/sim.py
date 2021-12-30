@@ -30,8 +30,8 @@ def generate_launch_description():
             output='screen',
             parameters=[
                 {"GATE": True},
-                {"BINS": True},
                 {"TARGET": True},
+                {"BINS": True},
                 {"OCTAGON": True},
                 {"POOL_B": True},
                 {"SIM": True}
