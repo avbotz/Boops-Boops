@@ -5,6 +5,6 @@
 # controller. Directly setting a Velocity setpoint will
 # disable the position setpoint until a new one is sent.
 
-float32 north_m_s
-float32 east_m_s
+float32 forward_m_s
+float32 right_m_s
 float32 down_m_s

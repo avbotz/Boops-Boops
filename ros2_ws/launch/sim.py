@@ -29,12 +29,13 @@ def generate_launch_description():
             node_executable='mission',
             output='screen',
             parameters=[
-                {"GATE": True},
-                {"BINS": True},
-                {"TARGET": True},
-                {"OCTAGON": True},
-                {"POOL_B": True},
-                {"SIM": True}
+                # {"GATE": True},
+                # {"BINS": True},
+                # {"TARGET": True},
+                # {"OCTAGON": True},
+                # {"POOL_B": True},
+                # {"SIM": True}
+                { "PRELIM": True }
             ]
         ),
 
