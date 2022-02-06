@@ -12,6 +12,16 @@ Using this information, sub_mission is able to send commands to turn towards the
 
 ## How to Train ML Models 
 
-- include labeling images with cvat, and also links to train and how to extract the model and put it in the stack
+To train ML models, you will first need a labeled dataset (which is a folder with the images you want to train the model on + corresponding .xml files that contain information about where the object is in the image.)
+
+The steps to train are as follows:
+* Collect images (see "Image Collection Run" or "Simulated Image Collection Run" sections in README)
+* Annotate the images (use [CVAT](https://github.com/openvinotoolkit/cvat), which has the capability of [interpolating](https://youtu.be/Hc3oudNuDsY) between images to automatically label some images for you, which speeds up the process a ton), and export them into PASCAL VOC format (to put them into one directory with images + corresponding .xml annotation files)
+* Train - Follow this Google Colab [link](https://colab.research.google.com/drive/1BQJQTtTJBKeh5aI53_zLtkuy93W6ZN11?usp=sharing) to train your model (you may have to upload a .zip file of your images+annotations dataset onto your Google Drive first)
+* Deploy - (put instructions here (maybe download the model, put it into the BB models folder, upload the download models script in BB?)))
+
+## OpenCV
+
+Besides using ML models, we also use OpenCV (Open Computer Vision), which are traditional computer vision techniques that do not require ML. These include techniques such as filtering out colors, detecting edges in an image, etc. Currently, we plan on using OpenCV for tasks that do not require distinguishing specific objects, such as the path markers, or orienting ourselves to the bin (perhaps).
 
 ## Where to Put the Trained ML Models
