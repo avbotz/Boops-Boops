@@ -1,6 +1,14 @@
 #!/bin/bash
+# Author Kush Nayak
 
-# Download ML Models from Craig's Google Drive
-wget -O models/pool_bins.pb "https://docs.google.com/uc?export=download&id=1s-yNk3P0e2Nrnw3t1SWd4ZLs6QXIsyHa"
-wget -O models/gpu_gate.pb "https://docs.google.com/uc?export=download&id=1SoYc-Y3bqZZkWZz4g3etvHSsD7j1ck0U"
-wget -O models/gpu_target.pb "https://docs.google.com/uc?export=download&id=1rZDo5jYMlwgf0ZIpA3yAIxKgLPxMS-Z1"
+# Download YOLOv5 ML Models from Craig's Google Drive
+mkdir -p weights
+function get_model {
+	wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate "https://docs.google.com/uc?export=download&id=${2}" -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=${2}" -O weights/$1 && rm -rf /tmp/cookies.txt
+}
+
+GATE_ID="14UtKraYM2JtKyWHVX6klBLltN00dvhZW"
+BINS_ID="117WsRQgEZlVJhpxTeXip0eRNoWGyTPNc"
+
+get_model gate.pt $GATE_ID
+get_model bins.pt $BINS_ID

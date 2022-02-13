@@ -31,7 +31,7 @@ sleep 8
 tmux selectp -t 2
 tmux send-keys "unset PYTHONPATH" C-m
 tmux send-keys "source setup.sh" C-m
-tmux send-keys "ros2 launch ros2_ws/launch/sim.py" C-m
+tmux send-keys "ros2 launch ros2_ws/launch/launch_sim_yolov5.py" C-m
 
 # From here, your ROS2 stuff should work!
 tmux a
