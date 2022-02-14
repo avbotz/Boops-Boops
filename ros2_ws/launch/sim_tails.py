@@ -9,7 +9,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='sub_vision',
+            package='sub_vision_yolov5',
             node_executable='vision',
             output='screen',
             parameters=[
