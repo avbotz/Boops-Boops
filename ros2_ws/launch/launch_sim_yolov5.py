@@ -39,7 +39,7 @@ def generate_launch_description():
             parameters=[
                 {"GATE": True},
                 {"BINS": True},
-                {"TARGET": True},
+                {"BUOY": True},
                 {"OCTAGON": True},
                 {"POOL_B": True},
                 {"SIM": True}
