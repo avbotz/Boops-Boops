@@ -3,6 +3,7 @@ For now, it's necessary to launch the Gazebo simulator through the ros1 workspac
 This file is to run mission, control, vision nodes to work with the simulator.
 """
 
+from ament_index_python import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
