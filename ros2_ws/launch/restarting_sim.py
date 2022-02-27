@@ -12,7 +12,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='sub_vision',
+            package='sub_vision_yolov5',
             node_executable='vision',
             output='screen',
             parameters=[
@@ -33,8 +33,8 @@ def generate_launch_description():
             output='screen',
             parameters=[
                 {"GATE": True},
+                {"BUOY": True},
                 {"BINS": True},
-                {"TARGET": True},
                 {"OCTAGON": True},
                 {"POOL_B": True},
                 {"SIM": True}

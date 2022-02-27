@@ -14,7 +14,7 @@ def generate_launch_description():
             output='screen'
         ),
         Node(
-            package='sub_vision',
+            package='sub_vision_yolov5',
             node_executable='vision',
             output='screen',
             parameters=[
@@ -34,8 +34,8 @@ def generate_launch_description():
             parameters=[
                 {"COIN_FLIP": True}
                 {"GATE": True},
+                {"BUOY": True},
                 {"BINS": True},
-                {"TARGET": True},
                 {"OCTAGON": True},
                 {"POOL_B": True},
                 {"HEADS": True}

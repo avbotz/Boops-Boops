@@ -8,5 +8,6 @@
 gains/*
 models/*
 images/*
+weights/*
 .catkin_workspace
 *.log

@@ -9,6 +9,9 @@ ROS_WS_DIR=$(pwd)
 sudo apt-get install libopencv-dev python3-pip
 sudo pip3 install -r requirements.txt
 
+# YOLOv5 requirements
+sudo pip3 install -r https://raw.githubusercontent.com/ultralytics/yolov5/master/requirements.txt
+
 # TODO: Move away from ROS1
 # Install ROS1
 if [ "${1}" != "skip-install" ]; then
@@ -50,7 +53,6 @@ fi
 # Download ML models from Craig's Google Drive
 cd $ROS_WS_DIR
 ./models.sh
-
 
 source /opt/ros/eloquent/setup.sh
 
