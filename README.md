@@ -17,15 +17,14 @@
     Setting up a Boops-Boops development environment is pretty simple.
 
     PREREQS:
-    - Ubuntu 18.04 Bionic (yes, bionic! BB requires ros1 melodic as a result of
-      sim dependency, so we need to use 18.04)
+    - Ubuntu 20.04
 
     1. Open a terminal. 
     2. Run `git clone https://github.com/avbotz/Boops-Boops.git`. 
        This will download BB.
     3. Run `./install.sh`. 
-       This will install necessary dependencies, including 
-       both ROS1 Melodic and ROS2 Eloquent, also building the ROS workspaces.
+       This will install necessary dependencies, such as 
+       ROS2 Foxy and build the ROS workspaces.
        This will also download the current machine learning (ML)
        models that are being used for the sub's vision to detect objects.
        Only do this once.
@@ -35,10 +34,6 @@
     You're done! Your BB is now ready to be run ;)
 
     NOTES:
-    - You shouldn't have to work with ROS1 in daily life, as the only thing
-      running in ROS1 is the simulator. If you need to work on the simulator
-      or another ROS1 package, `source setup_ros1.sh` instead of `setup.sh`.
-    - For further info on ROS1, refer to official documentation.
     - If you have **already installed** the dependencies for BB, and you are only
       re-cloning the repository for some reason, you can skip installing ROS and
       other dependencies by running `./install.sh skip-install` instead of `./install.sh`.
@@ -66,14 +61,14 @@
     2. Run one of the following launch commands:
 
     Competition Run:
-    `ros2 launch ros2_ws/launch/restarting_mission_A_heads.py` or
-    `ros2 launch ros2_ws/launch/restarting_mission_A_tails.py` or
-    `ros2 launch ros2_ws/launch/restarting_mission_B_heads.py` or
-    `ros2 launch ros2_ws/launch/restarting_mission_B_tails.py` or
-    `ros2 launch ros2_ws/launch/restarting_mission_C_heads.py` or
-    `ros2 launch ros2_ws/launch/restarting_mission_C_tails.py` or
-    `ros2 launch ros2_ws/launch/restarting_mission_D_heads.py` or
-    `ros2 launch ros2_ws/launch/restarting_mission_D_tails.py` 
+    `ros2 launch launch/restarting_mission_A_heads.py` or
+    `ros2 launch launch/restarting_mission_A_tails.py` or
+    `ros2 launch launch/restarting_mission_B_heads.py` or
+    `ros2 launch launch/restarting_mission_B_tails.py` or
+    `ros2 launch launch/restarting_mission_C_heads.py` or
+    `ros2 launch launch/restarting_mission_C_tails.py` or
+    `ros2 launch launch/restarting_mission_D_heads.py` or
+    `ros2 launch launch/restarting_mission_D_tails.py` 
        First choose the command with the correct coin flip result and pool that 
        the sub will run in. This will launch the image acquisition, vision, control, 
        and mission nodes in a competition run. The difference between restarting_mission 
@@ -85,23 +80,23 @@
        restart the mission. 
 
     Standard Mission Run:
-    `ros2 launch ros2_ws/launch/mission_A_heads.py` or
-    `ros2 launch ros2_ws/launch/mission_A_tails.py` or
-    `ros2 launch ros2_ws/launch/mission_B_heads.py` or
-    `ros2 launch ros2_ws/launch/mission_B_tails.py` or
-    `ros2 launch ros2_ws/launch/mission_C_heads.py` or
-    `ros2 launch ros2_ws/launch/mission_C_tails.py` or
-    `ros2 launch ros2_ws/launch/mission_D_heads.py` or
-    `ros2 launch ros2_ws/launch/mission_D_tails.py` 
+    `ros2 launch launch/mission_A_heads.py` or
+    `ros2 launch launch/mission_A_tails.py` or
+    `ros2 launch launch/mission_B_heads.py` or
+    `ros2 launch launch/mission_B_tails.py` or
+    `ros2 launch launch/mission_C_heads.py` or
+    `ros2 launch launch/mission_C_tails.py` or
+    `ros2 launch launch/mission_D_heads.py` or
+    `ros2 launch launch/mission_D_tails.py` 
        First choose the command with the correct coin flip result and competition 
        pool that the sub will run in. This will launch the image acquisition, 
        vision, control, and mission nodes in a standard mission or pool test to 
        pilot the sub.
 
     Image Collection Run:
-    `ros2 launch ros2_ws/launch/remote_control_image_collection.py`       or 
-    `ros2 launch ros2_ws/launch/remote_control_image_collection_front.py` or 
-    `ros2 launch ros2_ws/launch/remote_control_image_collection_down.py`
+    `ros2 launch launch/remote_control_image_collection.py`       or 
+    `ros2 launch launch/remote_control_image_collection_front.py` or 
+    `ros2 launch launch/remote_control_image_collection_down.py`
        First choose the command with the correct camera that you want to collect
        images for; the first command will log images for both cameras, the second 
        for the front camera, and the third for the down camera. This will launch
@@ -110,46 +105,50 @@
        or pool tests to collect images to train ML models with)
 
     Prelim:
-    `ros2 launch ros2_ws/launch/prelim.py`
+    `ros2 launch launch/prelim.py`
        This will launch the control and mission nodes to have the sub move a set
        of movements to check if the sub is running smoothly.
 
     Pool Test:
-    `ros2 launch ros2_ws/launch/pool_test.py`
+    `ros2 launch launch/pool_test.py`
        This will launch the acquisition, vision, control, and mission nodes
        to execute whatever commands are located in the pool_test() function 
        in sub_mission's tasks.cpp.
 
     Vision Test:
-    `ros2 launch ros2_ws/launch/vision_test.py`
+    `ros2 launch launch/vision_test.py`
        This will launch the acquisition, vision, control, and mission nodes
        to execute whatever commands are located in the vision_test() function 
        in sub_mission's tasks.cpp, which might be testing down camera 
        object detection for example.
 
     PID Tuning Session:
-    `ros2 launch ros2_ws/launch/tuning.py`
+    `ros2 launch launch/tuning.py`
        This will launch the control and motor gains tuning GUI nodes to 
        remote control the sub, while the software member adjusts
        the aggressiveness of the motors using the GUI, in order to tune for gains 
        that allow the sub to move accurately and smoothly.
 
     Simulated Mission Run:
-    `./scripts/run_sim.sh`       or
-    `./scripts/run_sim_heads.sh` or
-    `./scripts/run_sim_tails.sh` 
-       This will start a tmux session that will run the ros1 simulator as well as 
-       launch the vision, control, and mission nodes in simulation mode to simulate
-       what a competition run might look like. The simulation is useful for testing 
-       new mission movements and catching possible bugs or seeing if current approaches 
-       for completing the competition mission are performed accurately by the sub.
+    `ros2 launch launch/sim.py`       or
+    `ros2 launch launch/sim_heads.py` or
+    `ros2 launch launch/sim_tails.py` 
+       This will launch Gazebo with Nemo floating in the water, a simulator node
+       to act as the microcontroller that communicates with sub_control and sends
+       thrust values to the motors, the vision node, the control node, and the mission 
+       node to simulate what a competition run might look like. The simulation is 
+       useful for testing new mission movements and catching possible bugs or seeing if 
+       current approaches  for completing the competition mission are performed 
+       accurately by the sub.
+
        When you are finished, kill the simulator by clicking on the terminal, 
-       pressing "Ctrl-B", pressing "D", and entering `./scripts/kill_sim.sh`.
+       pressing "Ctrl-C", waiting for everything to close, and entering `./scripts
+       kill_sim.sh`.
 
     Simulated Image Collection Run
-    `./scripts/run_sim_remote_control_image_collection.sh`       or
-    `./scripts/run_sim_remote_control_image_collection.sh front` or
-    `./scripts/run_sim_remote_control_image_collection.sh down`
+    `ros2 launch launch/sim_remote_control_image_collection.py`         or
+    `ros2 launch launch/sim_remote_control_image_collection_front.py`   or
+    `ros2 launch launch/sim_remote_control_image_collection_down.py` 
        First choose the command with the correct camera that you want to collect
        images for; the first command will log images for both cameras, the second 
        for the front camera, and the third for the down camera. This will launch 
@@ -166,8 +165,8 @@
     - tmux installed
 
     1. `source setup.sh` if not already sourced.
-    2. Startup the simulator with `./scripts/run_sim.sh`. This requires tmux.
-    3. If any changes have been made, rebuild the workspace. `cd ros2_ws` (in another terminal) and run `colcon build` to build. (Python packages must be built too.)
+    2. If any changes have been made, rebuild the workspace. `./compile.sh` 
+    3. Startup the simulator (instructions in `Running the Code` section)
 
     Currently, the only way to test ROS2 nodes is via manual run commands.
     Launch configuration support is planned.
@@ -212,7 +211,7 @@
     1. Create a separate branch of the subrepo you wish to commit to by changing
        into that directory and running the git commands to create your own branch.
        For example:
-       - cd ros2_ws/src/sub_mission
+       - cd src/sub_mission
        - git checkout -b thisIsMyOwnBranchName
     2. Inside your target subrepo, run the following commands to add, commit, and 
        push your changes to your branch on the github repo.
@@ -237,50 +236,33 @@
 ## Repo Structure
 
     - README: this readme file
-    - clean.sh: Used to clean all build artifacts in both repos
-    - install.sh: Used to install dependencies and set up initial repo workspaces
-    - compile.sh: Used to compile ROS2 workspace (run after changes are made)
-    - models.sh: Used to download ML models
-    - requirements.txt: Used for Python dependencies (TODO: Replace with rosdep?)
-    - **ros1_ws: ROS1 workspace (important) - contains simulator**
-      - launch: Contains roslaunch files (ros1) used to launch simulator
-      - startup/randomize_props.py: Script used to randomize props within simulator on startup
-      - sub_sim subrepo: Contains simulator
-    - **ros2_ws: ROS2 workspace (important) - contains main BB code**
+    - **src: ROS2 workspace (important) - contains main BB code**
       - sub_control subrepo: Contains packages for control (python) and service interfaces
       - sub_mission subrepo: Contains packages for running actual mission tasks
       - sub_vision subrepo: Contains packages for vision
-    - scripts: various convenience scripts (including to run simulator)
+      - sub_sim subrepo: Contains packages for simulating navigation and vision tasks
+    - **launch: Contains launch scripts that can launch multiple nodes at a time
+    - **images: Contains logged images from irl or sim runs
+    - **gains: Contains saved PID tuning gains from PID tuning sessions
+    - **docs: Documentation of BB
+    - **install, **build, **log: Some random stuff that appears after you build BB
+    - clean.sh: Used to clean all build artifacts in both repos
+    - compile.sh: Used to compile ROS2 workspace (run after changes are made)
+    - install.sh: Used to install dependencies and set up initial repo workspaces
+    - kill_sim.sh: Used to kill all simulation processes (run after first pressing Ctrl-C)
+    - models.sh: Used to download ML models
+    - requirements.txt: Used for Python dependencies (TODO: Replace with rosdep?)
     - setup.sh: Sets up ROS2 environment variables etc. (run every time)
-    - setup_ros1.sh: Sets up ROS1 environment variables etc. (run every time) (do not mix with ROS2 setup.sh)
 
-    ROS1 workspace packages are standard roscpp packages. ROS2 workspace packages are
-    standard rclcpp packages unless otherwise stated (sub_control is an rclpy/python package).
+    ROS2 workspace packages are standard rclcpp (c++) packages or rclpy (python) packages.
 
 ## Rationale
 
-    This repository is somewhat of a non-conventional layout for ROS projects.
-    Experienced ROS developers might be surprised to see both a ros1_ws and
-    ros2_ws embedded inside this repository. The reason we chose to use this
-    repository layout is because it actually keeps tracking packages simple.
-
     The central repo essentially acts as a collection of bootstrapping scripts
-    for the ROS1 and ROS2 workspaces. The reason these folders are embedded in
+    for the ROS2 workspaces. The reason these folders are embedded in
     the repository is because we track our packages as subrepos within this central
     repository; this makes it easy for team members to pull all resources needed
     to get up and running in one go.
-
-    Of particular interest are the separate ros1 and ros2 workspaces; the reason
-    we have these two separate workspaces is due to a need to support our simulator,
-    which currently runs on ROS1. Plans are in the works to port the sim to ROS2
-    and eliminate this dependency. However, having the flexibility to use ROS1
-    packages when needed is extremely useful.
-
-## Some Quick Clarifications
-
-    - ROS1 uses the `catkin` build system (e.g. `catkin_make`). ROS2 uses the `colcon` build utility (`colcon build`). Use the respective command for the respective workspaces.
-    - ROS1 bridge is provided by `ros-${DISTRO}-ros1-bridge`. (DISTRO = eloquent for us.)
-    - `dataclasses` may not be available in stdlib if Python is an older version (like the version currently in bionic). Install from requirements.txt to fix this.
 
 ## Questions?
 

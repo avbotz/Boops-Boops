@@ -2,3 +2,5 @@ flask
 argcomplete
 pyserial
 dataclasses
+libopencv-dev
+python3-opencv

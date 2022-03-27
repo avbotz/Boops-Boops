@@ -3,14 +3,33 @@ For now, it's necessary to launch the Gazebo simulator through the ros1 workspac
 This file is to run mission, control, vision nodes to work with the simulator.
 """
 
+import os
+
+from ament_index_python import get_package_share_directory
+
 from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription
+from launch_xml.launch_description_sources import XMLLaunchDescriptionSource
 from launch_ros.actions import Node
+
 
 def generate_launch_description():
     return LaunchDescription([
+        IncludeLaunchDescription(
+            XMLLaunchDescriptionSource(
+                os.path.join(
+                    get_package_share_directory('sub_sim'),
+                    'launch/simulator.xml')
+            )
+        ),
+        Node(
+            package='sub_sim',
+            executable='simulator',
+            output='screen',
+        ),
         Node(
             package='sub_acquisition',
-            node_executable='acquisition',
+            executable='acquisition',
             output='screen',
             parameters=[
                 {"SIM": True}
@@ -18,7 +37,7 @@ def generate_launch_description():
         ),
         Node(
             package='sub_vision_yolov5',
-            node_executable='vision',
+            executable='vision',
             output='screen',
             parameters=[
                 {"SIM": True}
@@ -26,7 +45,7 @@ def generate_launch_description():
         ),
         Node(
             package='sub_control',
-            node_executable='service',
+            executable='service',
             output='screen',
             parameters=[
                 {"SIM": True}
@@ -34,7 +53,7 @@ def generate_launch_description():
         ),
         Node(
             package='sub_mission',
-            node_executable='mission',
+            executable='mission',
             output='screen',
             parameters=[
                 {"GATE": True},
@@ -45,11 +64,11 @@ def generate_launch_description():
                 {"SIM": True}
             ]
         ),
-
+        
         # Launch image display
         Node(
             package='rqt_image_view',
-            node_executable='rqt_image_view',
+            executable='rqt_image_view',
             output='screen'
         )
     ])

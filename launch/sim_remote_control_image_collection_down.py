@@ -1,15 +1,33 @@
 """
 For now, it's necessary to launch the Gazebo simulator through the ros1 workspace.
 This file is to run control, tuning, and vision_node to remote control Nemo 
-through the simulator as it logs images from both the front and down cameras
+through the simulator as it logs images from only the down camera
 (maybe for ML training or remote control practice).
 """
 
+import os
+
+from ament_index_python import get_package_share_directory
+
 from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription
+from launch_xml.launch_description_sources import XMLLaunchDescriptionSource
 from launch_ros.actions import Node
 
 def generate_launch_description():
     return LaunchDescription([
+        IncludeLaunchDescription(
+            XMLLaunchDescriptionSource(
+                os.path.join(
+                    get_package_share_directory('sub_sim'),
+                    'launch/simulator.xml')
+            )
+        ),
+        Node(
+            package='sub_sim',
+            executable='simulator',
+            output='screen',
+        ),
         Node(
             package='sub_control',
             node_executable='service',
@@ -37,8 +55,7 @@ def generate_launch_description():
             output='screen',
             parameters=[
                 {"SIM": True},
-                {"LOG_FRONT": True},
-                {"LOG_DOWN": True}
+                {"LOG_DOWN": True},
             ]
         ),
 
