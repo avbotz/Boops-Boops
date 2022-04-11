@@ -6,7 +6,7 @@ set -e
 ROS_WS_DIR=$(pwd)
 
 # Simple apt-get/pip packages.
-sudo apt-get install libopencv-dev python3-pip
+sudo apt-get install libopencv-dev python3-pip git tmux
 sudo pip3 install -r requirements.txt
 
 # # YOLOv5 requirements
@@ -21,12 +21,7 @@ if [ "${1}" != "skip-install" ]; then
 	sudo apt install ros-foxy-gazebo-ros-pkgs
 	sudo apt-get install python3-colcon-common-extensions
 	sudo apt-get install python3-rosdep
-
-	# Install Plankton here:
-	
-	# Install tmux
-	sudo apt-get install tmux
-	
+		
 	# Download and install Spinnaker SDK from Craig's google drive
 	cd ~/Downloads
 	wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=13OGq0S_xd1bglssQZf8ecPB7ilrTvg93' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=13OGq0S_xd1bglssQZf8ecPB7ilrTvg93" -O ./spinnaker.tar.gz && rm -rf /tmp/cookies.txt
@@ -49,9 +44,11 @@ fi
 cd $ROS_WS_DIR
 ./models.sh
 
+# Install each subrepo
 source /opt/ros/foxy/setup.sh
+source /usr/share/gazebo-11/setup.sh
 
-ROS2_REPOS=( "https://github.com/avbotz/sub_control" "https://github.com/avbotz/sub_vision" "https://github.com/avbotz/sub_mission" "https://github.com/avbotz/sub_sim")
+ROS2_REPOS=("https://github.com/avbotz/sub_control" "https://github.com/avbotz/sub_vision" "https://github.com/avbotz/sub_mission" "https://github.com/avbotz/sub_sim" "https://www.github.com/Liquid-ai/Plankton")
 
 mkdir -p src
 if ! [ -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
@@ -68,7 +65,6 @@ rosdep update
 rosdep install -i --from-path src --rosdistro foxy -y
 
 colcon build
-cd ..
 
 echo "-----------------------     "
 echo "Boops-Boops workpace installed!"
