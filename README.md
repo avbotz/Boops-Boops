@@ -142,8 +142,7 @@
        accurately by the sub.
 
        When you are finished, kill the simulator by clicking on the terminal, 
-       pressing "Ctrl-C", waiting for everything to close, and entering `./scripts
-       kill_sim.sh`.
+       pressing "Ctrl-C", waiting for everything to close, and entering `./kill_sim.sh`.
 
     Simulated Image Collection Run
     `ros2 launch launch/sim_remote_control_image_collection.py`         or
