@@ -24,4 +24,16 @@ The steps to train are as follows:
 
 Besides using ML models, we also use OpenCV (Open Computer Vision), which are traditional computer vision techniques that do not require ML. These include techniques such as filtering out colors, detecting edges in an image, etc. Currently, we plan on using OpenCV for tasks that do not require distinguishing specific objects, such as the path markers, or orienting ourselves to the bin (perhaps).
 
+**Pathmarker Detection**
+
+* Convert image to BGR (necessary to apply HSV filter to image)
+* Apply HSV filter to mask out colors not in the orange color threshold 
+* Apply strong image blur and Canny Edge Detection with high threshold
+* Erode image to create a black-white mask
+* Find contours in image, filter out small objects, and iterate for contour with lowest hue
+* Get contours that have a hue close to the lowest hue (in case there are 2 path markers in sight)
+* Get contour closest to image and draw bounding contour and rectangle around it
+* Find top and bottom pixels of bounding contour using argmin() and argmax()
+* Use angle detection code to find the angle between the top and bottom pixels of the bounding contour
+
 ## Where to Put the Trained ML Models
