@@ -22,13 +22,15 @@
     1. Open a terminal. 
     2. Run `git clone https://github.com/avbotz/Boops-Boops.git`. 
        This will download BB.
-    3. Run `./install.sh`. 
+    3. Run `cd Boops-Boops`
+       This will change directory into the BB folder.
+    4. Run `./install.sh`. 
        This will install necessary dependencies, such as 
        ROS2 Foxy and build the ROS workspaces.
        This will also download the current machine learning (ML)
        models that are being used for the sub's vision to detect objects.
        Only do this once.
-    4. Source the ROS2 setup script with `source setup.sh`. 
+    5. Source the ROS2 setup script with `source setup.sh`. 
        This is necessary every time you open a new terminal to work with ROS2.
     
     You're done! Your BB is now ready to be run ;)
