@@ -65,6 +65,8 @@ cd ..
 rosdep update
 rosdep install -i --from-path src --rosdistro foxy -y
 
+colcon build --packages-up-to plankton
+
 colcon build
 
 echo "-----------------------     "

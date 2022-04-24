@@ -37,7 +37,7 @@ def generate_launch_description():
             node_executable='restart',
             output='screen',
             parameters=[
-                {"COIN_FLIP": True}
+                {"COIN_FLIP": True},
                 {"GATE": True},
                 {"BUOY": True},
                 {"BINS": True},
