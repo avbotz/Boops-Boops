@@ -9,8 +9,12 @@ function get_model {
 
 GATE_ID="18RodtGfvfKXPwqY8TSPaB2BxQMSDjJUN"
 BUOY_ID="1Nn65ZOOkcQFiYATDIkBQX1V-agAF2pB-"
-BINS_ID="117WsRQgEZlVJhpxTeXip0eRNoWGyTPNc"
+BINS_ID="1Md1hlqaeyzRoSU-iofml74sxICNaBhoh"
+OCTAGON_FRONT_ID="1s8Wz99FS49KqaNYjz9cyIPXXjok4xcUw"
+OCTAGON_DOWN_ID="1qS83jmnZ0JVAqJUgMVk7SA_IKH7C9vLm"
 
 get_model gate.pt $GATE_ID
 get_model buoy.pt $BUOY_ID
 get_model bins.pt $BINS_ID
+get_model octagon_front.pt $OCTAGON_FRONT_ID
+get_model octagon_down.pt $OCTAGON_DOWN_ID
