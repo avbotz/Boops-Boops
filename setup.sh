@@ -10,5 +10,5 @@
 
 echo "Source setup scripts..."
 . /opt/ros/foxy/setup.sh
-. /usr/share/gazebo-11/setup.sh
+. /usr/share/gazebo-*/setup.sh
 . install/setup.sh
