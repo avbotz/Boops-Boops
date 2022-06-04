@@ -28,13 +28,8 @@
 #
 
 # This docker file is used to generate a docker image, which will be used
-# to create a docker container to be able to run ROS2, Gazebo, and Pytorch 
-# on the Jetson TX2.
-
-# You will have to install Spinnaker SDK manually by downloading the Spinnaker SDK
-# file, copying it inside of a docker container, following the instructions
-# inside of the container to install the sdk, and then saving changes to the container.
-# (TODO: automate spinnaker sdk setup)
+# to create a docker container to be able to run ROS2, Gazebo, Pytorch, and
+# Spinnaker SDK on the Jetson TX2.
 
 ARG BASE_IMAGE=dustynv/ros:foxy-pytorch-l4t-r32.5.0
 FROM ${BASE_IMAGE}
@@ -47,6 +42,18 @@ ARG MAKEFLAGS=-j$(nproc)
 ENV LANG=en_US.UTF-8 
 ENV PYTHONIOENCODING=utf-8
 RUN locale-gen en_US en_US.UTF-8 && update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+
+### Install Spinnaker SDK (camera driver) (wget downloads from Craig's Google Drive)
+#WORKDIR /home
+
+RUN apt-get install libusb-1.0-0
+#RUN wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1BylMqtbLEu7EUUKHx0qQ0s8I--6IF9SJ' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1BylMqtbLEu7EUUKHx0qQ0s8I--6IF9SJ" -O spinnaker.tar.gz && rm -rf /tmp/cookies.txt && tar -xzf spinnaker.tar.gz -C .
+
+#COPY ./my_install_spinnaker.sh /tmp/spinnaker-2.6.0.157-arm64/my_install_spinnaker.sh
+
+#WORKDIR /tmp/spinnaker-2.6.0.157-arm64
+#RUN ./my_install_spinnaker.sh
+
 
 WORKDIR /tmp
 
@@ -61,7 +68,9 @@ RUN apt-get update && \
 		  libgazebo9-dev \
 		  gazebo9 \
 		  gazebo9-common \
-		  gazebo9-plugin-base \
+		  gazebo9-plugin-base
+		  python3-pyqt5 \
+		  libspnav-dev \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
@@ -98,14 +107,17 @@ RUN source ${ROS_ROOT}/install/setup.bash && \
     
 
 # Install BB and YOLOv5 dependencies
-RUN pip3 install --verbose flask argcomplete pyserial dataclasses 
-RUN pip3 install --verbose matplotlib>=3.2.2 \
-    PyYAML>=5.3.1 \
-    requests>=2.23.0 \
-    tensorboard>=0.8.1 \
-    pandas>=1.1.4 \
-    seaborn>=0.11.0 \
-    thop
+RUN pip3 install flask --verbose && \
+    pip3 install argcomplete --verbose && \
+    pip3 install pyserial --verbose && \
+    pip3 install dataclasses --verbose && \
+    pip3 install matplotlib>=3.2.2 --verbose && \
+    pip3 install PyYAML>=5.3.1 --verbose && \
+    pip3 install requests>=2.23.0 --verbose && \
+    pip3 install tensorboard>=0.8.1 --verbose && \
+    pip3 install pandas>=1.1.4 --verbose && \
+    pip3 install seaborn>=0.11.0 --verbose && \
+    pip3 install thop --verbose 
 
 
 # Set up environment
