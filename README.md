@@ -225,12 +225,22 @@
 
 ## Pool Test Procedure
 
-    1. Setup sub, turn on, and connect sub to router. Ensure kill is OFF.
-    2. Connect own computer to AVBotz network.
-    3. SSH into sub, "ssh user@192.168.2.50".
+    1. Setup sub, turn on, and connect sub to router (ethernet cable 
+       goes through subconn (the red plug on the lid), connects to wifi
+       access point device (looks like a box) that generates wifi for the sub). 
+       Ensure kill is OFF.
+    2. Connect own computer to AVBotz wifi network.
+    3. VNC into sub, to be able to access the sub's desktop screen.
+       - Open Remote Desktop Viewer app.
+       - Click "Connect" button.
+       - Select "VNC" in the protocol drop down menu at the top.
+       - Enter "192.168.1.101" in the host field.
+       - Click the connect button at the bottom.
+       - Enter the VNC password: nemo1234
     4. Put sub into water without breaking a motor.
-    5. Follow Nautical README instructions. Pray that the DVL doesn't hang.
-    6. Follow Boops-Boops "Running the Code" instructions with one of the common node combinations.
+    5. Inside the VNC, Follow Nautical README instructions. Pray that the DVL doesn't hang.
+    6. Inside the VNC,Follow Boops-Boops "Running the Code" instructions with one of the 
+       common node combinations.
     7. Unplug tether if this is an autonomous run.
     8. Turn kill switch ON to begin mission if that is running.
 
