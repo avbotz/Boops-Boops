@@ -25,6 +25,7 @@ if [ "${1}" != "skip-install" ]; then
 	sudo apt update
 	sudo apt install ros-foxy-desktop
 	sudo apt install ros-foxy-gazebo-ros-pkgs
+	sudo apt install ros-foxy-image-transport-plugins
 	sudo apt-get install python3-colcon-common-extensions
 	sudo apt-get install python3-rosdep
 		
