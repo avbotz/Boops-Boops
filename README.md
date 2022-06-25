@@ -234,7 +234,7 @@
        - Open Remote Desktop Viewer app.
        - Click "Connect" button.
        - Select "VNC" in the protocol drop down menu at the top.
-       - Enter "192.168.1.101" in the host field.
+       - Enter "192.168.1.100" in the host field.
        - Click the connect button at the bottom.
        - Enter the VNC password: nemo1234
     4. Put sub into water without breaking a motor.
