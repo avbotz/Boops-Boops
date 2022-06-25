@@ -10,7 +10,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='sub_vision',
+            package='sub_acquisition',
             node_executable='acquisition',
             output='screen'
         ),

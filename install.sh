@@ -12,6 +12,11 @@ sudo pip3 install -r requirements.txt
 # # YOLOv5 requirements
 sudo pip3 install -r https://raw.githubusercontent.com/ultralytics/yolov5/master/requirements.txt
 
+# For host pc that already installed pytorch with specific cuda version:
+# sudo pip3 install matplotlib>=3.2.2 numpy>=1.18.5 opencv-python>=4.1.1 Pillow>=7.1.2 PyYAML>=5.3.1 requests>=2.23.0 scipy>=1.4.1 tqdm>=4.41.0
+# sudo pip3 install protobuf==3.20.1 
+# sudo pip3 install tensorboard>=2.4.1 pandas>=1.1.4 seaborn>=0.11.0 ipython psutil thop
+
 if [ "${1}" != "skip-install" ]; then
 	# Install ROS2
 	sudo apt-get update && sudo apt-get install curl gnupg2 lsb-release git

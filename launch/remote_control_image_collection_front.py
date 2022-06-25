@@ -20,7 +20,7 @@ def generate_launch_description():
             output='screen'
         ),
         Node(
-            package='sub_vision',
+            package='sub_acquisition',
             node_executable='acquisition',
             output='screen'
         ),
