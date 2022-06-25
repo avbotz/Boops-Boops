@@ -36,4 +36,6 @@ Besides using ML models, we also use OpenCV (Open Computer Vision), which are tr
 * Find top and bottom pixels of bounding contour using argmin() and argmax()
 * Use angle detection code to find the angle between the top and bottom pixels of the bounding contour
 
-## Where to Put the Trained ML Models
+## sub_acquisition
+
+sub_acquisition is sort of like sub_vision, and its role is to take in images from the physical cameras and provide them to sub_vision. In the sub_acquisition package, the acquisition node continually interfaces with the cameras via Spinnaker SDK to get the latest image, it converts these into OpenCV format images, it downsizes the images (because the raw images for the front cam are like ~5000x3000 pixels, and the raw images for the down cam are like ~1280x800 pixels, which are too big for our YOLOv5s model), it filters the images if specified (configured in config.hpp of sub_acquisition), and it publishes these images onto a ROS2 topic that sub_vision listens and subscribes to.
