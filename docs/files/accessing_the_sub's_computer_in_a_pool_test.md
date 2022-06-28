@@ -12,4 +12,4 @@ If you need to access the terminal, you can set up a SSH tunnel. Mac users can i
 
 ## Mac VNC Connection
 
-Go to finder, press keys command+k, and in the text field paste and connect to `vnc://192.168.1.100`, or the current ip address used. This is the mac inbuilt VNC software using the Screen Share feature. Fill in the prompt that asks for the password, and the screen of the sub should come up.
+Go to finder (can click on desktop background), press <kbd>Cmd</kbd> + <kbd>K</kbd>, and in the text field paste and connect to `vnc://192.168.1.100`, or the current ip address used. This is the mac inbuilt VNC software using the Screen Share feature. Fill in the prompt that asks for the password, and the screen of the sub should come up.
