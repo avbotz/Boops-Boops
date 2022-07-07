@@ -1,0 +1,3 @@
+`Task.msg` is the file that defines the ROS2 message that is called a "Task" type message. This file defines it so that the Task msg object/variable has a variable that is called the value, where it can be set to the other integers that represent which task it is. 
+
+The file also maps each vision task so that they are represented by an integer, and these constants are used in both sub_vision and sub_mission.

@@ -1,9 +1,16 @@
 `sub_sim` is the package that creates a simulated environment (sort of like a videogame) to test if our mission and vision code works.
 
+## Explanation of Each File
+
+* [commandParser.cpp](./commandparser.cpp.md)
+* [PIDController.cpp](./pidcontroller.cpp.md)
+* [simulator.cpp](./simulator.cpp.md)
+* [utils.cpp](./utils.cpp.md)
+
 ## Structure
 The main ROS launch files that start up Gazebo and create the environment are located in the `launch` folder, with `simulator.launch` being the main file (to run a launch file, search it up lol feel lazy to type it here.) Next, the `meshes` folder contains the 3D design files with Nemo's design, which includes the main `dae` file that describes the body of nemo along with the `propeller.dae` file which is the design of the propeller (that is stolen from the uuvsim repo) and some images to provide the color of the sub. 
 
-In order to create the scenario in Gazebo, we need 3D models of the props and the Transdec pool, which are stored in the `meshes` folder, usually as `obj` files. They are also some `model.config` and `model.sdf` files; those are just to register these models so that Gazebo can see them. 
+In order to create the scenario in Gazebo, we need 3D models of the props and the Transdec pool, which are stored in the `models` folder, usually as `obj` files. They are also some `model.config` and `model.sdf` files; those are just to register these models so that Gazebo can see them. 
 
 To actually spawn these props inside the scenario, the prop locations are written in the `transdec.world` file in the `worlds` folder; if you ever need to update the sim to have new props for a new competiton, you can create the model in Blender (preferably an obj file with color image textures (it seems using images to color the object result in brighter colors in the sim, whereas coloring them the default way creates colors that are too light in the sim)), place the model files in the `models` folder using the other models as an example, and then edit in the location into the `transdec.world` file. Then, when you launch the sim with the roslaunch file, you should see the props inside of the sim.
 

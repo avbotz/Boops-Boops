@@ -1,6 +1,68 @@
 `sub_vision` is the package that handles detection of competition objects from the camera, and it returns information such as the angle and distance to the objects to sub_mission.
 
+## Explanation of Each File
+
+sub_acquisition:
+- [acquisition.cpp](./acquisition.cpp.md)
+- [filters.cpp](./filters.cpp.md)
+- [log.cpp](./log.cpp.md)
+
+sub_vision_yolov5:
+- [detect.py](./detect.py.md) 
+- [image_logger.py](./image_logger.py.md)
+- [preprocess.py](./preprocess.py.md)
+- [service.py](./service.py.md)
+
+sub_vision_interfaces:
+- [Task.msg](./task.msg.md)
+- [Vision.srv](./vision.srv.md)
+
 ## Structure
+
+In sub_vision, there are two main packages: `sub_acquisition` and `sub_vision_yolov5`. `sub_acquisition` contains a node that reads the images from the front camera and down camera and publishes them onto a ROS2 topic, while `sub_vision_yolov5` reads the topic, reads in the latest image, and gives detection data (such as angle and distance to a specified object) when `sub_mission` requests it. Meanwhile, `sub_vision_interfaces` has files that define message types and values that are inputted and outputted to/by the vision service. Finally, the CMakeLists.txt files contain information for the compiler of which files to compile to create a node executable, and the package.xml files contain information on how to set up the files with which dependencies to look for (I think).
+
+```
+sub_vision
+├── sub_acquisition
+│   ├── CMakeLists.txt
+│   ├── include
+│   │   └── sub_acquisition
+│   │       ├── acquisition.hpp
+│   │       ├── config.hpp
+│   │       ├── filters.hpp
+│   │       └── log.hpp
+│   ├── package.xml
+│   └── src
+│       ├── acquisition.cpp
+│       ├── filters.cpp
+│       └── log.cpp
+├── sub_vision_interfaces
+│   ├── CMakeLists.txt
+│   ├── msg
+│   │   └── Task.msg
+│   ├── package.xml
+│   └── srv
+│       └── Vision.srv
+└── sub_vision_yolov5
+    ├── package.xml
+    ├── requirements.txt
+    ├── resource
+    │   └── sub_vision_yolov5
+    ├── setup.cfg
+    ├── setup.py
+    ├── sub_vision_yolov5
+    │   ├── detect.py
+    │   ├── image_logger.py
+    │   ├── __init__.py
+    │   ├── preprocess.py
+    │   ├── __pycache__
+    │   │   └── __init__.cpython-39.pyc
+    │   └── service.py
+    └── test
+        ├── test_copyright.py
+        ├── test_flake8.py
+        └── test_pep257.py
+```
 
 ## How it Works
 
@@ -23,18 +85,6 @@ The steps to train are as follows:
 ## OpenCV
 
 Besides using ML models, we also use OpenCV (Open Computer Vision), which are traditional computer vision techniques that do not require ML. These include techniques such as filtering out colors, detecting edges in an image, etc. Currently, we plan on using OpenCV for tasks that do not require distinguishing specific objects, such as the path markers, or orienting ourselves to the bin (perhaps).
-
-**Pathmarker Detection**
-
-* Convert image to BGR (necessary to apply HSV filter to image)
-* Apply HSV filter to mask out colors not in the orange color threshold 
-* Apply strong image blur and Canny Edge Detection with high threshold
-* Erode image to create a black-white mask
-* Find contours in image, filter out small objects, and iterate for contour with lowest hue
-* Get contours that have a hue close to the lowest hue (in case there are 2 path markers in sight)
-* Get contour closest to image and draw bounding contour and rectangle around it
-* Find top and bottom pixels of bounding contour using argmin() and argmax()
-* Use angle detection code to find the angle between the top and bottom pixels of the bounding contour
 
 ## sub_acquisition
 

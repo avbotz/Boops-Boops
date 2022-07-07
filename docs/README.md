@@ -6,6 +6,7 @@ Welcome to the Boops-Boops :dolphin: wiki! Here you will find in depth explanati
 * [sub_vision](./files/sub_vision.md)
 * [sub_sim](./files/sub_sim.md)
 * [Hydrophones](./files/hydrophones.md)
+* [Launch Files](./files/launch_files.md)
 * [Miscellaneous tutorials](./files/tutorials.md)
 
 ## Overview:

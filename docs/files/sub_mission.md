@@ -10,6 +10,7 @@
 * [util.cpp](./util.cpp.md)
 
 ## Structure
+
 The main C++ files are located in the `sub_mission/src` folder, where the package operates by running a central node, usually `mission_node` or `restart_node`, which executes functions (defined in tasks.cpp) that comprise a linear set of instructions for the submarine to follow as it navigates through the course. A node, as used in Robot Operating System 2 (ROS2), is an independent process that allows the developer to run several processes at the same time with different jobs, which allows Nemo to operate efficiently. 
 
 ```
