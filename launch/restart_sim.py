@@ -41,10 +41,10 @@ def generate_launch_description():
             ]
         ),
 
-        # Launch image display
+        # Launch image display, to access enter: 0.0.0.0:5000 in a web browser
         Node(
-            package='rqt_image_view',
-            node_executable='rqt_image_view',
-            output='screen'
+            package='sub_interface',
+            node_executable='interface',
+            output='screen',
         )
     ])

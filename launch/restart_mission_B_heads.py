@@ -1,7 +1,7 @@
 """
 This file is to run mission_node (controlled by restart_runner node), 
 control_node, vision_node, and acquisition_node for the sub to complete 
-the mission in POOL C (either competition or at a pool test).
+the mission in POOL B (either competition or at a pool test).
 
 This is recommended for competition because if we decide to restart our run, 
 the kill switch will kill the mission, and when the kill switch is turned on again,
@@ -42,15 +42,15 @@ def generate_launch_description():
                 {"BUOY": True},
                 {"BINS": True},
                 {"OCTAGON": True},
-                {"POOL_C": True},
-                {"TAILS": True}
+                {"POOL_B": True},
+                {"HEADS": True}
             ]
         ),
 
-        # Launch image display
+        # Launch image display, to access enter: 0.0.0.0:5000 in a web browser
         Node(
-            package='rqt_image_view',
-            node_executable='rqt_image_view',
-            output='screen'
+            package='sub_interface',
+            node_executable='interface',
+            output='screen',
         )
     ])

@@ -63,15 +63,11 @@
     2. Run one of the following launch commands:
 
     Competition Run:
-    `ros2 launch launch/restarting_mission_A_heads.py` or
-    `ros2 launch launch/restarting_mission_A_tails.py` or
-    `ros2 launch launch/restarting_mission_B_heads.py` or
-    `ros2 launch launch/restarting_mission_B_tails.py` or
-    `ros2 launch launch/restarting_mission_C_heads.py` or
-    `ros2 launch launch/restarting_mission_C_tails.py` or
-    `ros2 launch launch/restarting_mission_D_heads.py` or
-    `ros2 launch launch/restarting_mission_D_tails.py` 
-       First choose the command with the correct coin flip result and pool that 
+    `ros2 launch launch/restart_mission_A.py` or
+    `ros2 launch launch/restart_mission_B.py` or
+    `ros2 launch launch/restart_mission_C.py` or
+    `ros2 launch launch/restart_mission_D.py` or
+       First choose the command with the correct pool that 
        the sub will run in. This will launch the image acquisition, vision, control, 
        and mission nodes in a competition run. The difference between restarting_mission 
        and the normal mission is that if the kill switch kills the sub, restart_node
@@ -96,15 +92,21 @@
        pilot the sub.
 
     Image Collection Run:
-    `ros2 launch launch/remote_control_image_collection.py`       or 
+    `ros2 launch launch/remote_control_image_collection.py`       or
     `ros2 launch launch/remote_control_image_collection_front.py` or 
-    `ros2 launch launch/remote_control_image_collection_down.py`
+    `ros2 launch launch/remote_control_image_collection_down.py`  or
+    `ros2 launch launch/image_collection.py`                      or
+    `ros2 launch launch/image_collection_front.py                 or
+    `ros2 launch launch/image_collection_down.py`
        First choose the command with the correct camera that you want to collect
        images for; the first command will log images for both cameras, the second 
        for the front camera, and the third for the down camera. This will launch
        the image acquisition, vision, control, and tuning nodes to remote control
        Nemo as images are automatically being logged. (Can be used in competition pool
-       or pool tests to collect images to train ML models with)
+       or pool tests to collect images to train ML models with.) The last 3 launch files
+       only launch the vision nodes to collect images from the front and down cameras,
+       and you can push the sub around or use Nautical terminal commands to control the sub
+       (see Nautical README).
 
     Prelim:
     `ros2 launch launch/prelim.py`
@@ -129,7 +131,9 @@
        This will launch the control and motor gains tuning GUI nodes to 
        remote control the sub, while the software member adjusts
        the aggressiveness of the motors using the GUI, in order to tune for gains 
-       that allow the sub to move accurately and smoothly.
+       that allow the sub to move accurately and smoothly. Recommended to use
+       VNC to view the computer image while you are doing this. (See pool test
+       procedure section.)
 
     Simulated Mission Run:
     `ros2 launch launch/sim.py`       or
@@ -230,17 +234,22 @@
        access point device (looks like a box) that generates wifi for the sub). 
        Ensure kill is OFF.
     2. Connect own computer to AVBotz wifi network.
-    3. VNC into sub, to be able to access the sub's desktop screen.
+    3. SSH into sub: `ssh avbotz@192.168.1.101` (or try 192.168.1.100 if that doesn't work)
+       You can open multiple terminals and enter the ssh command again to get multiple panes,
+       or you can use tmux (which is more difficult in my opinion).
+    3. OR VNC into sub, to be able to access the sub's desktop screen. (Not recommended,
+       slower and more prone to lag/freezing because it's transfering the entire screenshare
+       of the desktop instead of just opening a terminal for you.)
        - Open Remote Desktop Viewer app.
        - Click "Connect" button.
        - Select "VNC" in the protocol drop down menu at the top.
-       - Enter "192.168.1.100" in the host field. If that doesn't work, try "192.168.1.101".
+       - Enter "192.168.1.101" in the host field. If that doesn't work, try "192.168.1.100".
        - Click the connect button at the bottom.
        - Enter the VNC password: nemo1234
     4. Put sub into water without breaking a motor.
-    5. Inside the VNC, Follow Nautical README instructions. Pray that the DVL doesn't hang.
-    6. Inside the VNC,Follow Boops-Boops "Running the Code" instructions with one of the 
-       common node combinations.
+    5. Inside the SSH/VNC, Follow Nautical README instructions.
+    6. Inside the SSH/VNC,Follow Boops-Boops "Running the Code" instructions with one of the 
+       common launch files.
     7. Unplug tether if this is an autonomous run.
     8. Turn kill switch ON to begin mission if that is running.
 

@@ -1,11 +1,6 @@
 """
-This file is to run mission_node (controlled by restart_runner node), 
-control_node, vision_node, and acquisition_node for the sub to complete 
-the mission in POOL A (either competition or at a pool test).
-
-This is recommended for competition because if we decide to restart our run, 
-the kill switch will kill the mission, and when the kill switch is turned on again,
-the mission will restart (which won't happen with the normal launch_mission.py)
+This file is to run mission_node, control_node, vision_node, and acquisition_node 
+for the sub to complete the mission in POOL A (either competition or at a pool test)
 """
 
 from launch import LaunchDescription
@@ -34,23 +29,21 @@ def generate_launch_description():
         ),
         Node(
             package='sub_mission',
-            node_executable='restart',
+            node_executable='mission',
             output='screen',
             parameters=[
-                {"COIN_FLIP": True},
                 {"GATE": True},
                 {"BUOY": True},
                 {"BINS": True},
                 {"OCTAGON": True},
-                {"POOL_A": True},
-                {"HEADS": True}
+                {"POOL_A": True}
             ]
         ),
 
-        # Launch image display
+        # Launch image display, to access enter: 0.0.0.0:5000 in a web browser
         Node(
-            package='rqt_image_view',
-            node_executable='rqt_image_view',
-            output='screen'
+            package='sub_interface',
+            node_executable='interface',
+            output='screen',
         )
-    ])
+    ]) 

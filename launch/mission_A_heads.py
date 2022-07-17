@@ -44,8 +44,8 @@ def generate_launch_description():
 
         # Launch image display
         Node(
-            package='rqt_image_view',
-            node_executable='rqt_image_view',
-            output='screen'
+            package='sub_interface',
+            node_executable='interface',
+            output='screen',
         )
     ])
