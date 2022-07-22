@@ -33,7 +33,8 @@ def generate_launch_description():
             ]
         ),
 
-        # Launch image display, to access enter: 0.0.0.0:5000 in a web browser
+        # Launch image display, to access enter:
+        # (ip address of computer running BB):5000 in a web browser
         Node(
             package='sub_interface',
             node_executable='interface',

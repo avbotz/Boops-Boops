@@ -12,6 +12,14 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
+            package='sub_acquisition',
+            executable='acquisition',
+            output='screen',
+            parameters=[
+                {"SIM": True}
+            ]
+        ),
+        Node(
             package='sub_vision_yolov5',
             node_executable='vision',
             output='screen',
@@ -41,7 +49,8 @@ def generate_launch_description():
             ]
         ),
 
-        # Launch image display, to access enter: 0.0.0.0:5000 in a web browser
+        # Launch image display, to access enter:
+        # (ip address of computer running BB):5000 in a web browser
         Node(
             package='sub_interface',
             node_executable='interface',
