@@ -34,14 +34,14 @@ def generate_launch_description():
         ),
         Node(
             package='sub_mission',
-            node_executable='mission',
+            node_executable='restart',
             output='screen',
             parameters=[
                 {"GATE": True},
                 {"BUOY": True},
                 {"BINS": True},
                 {"OCTAGON": True},
-                {"POOL_D": True}
+                {"POOL_A": True}
             ]
         ),
 
