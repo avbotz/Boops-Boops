@@ -6,11 +6,30 @@ sense of what a competition run will feel like (since we will use restart_node
 instead of mission_node at competition).
 """
 
+import os
+
+from ament_index_python import get_package_share_directory
+
 from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription
+from launch_xml.launch_description_sources import XMLLaunchDescriptionSource
 from launch_ros.actions import Node
+
 
 def generate_launch_description():
     return LaunchDescription([
+        IncludeLaunchDescription(
+            XMLLaunchDescriptionSource(
+                os.path.join(
+                    get_package_share_directory('sub_sim'),
+                    'launch/simulator.xml')
+            )
+        ),
+        Node(
+            package='sub_sim',
+            executable='simulator',
+            output='screen',
+        ),
         Node(
             package='sub_acquisition',
             executable='acquisition',
@@ -21,7 +40,7 @@ def generate_launch_description():
         ),
         Node(
             package='sub_vision_yolov5',
-            node_executable='vision',
+            executable='vision',
             output='screen',
             parameters=[
                 {"SIM": True}
@@ -29,7 +48,7 @@ def generate_launch_description():
         ),
         Node(
             package='sub_control',
-            node_executable='service',
+            node_executable='control',
             output='screen',
             parameters=[
                 {"SIM": True}
@@ -37,7 +56,7 @@ def generate_launch_description():
         ),
         Node(
             package='sub_mission',
-            node_executable='restart',
+            executable='restart',
             output='screen',
             parameters=[
                 {"GATE": True},
@@ -48,7 +67,7 @@ def generate_launch_description():
                 {"SIM": True}
             ]
         ),
-
+        
         # Launch image display, to access enter:
         # (ip address of computer running BB):5000 in a web browser
         Node(

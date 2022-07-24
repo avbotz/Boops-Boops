@@ -29,7 +29,7 @@ def generate_launch_description():
         ),
         Node(
             package='sub_control',
-            node_executable='service',
+            node_executable='control',
             output='screen',
             parameters=[
                 {"SIM": True}
