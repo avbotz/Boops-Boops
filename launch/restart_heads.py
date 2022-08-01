@@ -23,8 +23,8 @@ def generate_launch_description():
             node_executable='vision',
             output='screen',
             parameters=[
-                {"LOG_FRONT": False},
-                {"LOG_DOWN": False},
+                {"LOG_FRONT": True},
+                {"LOG_DOWN": True},
             ]
         ),
         Node(
@@ -37,11 +37,12 @@ def generate_launch_description():
             node_executable='restart',
             output='screen',
             parameters=[
+		{"COIN_FLIP": True},
                 {"GATE": True},
                 {"BUOY": True},
                 {"BINS": True},
                 {"OCTAGON": True},
-                {"POOL_A": True}
+                {"HEADS": True}
             ]
         ),
 

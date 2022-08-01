@@ -18,7 +18,7 @@ def generate_launch_description():
             XMLLaunchDescriptionSource(
                 os.path.join(
                     get_package_share_directory('sub_sim'),
-                    'launch/simulator.xml')
+                    'launch/simulator_tails.xml')
             )
         ),
         Node(
@@ -60,7 +60,6 @@ def generate_launch_description():
                 {"BUOY": True},
                 {"BINS": True},
                 {"OCTAGON": True},
-                {"POOL_B": True},
                 {"TAILS": True},
                 {"SIM": True}
             ]
