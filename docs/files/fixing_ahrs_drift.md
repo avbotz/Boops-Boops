@@ -5,6 +5,7 @@ Note: This is for the old $1k TRAX AHRS. We replaced this with a $30 WitMotion W
 Note: In the future it's probably better to design everything and use cheap sensors/components that still work very well, like our current WitMotion AHRS and the Cerulean Sonar DVL. Sometimes it's not worth it to buy expensive hardware, as a lot of times it is overkill for our needs, and the components can be very fragile and lead to accidental breakages that can drain up to tens of thousands of dollars. Sometimes it's better to invest in cheap sensors/parts that work well, to keep things replaceable and financiable by the club. 
 
 For the WitMotion, if something is going weird:
+- Make sure the board holding the AHRS and the boards holding parts near the AHRS (i.e. the Arduino or the microcontroller) are strapped down so that they do not budge when you push them. We had an issue in 2022 comp where the AHRS board and Arduino boards were not fastened down, leading to the Arduino board smashing the AHRS board, causing jitter that threw off the gyro on the AHRS and caused some drift. We fixed that by fastening the AHRS board by tightening the screws and using hot glue, and fastening the Arduino board by using electrical tape to tape it down so that it didn't move.
 - Use WitMotion Windows app (search up how to download it, it's on their website for the WT-901 AHRS)
 - Connect the AHRS to computer using FTDI (which is a Serial to USB converter)
 - Open their Windows app

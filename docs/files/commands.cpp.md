@@ -13,7 +13,7 @@ This function returns the angle to a competition object, as it can take multiple
 
 Inputs:
 * int attempts: the number of detections you want to use to find the average angle to the object.
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
@@ -25,7 +25,7 @@ This is the same as `align()`, except that instead of outputting the absolute an
 
 Inputs:
 * int attempts: the number of detections you want to use to find the average angle to the object.
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
@@ -41,7 +41,7 @@ This function tries to look for a competition object, and if it can't find it, i
 
 Inputs:
 * int attempts: the number of detections you want to use to find the average angle to the object.
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
@@ -57,7 +57,7 @@ This function tries to look for a competition object, and if it can't find it, i
 
 Inputs:
 * int attempts: the number of detections you want to use to find the average angle to the object.
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 * int num_sweeps: the number of total sweeps the sub should do to look for the object. (If `num_sweeps = 4`, then it will sweep 4 times, moving forward 3 times.)
 
@@ -66,7 +66,7 @@ Outputs:
 
 ## float distance(int attempts, int task, int camera)
 
-This function returns the distance to a competition object, as it can take multiple detections and average out their distances to return the average distance to the object (for more stability/accuracy). 
+This function returns the distance to a competition object, as it can take multiple detections and average out their distances to return the average distance to the object (for more stability/accuracy). Note that to get the distance, you have to set up the calculation for that specific object in sub_vision, which includes writing that code to calculate the distance and providing the relevant object real height (see the places where it's already been written for other tasks.)
 
 1. Execute a for loop to collect x amount of detections, add the distances to the total.
 2. If all of our detections were unsuccessful, then we return an invalid distance.
@@ -74,7 +74,7 @@ This function returns the distance to a competition object, as it can take multi
 
 Inputs:
 * int attempts: the number of detections you want to use to find the average distance to the object.
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
@@ -82,7 +82,7 @@ Outputs:
 
 ## float distAndAlign(int attempts, int task, int camera)
 
-This function returns the distance to a competition object, but instead of relying on the distance from detections, we move the sub and use math to calculate the distance. However, even though it is hella cool and looks aesthetic in the simulator, this method is deprecated because small inaccuracies of horizontal movement can significantly disrupt the distance calculation.
+This function returns the distance to a competition object, but instead of relying on the distance from detections, we move the sub and use math to calculate the distance. However, even though it is hella cool and looks aesthetic in the simulator, this method is deprecated because small inaccuracies of horizontal movement can significantly disrupt the distance calculation. For example, if you tell the sub to move 0.5 meters and it moves 0.25, your calculation will be like 50% off.
 
 1. Store the original state of the sub in case we want to return if the calculation is unsuccessful.
 2. Find the relative angle to the object.
@@ -96,7 +96,7 @@ This function returns the distance to a competition object, but instead of relyi
 
 Inputs:
 * int attempts: the number of detections you want to use to find the average angle to the object.
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
@@ -132,7 +132,7 @@ This function continuously moves the sub forward while taking numerous vision de
 
 Inputs:
 * float max_dist: the maximum distance we allow the sub to travel from where the function was called (so we don't have the sub moving like 100 meters forward and crashing into the wall if it can't find the object).
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 * float timeout: the maximum number of seconds you want the function to run for (so we don't wait for 20 minutes if the sub gets stuck somewhere and can't move forward).
 
@@ -141,7 +141,7 @@ Outputs:
 
 ## Coordinate downAlign(int attempts, int task, int camera)
 
-This function uses the down camera and calculates the coordinates that the sub needs to move to in order to align with something below it (such as the bins). (This function does not actually move the sub; it only calculates the coordinates that it should move to.)
+This function uses the down camera and calculates the absolute coordinates that the sub needs to move to in order to align with something below it (such as the bins). (This function does not actually move the sub; it only calculates the coordinates that it should move to.)
 
 1. Set up some variables (eg. x_avg, which is the average x coordinate that we will return later along with the y coordinate).
 2. Record the sub's current state.
@@ -157,7 +157,7 @@ This function uses the down camera and calculates the coordinates that the sub n
 
 Inputs:
 * int attempts: the number of detections you want to use to find the average coordinates of the object.
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
@@ -165,7 +165,7 @@ Outputs:
 
 ## bool frontContinuousAlign(float min_seconds, int task, int camera, float thres)
 
-This function continuously aligns the sub to an object in front of it, except instead of using angles and turning the sub to align, it uses offsets to move the sub horizontally and vertically to align. 
+This function continuously aligns the sub to an object in front of it, except instead of using angles and turning the sub to align, it uses offsets to move the sub horizontally and then vertically to align. 
 
 1. Vertically align the sub to the object (so the object and the sub are at the same z).
 2. Horizontally align the sub to the object (so the object is right in front of it).
@@ -173,7 +173,7 @@ This function continuously aligns the sub to an object in front of it, except in
 
 Inputs: 
 * float min_seconds: the minimum amount of seconds that you want the sub to vertically align and horizontally align (the minimum seconds applies to each one, not both combined).
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 * float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
@@ -201,7 +201,7 @@ This function continuously calls for detections to vertically readjust the sub s
 
 Inputs: 
 * float min_seconds: the minimum amount of seconds that you want the sub to vertically align (the minimum seconds applies to each one, not both combined).
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 * float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
@@ -229,7 +229,7 @@ This function continuously calls for detections to horizontally readjust the sub
 
 Inputs: 
 * float min_seconds: the minimum amount of seconds that you want the sub to horizontally align (the minimum seconds applies to each one, not both combined).
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 * float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
@@ -247,7 +247,7 @@ This function takes the angle to an object, turns towards the object, and repeat
 
 Inputs:
 * int attempts: the number of detections you want to use to find the average angle to the object. In this case, also the amount of times you want to turn towards the object.
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 
 Outputs:
@@ -261,13 +261,13 @@ This function continuously calculates the offsets to align with an object undern
 2. Warmup the ML model so that the warming up speed does not factor into our timing to see how long the function has taken.
 3. Record the starting time to later see how many seconds have elapsed.
 4. Record the current state of the sub.
-5. Get the distance to the object (which is the distance to the floor/anything right below the sub, which is why we use `control_client::depth()`.
+5. Get the distance to the object (which is the distance to the floor/anything right below the sub, which is why we use `service_client::altitude()`.
 6. Detect the object.
 7. If the detection is valid, continue.
 8. If we have continuously aligned for past the minimum time requirement and the object is aligned, then stop the function.
 9. Calculate the offsets we need to move the sub for it to be directly above the object.
 10. If we are trying to align on top of the bins, then adjust the offset values so that we align the ball dropper instead of the down camera.
-11. Convert relative offsets to absolute coordinates, and set the sub to move to those coordinates.
+11. Convert relative offsets to absolute coordinates, and set the sub to move to those coordinates. (Don't block so we can continuously readjust.)
 12. If the earlier detection wasn't valid, then we record that (if we failed too many times, then we stop the function because it means the object probably wasn't in view).
 13. If we couldn't detect the object with 5 tries or took too long, then stop the function.
 14. Repeat steps 4-13 until the object is aligned, we have taken too long, or we couldn't find the object with numerous tries.
@@ -275,7 +275,7 @@ This function continuously calculates the offsets to align with an object undern
 
 Inputs: 
 * float min_seconds: the minimum amount of seconds that you want the sub to align for.
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 * float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
@@ -295,7 +295,7 @@ This function uses the vision system to test if an object is centered in front o
 
 Inputs: 
 * int attempts: the number of detections you want to use to find the average angle to the object.
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 * float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
 
@@ -423,35 +423,66 @@ This function tells the sub to turn `angle` degrees from its current position. (
 Inputs:
 * float angle: the relative angle that we want to turn the sub.
 
+## void writeDepth(float depth)
+
+This function tells the sub to move to a certain depth from the surface without waiting for the sub to actually get to that position.
+
+1. Format desired depth into string message.
+2. Transfer string message to sub_control, which sends it to Nautical on the Atmega to move to that depth.
+
+Inputs:
+* float depth: the depth from the surface that we want the sub to move to.
+
+## void writeAltitude(float altitude)
+
+This function tells the sub to move to a certain altitude above the floor waiting for the sub to actually get to that position.
+
+1. Format desired altitude into string message.
+2. Transfer string message to sub_control, which sends it to Nautical on the Atmega to move to that altitude.
+
+Inputs:
+* float altitude: the altitude from the surface that we want the sub to move to.
+
 ## void setDepth(float depth, float acceptable_error)
 
-This function tells the sub to move to a certain depth (measured from the bottom, so basically altitude).
+This function tells the sub to move to a certain depth from the surface and waits for the sub to get there.
 
 1. Tell Nautical to move to that depth.
 2. Wait until we are close enough to the desired depth. When we are close enough, the function automatically finishes.
 
 Inputs:
-* float depth: the depth (measured in meters from the bottom/floor) that we want the sub to move to.
-* float acceptable_error: the number of meters from the desired depth that we are OK with the sub being at. (The default is 0.75 meters.
+* float depth: the depth from the surface that we want the sub to move to.
+* float acceptable_error: the number of meters from the desired depth that we are OK with the sub being at. (The default is 0.75 meters.)
 
-## void continuousSpin(int num_rotations)
+## void setAltitude(float altitude, float acceptable_error)
 
-This function controls the sub to continuously spin in place for `num_rotations` amount of rotations (1 rotation is 360 degrees). It achieves this affect by continuously telling the sub to turn 90 degrees from its current position in a while loop, which makes the sub continuously turn (like a holding a carrot in front of a pig in Minecraft to have the pig continuously move forward).
+This function tells the sub to move to a certain altitude above the floor and waits for the sub to get there.
+
+1. Tell Nautical to move to that altitude.
+2. Wait until we are close enough to the desired altitude. When we are close enough, the function automatically finishes.
+
+Inputs:
+* float altitude: the altitude above the floor that we want the sub to move to.
+* float acceptable_error: the number of meters from the desired altitude that we are OK with the sub being at. (The default is 0.75 meters.
+
+## void continuousSpin(float degrees_to_spin)
+
+This function controls the sub to continuously spin in place for `degrees_to_spin` degrees. It achieves this affect by continuously telling the sub to turn 90 degrees from its current position in a while loop (without blocking), which makes the sub continuously turn (like a holding a carrot in front of a pig in Minecraft to have the pig continuously move forward). Negative `degrees_to_spin` results in the sub spinning left.
 
 1. Record the original state of the sub so that we can return to it later.
 2. Set up the `prev_angle` variable that will be useful later to calculate how many degrees we have already spun.
-3. Convert `num_rotations` to how many degrees we have to spin.
-4. Set up the `total_degrees_turned` variable to track how much we have already spun.
+3. Set up the `total_degrees_turned` variable to track how much we have already spun.
+4. Start the loop that holds the carrot in front of the pig.
 5. Get the current absolute yaw of the sub.
 6. Calculate how much the sub has spun since the last iteration and add it to the total degrees that we have spun.
 7. Update `prev_angle` to our current yaw to set up the angle calculation in the next iteration.
-8. If we are close enough to the amount of degrees to spin, or if we have spun over the desired amount, then spin back to the original yaw position and move back to the original position of the sub (in case the sub has moved out of position after spinning).
-9. Otherwise, tell the sub to turn 90 degrees from its current position.
+8. If we are close enough to the amount of degrees to spin, or if we have spun over the desired amount, then spin to the the final yaw position and move back to the original xy position of the sub (in case the sub has moved out of position after spinning) at the same time.
+9. Otherwise, continue the loop by telling the sub to turn 90 degrees from its current position (without blocking).
 10. Sleep for a bit so that we don't overload the Atmega's serial connection.
 11. Repeat steps 5-10 until we have spun enough.
 
 Inputs:
-* int num_rotations: the number of full, 360 degree rotations that we want the sub to complete. (The sub will not pause between rotations.)
+* float degrees_to_spin: the number of degrees that we want the sub to spin.
 
 ## bool isValidAngle(float angle)
 
@@ -511,7 +542,7 @@ This function makes a request to detect the user-specified object. This will war
 
 Inputs:
 * int attempts: the number of detections you want to have the model run.
-* int task: the object you want to detect (Task::GATE, Task::GATE_ML, Task::BINS, Task::BINS_ML, Task::TARGET, Task::TARGET_ML, Task::SECOND_TARGET, Task::SECOND_TARGET_ML).
+* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
 * int camera: which camera the detection should be on (FRONT, DOWN).
 
 ## void disableAltitudeControl()
@@ -541,6 +572,16 @@ This function tells the sub to move to the user-specified state, and it waits un
 3. Get the sub's current state.
 4. If the sub is 0.5 meters away from its desired x coordinate, 0.5 meters away from its desired y coordinate, or 3 degrees away from its desired yaw angle, then sleep.
 5. Otherwise, this means that we are close enough to the desired state, so we can set `quit` to true to escape the while loop and terminate the function.
+
+Inputs:
+* const State dest: the destination state (absolute coordinates) that we want the sub to move to.
+
+## void write_state(const State dest)
+
+This function transfers a desired state setpoint (x, y, z, yaw, pitch, roll) to Nautical for Nautical to move toward that state. Note that it sends -1 for the z value, indicating to Nautical that we do not want to change the current depth setpoint; if you want to change depth, use the `setDepth` or `writeDepth` functions. 
+
+1. Format the desired setpoint into a string message.
+2. Send that string message over to sub_control, which sends it to Nautical on the Atmega.
 
 Inputs:
 * const State dest: the destination state (absolute coordinates) that we want the sub to move to.

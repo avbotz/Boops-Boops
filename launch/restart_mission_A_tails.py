@@ -23,8 +23,8 @@ def generate_launch_description():
             node_executable='vision',
             output='screen',
             parameters=[
-                {"LOG_FRONT": False},
-                {"LOG_DOWN": False},
+                {"LOG_FRONT": True},
+                {"LOG_DOWN": True},
             ]
         ),
         Node(

@@ -55,12 +55,12 @@ def generate_launch_description():
             node_executable='mission',
             output='screen',
             parameters=[
+		{"POOL_TEST": True},
                 {"COIN_FLIP": True},
                 {"GATE": True},
                 {"BUOY": True},
                 {"BINS": True},
                 {"OCTAGON": True},
-                {"TAILS": True},
                 {"SIM": True}
             ]
         ),

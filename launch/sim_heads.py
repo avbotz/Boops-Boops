@@ -60,7 +60,6 @@ def generate_launch_description():
                 {"BUOY": True},
                 {"BINS": True},
                 {"OCTAGON": True},
-                {"HEADS": True},
                 {"SIM": True}
             ]
         ),

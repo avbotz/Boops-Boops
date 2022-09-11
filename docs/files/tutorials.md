@@ -2,6 +2,7 @@ Here you will find some tutorials on how to do some things throughout the stack;
 
 ## Tutorials:
 
+* [Competition Strategy](./competition_strategy.md)
 * [Updating the Simulator](./updating_the_simulator.md)
 * [Collecting Sim Image Datasets](./collecting_sim_image_datasets.md)
 * [Setting Up the Onboard Computer](./setting_up_the_onboard_computer.md)
@@ -11,6 +12,8 @@ Here you will find some tutorials on how to do some things throughout the stack;
 * [Fixing AHRS Drift](./fixing_ahrs_drift.md)
 * [Fixing Leaky Thrusters](./fixing_leaky_thrusters.md)
 * [Fundraising](./fundraising.md)
+* [Writing Good Emails](./writing_good_emails.md)
 * [Tough Times](./tough_times.md)
+* [What is a Sub](./what_is_a_sub.md)
 * [How to be a Good VP](./how_to_be_a_good_vp.md)
 * [How to be a Good Member](./how_to_be_a_good_member.md)

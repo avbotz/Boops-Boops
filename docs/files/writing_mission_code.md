@@ -37,13 +37,15 @@ if (isValidAngle(angle))
 
 ### Controlling Depth
 
-Most of the time, we control depth measured from the bottom (aka altitude), which is measured by the DVL. This may seem counterintuitive, but it works will because the way that certain functions like `move()` and `setForward()` works is that they take the current state, edit some values, and then pass it through to Nautical-Private. This works for things like moving forward/horizontally, but if it gets the current z value and passes it on, the z value (depth from surface) that you set a few minutes ago is overrided with the new z value, which makes things more complicated. For this reason, we primarily control depth from the bottom, since in Nautical-Private a set desired altitude will override all depth from the surface requests, fixing our issue of the z value drift. If you do really want to control depth from the surface, you can use functions like `disableAltitudeControl()` and then `setDepthFromSurface()` to do so (but keep in mind they face the problems of z value drift).
+Most of the time, we control depth measured from the bottom (aka altitude), which is measured by the DVL. This may seem counterintuitive, but it works will because the way that certain functions like `move()` and `setForward()` works is that they take the current state, edit some values, and then pass it through to Nautical-Private. This works for things like moving forward/horizontally, but I've set it so that it doesn't pass on an edited z value to Nautical-Private so it doesn't continuously override a setpoint that we wanted to stay constant throughout a heavy portion of the run. 
 
-To set depth from the bottom, we use the `setDepth()` function. For example, to set the sub to maintain a 1 meter altitude, we would say `setDepth(1);`.
+Because of this, depth is controlled separately through the `setDepth` function, which tells Nautical-Private to make the sub go the inputted number of meters below the surface, and the function waits for it to reach that point before proceeding. If you don't want to wait after you set the depth, you can use the `writeDepth` function which does the same thing but doens't block waiting for the sub to descend. If you want to set the altitude of the sub instead (tell the sub to go x meters above the ground, using DVL range to bottom data), you can use the `setAltitude` and `writeAltitude` functions, but this is used less because pressure sensor tends to be more reliable than DVL range data (for now).
+
+For example, to set the sub to maintain a 1 meter altitude, we would say `setDepth(1);`.
 
 ### Adding a Little Sauce
 
-Now, you have the tools to submerge the sub, align to an object, and move to the object. However, if you want to be a little more advanced, and (hopefully) a little more accurate, you can use continuous functions like `forwardAlign()` or `downContinuousAlign()`. These functions esssentially do everything we did at the top, except they continually get the latest vision detection and readjust the sub's trajectory using `write_state()` to continuously readjust. This way, you don't have to rely on just one detection, but you can essentially average these values out using multiple continuous detections to sort of "lock on" to the target.
+Now, you have the tools to submerge the sub, align to an object, and move to the object. However, if you want to be a little more advanced and more accurate, you can use continuous functions like `forwardAlign()` or `downContinuousAlign()`. These functions esssentially do everything we did at the top, except they continually get the latest vision detection and readjust the sub's trajectory using `write_state()` to continuously readjust. This way, you don't have to rely on just one detection, but you can essentially average these values out using multiple continuous detections to sort of "lock on" to the target.
 
 ### Final:
 
@@ -51,6 +53,11 @@ Now, we have pretty much all the tools in our bag that we need. For gate, we mig
 ```
 setDepth(1.5);
 setForward(2);
+
+float angle = align(4, Task::GATE_ML, FRONT);
+if (isValidAngle(angle))
+    setAngle(angle);
+    
 forwardAlign(15, Task::GATE_ML, FRONT, 80);
 std::this_thread::sleep_for(17s);
 continuousSpin(720);
