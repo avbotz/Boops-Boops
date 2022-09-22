@@ -37,11 +37,11 @@ if (isValidAngle(angle))
 
 ### Controlling Depth
 
-Most of the time, we control depth measured from the bottom (aka altitude), which is measured by the DVL. This may seem counterintuitive, but it works will because the way that certain functions like `move()` and `setForward()` works is that they take the current state, edit some values, and then pass it through to Nautical-Private. This works for things like moving forward/horizontally, but I've set it so that it doesn't pass on an edited z value to Nautical-Private so it doesn't continuously override a setpoint that we wanted to stay constant throughout a heavy portion of the run. 
-
-Because of this, depth is controlled separately through the `setDepth` function, which tells Nautical-Private to make the sub go the inputted number of meters below the surface, and the function waits for it to reach that point before proceeding. If you don't want to wait after you set the depth, you can use the `writeDepth` function which does the same thing but doens't block waiting for the sub to descend. If you want to set the altitude of the sub instead (tell the sub to go x meters above the ground, using DVL range to bottom data), you can use the `setAltitude` and `writeAltitude` functions, but this is used less because pressure sensor tends to be more reliable than DVL range data (for now).
+Depth is controlled through the `setDepth` function, which tells Nautical-Private to make the sub go the inputted number of meters below the surface, and the function waits for it to reach that point before proceeding. If you don't want to wait after you set the depth, you can use the `writeDepth` function which does the same thing but doesn't block waiting for the sub to descend. If you want to set the altitude of the sub instead (tell the sub to go x meters above the ground, using DVL range to bottom data), you can use the `setAltitude` and `writeAltitude` functions, but this is used less because pressure sensor tends to be more reliable than DVL range data (for now).
 
 For example, to set the sub to maintain a 1 meter altitude, we would say `setDepth(1);`.
+
+** The way the move() and setForward() functions work is that they take the sub's current state, edit some absolute coordinates, and send that waypoint over to sub_control which sends it to the microcontroller. In these functions, we send a depth/z setpoint of -1 because we're telling the microcontroller to not change its depth setpoint (we want it to stay constant over a run), so the only way to adjust depth is through the setDepth (or writeDepth) functions.
 
 ### Adding a Little Sauce
 
