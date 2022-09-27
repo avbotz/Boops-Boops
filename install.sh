@@ -32,7 +32,7 @@ if [ "${1}" != "skip-install" ]; then
 	cd ~/Downloads
 	wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1GEQnZosEHUewi1AdhNMk5z_9XJpvWMJa' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1GEQnZosEHUewi1AdhNMk5z_9XJpvWMJa" -O ./spinnaker.tar.gz && rm -rf /tmp/cookies.txt
 	tar -xzf spinnaker.tar.gz -C .
-	cd ~/Downloads/spinnaker-2.0.0.147-amd64
+	cd ~/Downloads/spinnaker-2.7.0.128-amd64
 	sudo apt-get install libavcodec58 libavformat58 libswscale5 libswresample3 libavutil56 libusb-1.0-0 libpcre2-16-0 libdouble-conversion3 libxcb-xinput0 libxcb-xinerama0
 	sudo sh install_spinnaker.sh
 	cd $ROS_WS_DIR
@@ -62,7 +62,8 @@ if ! [ -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
 fi
 
 cd src
-for repo in ${ROS2_REPOS[@]}; do
+for repo in ${ROS2_REPOS[@]} 
+do
 	git clone $repo
 done
 cd ..
