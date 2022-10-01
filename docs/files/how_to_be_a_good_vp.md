@@ -1,4 +1,4 @@
-## How to be a Good VP
+## How to be a Good VP (Be like craig)
 
 For being a good VP, you need these 3 things:
 1. Vision
