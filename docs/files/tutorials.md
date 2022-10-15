@@ -2,6 +2,8 @@ Here you will find some tutorials on how to do some things throughout the stack;
 
 ## Tutorials:
 
+* [Learning Resources](./learning_resources.md)
+* [Manage Repos from Terminal](./manage_repos_from_terminal.md)
 * [Competition Strategy](./competition_strategy.md)
 * [Updating the Simulator](./updating_the_simulator.md)
 * [Collecting Sim Image Datasets](./collecting_sim_image_datasets.md)

@@ -53,7 +53,7 @@ def generate_launch_description():
         ),
         Node(
             package='sub_mission',
-            executable='restart',
+            executable='mission',
             output='screen',
             parameters=[
                 {"GATE": True},

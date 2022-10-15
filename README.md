@@ -248,8 +248,8 @@
        - Click the connect button at the bottom.
        - Enter the VNC password: nemo1234
     4. Put sub into water without breaking a motor.
-    5. Inside the SSH/VNC, Follow Nautical README instructions.
-    6. Inside the SSH/VNC,Follow Boops-Boops "Running the Code" instructions with one of the 
+    5. Inside the SSH/VNC, follow Nautical README instructions.
+    6. Inside the SSH/VNC, follow Boops-Boops "Running the Code" instructions with one of the 
        common launch files.
     7. Unplug tether if this is an autonomous run.
     8. Turn kill switch ON to begin mission if that is running.
