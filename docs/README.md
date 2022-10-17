@@ -13,7 +13,7 @@ Welcome to the Boops-Boops :dolphin: wiki! Here you will find in depth explanati
 
 ![alt text](./files/stack.svg)
 
-The Boops-Boops repository hosts 3 main modules: `sub_mission`, `sub_control`, and `sub_vision`, along with `sub_sim`. You'll notice that these modules aren't include with the base BB GitHub repository; this is because they are all located in their own github repositories. In order to assemble them all together, the install script takes care of that (see the README). With that, let's breakdown the modules and what their functions are.
+The Boops-Boops repository hosts 3 main modules: `sub_mission`, `sub_control`, and `sub_vision`, along with `sub_sim`. You'll notice that these modules aren't include with the base BB GitHub repository; this is because they are all located in their own github repositories. In order to assemble them all together, [the install script](../install.sh#L65) clones these repositories. With that, let's breakdown the modules and what their functions are.
 
 ### sub_mission
 `sub_mission` is the main package that runs the entire show as the main boss, sort of like the CEO of the company. This node tells the sub when to move forward, horizontally, or vertically, and it tells the sub when to use its vision system to detect objects. It is able to send these commands because at its side, `sub_control` and `sub_vision` exist to serve it, like its deputies or henchmen.
