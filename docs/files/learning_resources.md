@@ -3,7 +3,7 @@
 If you want to learn more and increase your skills, here are some great resources. If you are able to complete these well in one year, you will probably be really good.
 
 * [Introduction to Computer Science and Programming Using Python](https://www.edx.org/course/introduction-to-computer-science-and-programming-7) - free course by MIT, hosted on EDx platform. Even though it is an intro course, it is really rigorous and gives you a really good base for solving problems and using Python.
-* [Programming with Python for Data Science](https://learning.edx.org/course/course-v1:Microsoft+DAT210x+3T2017/home) - really good course about machine learning (helps with your understanding of how ML on the sub works)
+* [Programming with Python for Data Science](https://learning.edx.org/course/course-v1:Microsoft+DAT210x+1T2018a/home?_gl=1*14a8jsu*_ga*MTgwMzI4NzM0Ni4xNjY1ODY3NDc2*_ga_D3KS4KMDT0*MTY2NTk4MTYxNy4yLjEuMTY2NTk4MTgwNS4wLjAuMA..) - really good course about machine learning (helps with your understanding of how ML on the sub works)
 * [Train Your Own YOLOv5 ML Model for Object Detection](https://docs.google.com/document/d/1QkBCtuJQoaMSQxkNmlqJVfsqXRX-WPJ6bklww_lihYI/edit?usp=sharing) - this is basically how we do it for the sub.
 * [Learn C++](https://www.learncpp.com/) - great website to learn C++.
 * [Ubuntu Terminal Commands](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview) - learn how to use the terminal (useful for projects).
