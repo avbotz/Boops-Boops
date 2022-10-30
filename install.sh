@@ -6,7 +6,7 @@ set -e
 ROS_WS_DIR=$(pwd)
 
 # Simple apt-get/pip packages.
-sudo apt-get -y install libopencv-dev python3-opencv python3-pip git tmux
+sudo apt-get install libopencv-dev python3-opencv python3-pip git tmux
 sudo pip3 install -r requirements.txt
 
 # # YOLOv5 requirements
@@ -19,21 +19,21 @@ sudo pip3 install -r https://raw.githubusercontent.com/ultralytics/yolov5/master
 
 if [ "${1}" != "skip-install" ]; then
 	# Install ROS2
-	sudo apt-get update && sudo apt-get -y install curl gnupg2 lsb-release git
+	sudo apt-get update && sudo apt-get install curl gnupg2 lsb-release git
 	sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg	
 	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 	sudo apt update
 	sudo apt install ros-foxy-desktop
 	sudo apt install ros-foxy-gazebo-ros-pkgs
-	sudo apt-get -y install python3-colcon-common-extensions
-	sudo apt-get -y install python3-rosdep
+	sudo apt-get install python3-colcon-common-extensions
+	sudo apt-get install python3-rosdep
 		
 	# Download and install Spinnaker SDK from Craig's google drive
 	cd ~/Downloads
 	wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1GEQnZosEHUewi1AdhNMk5z_9XJpvWMJa' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1GEQnZosEHUewi1AdhNMk5z_9XJpvWMJa" -O ./spinnaker.tar.gz && rm -rf /tmp/cookies.txt
 	tar -xzf spinnaker.tar.gz -C .
-	cd ~/Downloads/spinnaker-2.7.0.128-amd64
-	sudo apt-get -y install libavcodec58 libavformat58 libswscale5 libswresample3 libavutil56 libusb-1.0-0 libpcre2-16-0 libdouble-conversion3 libxcb-xinput0 libxcb-xinerama0
+	cd 'ls -t -d ~/Downloads/spinnaker-*/ | head -1'
+	sudo apt-get install libavcodec58 libavformat58 libswscale5 libswresample3 libavutil56 libusb-1.0-0 libpcre2-16-0 libdouble-conversion3 libxcb-xinput0 libxcb-xinerama0
 	sudo sh install_spinnaker.sh
 	cd $ROS_WS_DIR
 
@@ -54,7 +54,7 @@ cd $ROS_WS_DIR
 source /opt/ros/foxy/setup.sh
 source /usr/share/gazebo-11/setup.sh
 
-ROS2_REPOS=("https://github.com/avbotz/sub_control" "https://github.com/avbotz/sub_vision" "https://github.com/avbotz/sub_mission" "https://github.com/avbotz/sub_interface.git" "https://github.com/avbotz/sub_sim" "https://www.github.com/Liquid-ai/Plankton")
+ROS2_REPOS=("https://github.com/avbotz/sub_control" "https://github.com/avbotz/sub_vision" "https://github.com/avbotz/sub_mission" "https://github.com/avbotz/sub_interface" "https://github.com/avbotz/sub_sim" "https://www.github.com/Liquid-ai/Plankton")
 
 mkdir -p src
 if ! [ -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
@@ -64,12 +64,15 @@ fi
 cd src
 for repo in ${ROS2_REPOS[@]} 
 do
-	git clone $repo
+	if [ ! -d "$repo | grep -oE '[^/]+$'" ];
+	then 
+		git clone $repo
+	fi
 done
 cd ..
 
 rosdep update
-rosdep install -i --from-path src --rosdistro foxy -y
+rosdep install -i --from-path src --rosdistro foxy
 
 colcon build --packages-up-to plankton
 
