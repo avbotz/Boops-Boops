@@ -66,7 +66,7 @@ for repo in ${ROS2_REPOS[@]}
 do
 	if [ ! -d "$repo | grep -oE '[^/]+$'" ];
 	then 
-		git clone $repo
+		git clone --recursive $repo
 	fi
 done
 cd ..
