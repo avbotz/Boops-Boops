@@ -6,7 +6,7 @@ set -e
 ROS_WS_DIR=$(pwd)
 
 # Simple apt-get/pip packages.
-sudo apt-get install libopencv-dev python3-opencv python3-pip git tmux
+sudo apt-get install libopencv-dev python3-opencv python3-pip git tmux 
 sudo pip3 install -r requirements.txt
 
 # # YOLOv5 requirements
@@ -24,7 +24,7 @@ if [ "${1}" != "skip-install" ]; then
 	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 	sudo apt update
 	sudo apt install ros-foxy-desktop
-	sudo apt install ros-foxy-gazebo-ros-pkgs
+	sudo apt install ros-foxy-gazebo-*
 	sudo apt-get install python3-colcon-common-extensions
 	sudo apt-get install python3-rosdep
 		

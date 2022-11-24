@@ -1,5 +1,4 @@
 """
-For now, it's necessary to launch the Gazebo simulator through the ros1 workspace.
 This file is to run control, tuning, and vision_node to remote control Nemo 
 through the simulator as it logs images from only the front camera
 (maybe for ML training or remote control practice).

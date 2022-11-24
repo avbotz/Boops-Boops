@@ -1,5 +1,4 @@
 """
-For now, it's necessary to launch the Gazebo simulator through the ros1 workspace.
 This file is to run mission, control, vision nodes to work with the simulator.
 """
 
