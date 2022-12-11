@@ -29,7 +29,7 @@ if [ "${1}" != "skip-install" ]; then
 	sudo apt-get install python3-rosdep
 		
 	cd ~/Downloads
-	#non-greedy grep finding file id from html in reverse
+	#non-greedy grep finding file id from html in reverse (doesn't work as download link changes per request)
 	#wget -O spinnaker.tar.gz https://flir.app.boxcn.net/v/SpinnakerSDK/file/$(curl -s https://flir.app.boxcn.net/v/SpinnakerSDK/folder/133154514756 | rev | grep -Po 'zg.rat.gkp-46mra-40.02utnubU-.*?-rekannips.*?:"di"' | rev | grep -Po '(?<=:).*?(?=,)' | head -1)
 	# Ryan's google drive
 	wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1OSc0goplIs2CQj7MVlYHpLIfvbIhuMcN' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1OSc0goplIs2CQj7MVlYHpLIfvbIhuMcN" -O spinnaker.tar.gz && rm -rf /tmp/cookies.txt
