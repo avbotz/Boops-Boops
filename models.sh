@@ -13,6 +13,7 @@ BINS_ID="1Md1hlqaeyzRoSU-iofml74sxICNaBhoh"
 OCTAGON_FRONT_ID="1s8Wz99FS49KqaNYjz9cyIPXXjok4xcUw"
 OCTAGON_DOWN_ID="1_KhywObJfsyBUvMKwrwuDaWOQFsS1K5L"
 PATH_MARKER_ID="1keu8EevbXNRI0KRFCapySPcwuOh1y7mQ"
+BOTTLES_ID="18dKo4wAZppFKxs5vw2Uv09GWjMOYQEq2"
 
 get_model gate.pt $GATE_ID
 get_model buoy.pt $BUOY_ID
