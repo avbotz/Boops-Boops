@@ -2,10 +2,67 @@
 
 To get money, here are the big ways to do it:
 1. Competition Donation Matches: The way it works every year is that one (or a few) people book the expenses for the trip, and the club reimburses them. For this reason, every competing member needs to donate their fees to the club so that the club can reimburse the booker. A really smart thing to do is to ask every person to have their parent's company match that donation if their company does that sort of things. This way, let's say 4 people out of 15 competitors can match it, that's literally 4 x $2000 = $8000 of revenue, which is insane. We originally had the idea of everyone paying one person that works at Google, who then donates that to the club. Then, Google can match like $10,000, which is their limit. However, after consulting about this with adults, we concluded that this is a little sus; it's literally fraud, and it might have someone fired from their job or hurt their reputation at the company lol, so may be better to just have individual families match their donations from their respective companies if they can.
-2. Door to Door: Now this is actually crazy. I talked with Brody (one of the GOATs), who said their Biz VP (Brendan I think) actually went downtown, and into the commercial districts to literally go in person door to door to pitch to them to support the club. Brody said $5,000 was like a standard check that they would get, and he said that for companies that is like pocket change, and that local companies would be willing to support local organizations. Make sure you have your social media up to date all the time so companies/sponsors can see that they're making an impact. Brody said Brendan would go about once per week. He also said the year they constructed Marlin (2015-2016), they raised $120,000 (half in parts, half in cash) like wtf. Here are the notes from my convo with Brody: https://docs.google.com/document/d/1WRREENWAZDaUCIdpNXjNRzFwnhxCGEpn4kitavfIPVo/edit?usp=sharing
+2. Door to Door: Now this is actually crazy. I talked with Brody (one of the GOATs), who said their Biz VP (Brendan I think) actually went downtown, and into the commercial districts to literally go in person door to door to pitch to them to support the club. Brody said $5,000 was like a standard check that they would get, and he said that for companies that is like pocket change, and that local companies would be willing to support local organizations. Make sure you have your social media up to date all the time so companies/sponsors can see that they're making an impact. Brody said Brendan would go about once per week. He also said the year they constructed Marlin (2015-2016), they raised $120,000 (half in parts, half in cash) like wtf. See the bottom of this doc for notes from my convo with Brody.
 3. PTSA/PPIE Grants: This is a good source of income, around $1000 a year. We just have to apply to these grants, and usually we can get this.
 4. Hacker Initiative Grant: Idk about this but it seems promising; you just have to apply here: https://hackerinitiative.org/grant-application/.
 5. Karl Schulze: This is one of the OG founders, and he is goated. We want to respect this man for all he has done for this club, and we should always keep in contact. In the past, he has responded to calls for donations, so if you are really tight on money, this is an option. However, treat the man with respect because he has given a ton to the club over the years and not gotten much back, so we have to be better in that respect.
 6. Parent Donations: In the beginning of the year, you can send out a letter to have people donate to the club. If you play this right, you could potentially bag $2,000 ($1000 x 20 people). You could maybe have the first meeting be at the Amador pool, and run the sub as a demonstration so people can see firsthand how expensive the parts on the sub are. 
 7. Sponsorships: Sponsorships are tough because companies may not want to give straight up money, but many companies are willing to offer academic discounts on parts or straight up donate parts/services (eg. Theia for their lens, Datron for their CNC machining (cutting metal) services, Cerulean Sonar for their 15% discount on our DVL-75.) According to Calvin, big companies also may have grants lying around that we can apply to.
 8. Selling Boba: Ok I put this at the bottom of the list because it's a ton of effort to manage the logistics, and a hard day of work of selling hundreds of bobas at school only amounts to a couple hundred dollars of profit. But, it is still an income source, but keep in mind parts in AVBotz are super expensive (a singular thruster is $1400 ! Now multiply that by 8, and that's only the cost of our thrusters).
+
+
+Brody's (President 2014-2016) tips:
+Call With Brody 8-9-22
+Fundraising efforts led by Brody and one guy on business (Brendon)
+Raised $120,000 for Marlin (half was in parts)
+Door to door (commercial door to door)
+Local business, down town on hopkins
+Brendon would go door to door once a week ($5,000) at the commercial things
+Only need one person to do it properly
+Bigger checks from name brand
+Horowitz (someone’s father worked there)
+Intel (cold email)
+Google (10, 15k each) (someone’s father worked there)
+25k from Karl Schulze (worth 100 million)
+Have an extrovert, or dedicated business person
+Going door to door around pleasanton
+If done properly, practice a pitch, bring some materials, have balls
+Ask parents
+You need one person to do it properly
+Rotary club
+Commercial areas, weekday
+Local businesses, parents, karl schulze
+Alumni 
+Twitter, facebook, instagram
+When talking to sponsors, they’ll check social media
+Not active social media is a bad look
+Newsletter 
+Fundraising all about engagement
+Give back to companies that sponsor (have sponsor events)
+Invite sponsors, alumni to pool tests, bring refreshments, cookies, pizza
+Brody searches up Botz once every couple months
+Active newsletter, twitter, facebook, instagram
+
+Marlin:
+None of it went according to plan
+Have to treasure chris, insanely valuable (Datron by a landslide the most important sponsor)
+Put them top banner on website, everything
+They were mainly pushed back by designs 
+A little large, wanted circular o ring
+Wanted to make it more compact
+Tolerances on rectangular o rings have to be tighter
+President and VP of mech prepared to check themselves out of school, businesses open 9-5 mon through friday, some things need
+Wanted to finish designing by New Year, wasn’t done until March
+March-June machining, buying all parts
+Assembly was pretty quick
+Force simulations
+Finite element analysis
+Stress simulations
+A month of sketching and thinking of the ideas (started with complex sketches, got more simple)
+Make submarine symmetrical, compact, dense, helps with movement and balance
+Compact and dense (helps with barrel rolling)
+Brody thinks central hull is just way too big, thinks so much empty air, too buoyant not optimal
+Very important calculation: make sure at all times, the submarine is roughly neutrally buoyant (or close to it) (as close to neutrally buoyant as possible, more energy efficient, and lighter) (make it more dense and add floats instead of adding weights)
+President and VP of mechanical have to be prepared (the process is going to be insane a lot of hours, 10-25 hours a week for President VP of mechanical)
+Very important to have a very dedicated VP of mechanical 
+TDOA, or phase shift
