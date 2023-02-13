@@ -21,6 +21,6 @@ get_model buoy.pt $BUOY_ID
 get_model bins.pt $BINS_ID
 get_model octagon_front.pt $OCTAGON_FRONT_ID
 get_model octagon_down.pt $OCTAGON_DOWN_ID
-get_model bottles.pt $BOTTLES_ID
 get_model path_marker.pt $PATH_MARKER_ID
+get_model bottles.pt $BOTTLES_ID
 get_model torp_board.pt $TORP_BOARD_ID
