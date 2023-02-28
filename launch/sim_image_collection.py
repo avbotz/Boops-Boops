@@ -1,5 +1,5 @@
 """
-This file is to run control, tuning, and vision_node to remote control Nemo 
+This file is to run control, vision nodes, and interface to remote control Nemo 
 through the simulator as it logs images from both the front and down cameras
 (maybe for ML training or remote control practice).
 """
@@ -36,11 +36,6 @@ def generate_launch_description():
             ]
         ),
         Node(
-            package='sub_control',
-            node_executable='tuning',
-            output='screen'
-        ),
-        Node(
             package='sub_acquisition',
             node_executable='acquisition',
             output='screen',
@@ -61,6 +56,9 @@ def generate_launch_description():
 
         # Launch image display, to access enter:
         # (ip address of computer running BB):5000 in a web browser
+
+        # Use the interface's manual control mode to control the sub
+        # while the code automatically logs images.
         Node(
             package='sub_interface',
             node_executable='interface',
