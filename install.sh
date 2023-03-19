@@ -6,7 +6,7 @@ set -e
 ROS_WS_DIR=$(pwd)
 
 # Simple apt-get/pip packages.
-sudo apt-get install libopencv-dev python3-opencv python3-pip git tmux 
+sudo apt-get install libopencv-dev python3-opencv python3-pip git tmux npm
 sudo pip3 install -r requirements.txt
 
 # # YOLOv5 requirements

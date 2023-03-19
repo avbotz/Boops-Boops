@@ -49,8 +49,8 @@ def generate_launch_description():
             output='screen',
             parameters=[
                 {"SIM": True},
-                {"LOG_FRONT": False},
-                {"LOG_DOWN": False}
+                {"LOG_FRONT": True},
+                {"LOG_DOWN": True}
             ]
         ),
 
