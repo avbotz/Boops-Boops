@@ -58,6 +58,7 @@ def generate_launch_description():
                 {"GATE": True},
                 {"BUOY": True},
                 {"BINS": True},
+                {"TORP": True},
                 {"OCTAGON": True},
                 {"POOL_B": True},
                 {"SIM": True}
