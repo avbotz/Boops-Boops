@@ -19,3 +19,4 @@ Here you will find some tutorials on how to do some things throughout the stack;
 * [What is a Sub](./what_is_a_sub.md)
 * [How to be a Good VP](./how_to_be_a_good_vp.md)
 * [How to be a Good Member](./how_to_be_a_good_member.md)
+* [Life](./life.md)

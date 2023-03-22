@@ -78,6 +78,8 @@ colcon build --packages-up-to plankton
 
 colcon build
 
+./compile.sh
+
 echo "-----------------------     "
 echo "Boops-Boops workpace installed!"
 echo ""
