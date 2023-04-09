@@ -10,3 +10,4 @@ Werkzeug==2.0.1
 python-dateutil==2.8.2
 pytailwindcss
 protobuf==3.19.6
+ultralytics
