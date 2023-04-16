@@ -5,12 +5,18 @@ set -e
 
 ROS_WS_DIR=$(pwd)
 
-# Simple apt-get/pip packages.
-sudo apt-get install libopencv-dev python3-opencv python3-pip git tmux npm
+# Simple apt-get packages.
+sudo apt-get install libopencv-dev python3-opencv python3-pip git tmux npm nodejs
+
+# Install stuff for webserver
+sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
+npm install -g npx
+
+# Pip packages
 sudo pip3 install -r requirements.txt
 
-# # YOLOv5 requirements
-sudo pip3 install -r https://raw.githubusercontent.com/ultralytics/yolov5/master/requirements.txt
+# YOLOv8 requirements
+sudo pip3 install -r https://raw.githubusercontent.com/ultralytics/ultralytics/master/requirements.txt
 
 # For host pc that already installed pytorch with specific cuda version:
 # sudo pip3 install matplotlib>=3.2.2 numpy>=1.18.5 opencv-python>=4.1.1 Pillow>=7.1.2 PyYAML>=5.3.1 requests>=2.23.0 scipy>=1.4.1 tqdm>=4.41.0
