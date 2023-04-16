@@ -35,7 +35,7 @@ def generate_launch_description():
             ]
         ),
         Node(
-            package='sub_vision_yolov5',
+            package='sub_vision_yolov8',
             executable='vision',
             output='screen',
             parameters=[

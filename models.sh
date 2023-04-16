@@ -8,7 +8,7 @@ function get_model {
 }
 
 GATE_ID="18RodtGfvfKXPwqY8TSPaB2BxQMSDjJUN"
-BUOY_ID="1DZmDkJSpwqXFEaNzEVfyt6S6tbbdZM8Z"
+BUOY_ID="17bpkjeoXu22Rag2bEVyzTbnZyi-9fClV"
 BINS_ID="1Md1hlqaeyzRoSU-iofml74sxICNaBhoh"
 TORP_ID="1Mxg7V1NugbRiyvadclY5lo3m8FeDCK5l"
 OCTAGON_FRONT_ID="1s8Wz99FS49KqaNYjz9cyIPXXjok4xcUw"
