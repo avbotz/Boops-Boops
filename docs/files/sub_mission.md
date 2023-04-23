@@ -1,12 +1,22 @@
 `sub_mission` is the package that orchestrates the entire submarine; this package sends the commands to move the submarine, dive, submerge, or use the vision system to orient itself to a competition object.
 
+Conventions:
+* Units are in meters and degrees, in the North-East-Down coordinate system. Angles are within -180 to 180 degrees.
+* absolute angle: the angle in the coordinate system automatically created when the sub was unkilled. The origin of this system is the point where the sub was unkilled.
+* relative angle: the angle relative to the corrent orientation of the sub.
+* depth: distance from the surface
+* altitude: distance from the floor
+* State: an object type containing x, y, z, yaw, pitch, roll values
+* Coordinate: an object type containing x, y, values
+
 ## Explanation of Each File
 * [node.cpp](./node.cpp.md)
 * [mission.cpp](./mission.cpp.md)
 * [restart.cpp](./restart.cpp.md)
 * [tasks.cpp](./tasks.cpp.md)
-* [commands.cpp](./commands.cpp.md)
+* [alignments.cpp](./alignments.cpp.md)
 * [client.cpp](./client.cpp.md)
+* [movements.cpp](./movements.cpp.md)
 * [util.cpp](./util.cpp.md)
 
 ## Structure
@@ -19,16 +29,18 @@ src
 │   ├── mission.cpp
 │   ├── node.cpp
 │   └── restart.cpp
-├── client.cpp
-├── commands.cpp
+├── alignments.cpp
+├── clients.cpp
+├── movements.cpp
+├── scans.cpp
 ├── tasks.cpp
 └── util.cpp
 ```
 The code that constructs the node in the ROS framework is located inside of the `nodes/` folder, with `node.cpp` defining the node structure, `mission.cpp` utilizing the structure to create a `mission_node` executable, and `restart.cpp` also utilizing the structure to create a `restart_node` executable. 
 
-Below the nodes folder is the code that is used to write the movement instructions for the AUV during competition. The main file is `tasks.cpp`, which tells the AUV how to move through the course, and the other files just contain helper functions. If you are looking to edit the sub's navigation through the course, `tasks.cpp` is the place to do so.
+* tasks.cpp - the main file that instructs the sub how to move through the course. The other .cpp files are just a bunch of helper functions.
 
-Finally, besides the `.cpp` files, there are also `.hpp` files in the `sub_mission/include` folder, which exist to tell the compiler what libraries that we want to use in the main `.cpp` files. Of particular interest is `config.hpp`, which contains some configuration parameters for the submarine. If Nemo is ever updated in the future, please update the correct values into this file so that Nemo can be a beast.
+There are also `.hpp` files in the `sub_mission/include` folder, which tell the compiler what libraries that we want to use in the `.cpp` files. If Nemo is ever updated in the future, please update the correct parameters into `config.hpp` so that Nemo can be a beast.
 ```
 include
 └── sub_mission

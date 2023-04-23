@@ -1,88 +1,95 @@
-`commands.cpp` contains helper functions that assist in moving the sub through the competition course in `tasks.cpp`. See the beginning of `tasks.cpp` for clearing up some aspects of the code.
+`alignments.cpp` contains helper functions that usually request vision detections from sub_vision, then uses this information to align the sub with a competition object. 
+
+# Function Key
+
+Parameter meanings:
+* int attempts: The number of detections to average.
+* int task: An integer representing which task (competition object) we want to track. The mapping of which integer corresponds to which task is defined in sub_vision -> sub_vision_interfaces -> msg -> Task.msg
+* int camera: An integer representing which camera to use for detecting. 0 = front cam, 1 = down cam
+* float min_seconds: The min amount of seconds you want the function to operate for. 
+* float max_dist: The max dist we allow the sub to travel before ending the function (to prevent traveling too far).
+* float timeout: The max amount of time we allow a function to run for before we time out (to prevent getting stuck on objects).
+* float thres: The accuracy threshold that we're OK with. For example, thres=0.3 would mean you're satisfied if the object is within 30% of the center of the camera image, at which point the function should terminate, provided that it's already run for the min_seconds. 
+
+Function types:
+* Requestor functions: ask sub_vision for info, then take this info and return it.
+* Alignor functions: take sub_vision detections and move the sub to align with the object.
+* Continuous alignor functions: same as alignor functions but repeat the process continuously in a loop for more accuracy.
 
 # Function Breakdown
 
 ## float align(int attempts, int task, int camera)
 
-This function returns the angle to a competition object, as it can take multiple detections and average out their angles to return the average angle to the object (for more stability/accuracy). This function does not physically move the sub, despite its name.
+Returns:
+* float: the absolute angle the sub should turn to, to face a competition object.
+
+Takes multiple detections and average out their angles to return the average, absolute angle to the object (for more stability/accuracy). This function does not physically move the sub, despite its name.
 
 1. Execute a for loop to collect x amount of detections, add them to the total.
 2. If all of our detections were unsuccessful, then we return an invalid angle.
 3. Calculate the average angle to the object.
 4. Use `angleAdd` function to turn the relative angle into an absolute angle and return it. (angleAdd makes sure that the sum is within [-180, 180] degrees.
 
-Inputs:
-* int attempts: the number of detections you want to use to find the average angle to the object.
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
-
-Outputs:
-* float: the absolute angle that the sub can orient to to face the object.
-
 ## float relativeAlign(int attempts, int task, int camera)
+
+Returns:
+* float: the relative angle that the sub can turn to face the object.
 
 This is the same as `align()`, except that instead of outputting the absolute angle, we output the relative angle (steps 1-3 of `align()`).
 
-Inputs:
-* int attempts: the number of detections you want to use to find the average angle to the object.
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
+## float getOrientation(int attempts, int task, int camera)
 
-Outputs:
-* float: the relative angle that the sub can orient to to face the object.
+Returns:
+* float: the absolute orient (absolute angle the object is pointing to). Useful for path marker or torpedo board (to align perpendicularly to the torpedo board).
+
+Requests orientation information from sub_vision about this task, returns the average absolute orient. Note that if you want to get orientation info about an object, you must set up the detection in sub_vision's detect.py to calculate the orientation using OpenCV or solvePNP and return it (see their torpedo board example).
+
+## float hw_ratio(int attempts, int task, int camera)
+
+Returns:
+* float: the height/width ratio of a detection. For example, if a detected box around the object in the image is 40 pixels tall and 20 pixels wide, this returns 2.
+
+Same as getOrientation excepts returns height/width ratio of detected box. Useful for finding when we are perpendicularly aligned to an object (eg. torp board). Usually, facing torp board head on will yield a lower hw_ratio, whereas viewing the torp board at a slanted angle from the side will yield a higher hw_ratio. Moving to the place of lowest hw_ratio allows us to align head-on with the torp board. 
 
 ## float sweepCheck(int attempts, int task, int camera)
+
+Returns:
+* float: the absolute angle that the sub can orient to to face the object.
 
 This function tries to look for a competition object, and if it can't find it, it will turn left and right to look for it. Ultimately, it will attempt to return the absolute angle to the object.
 
 1. Set up relative angles that we can get the sub to turn to if we can't find the object.
 2. Try to look for the object. If we find it, then return the angle to the object. If we can't find it, then turn to the next search angle.
-3. If all of our search angles failed, then return an invalid angle.
-
-Inputs:
-* int attempts: the number of detections you want to use to find the average angle to the object.
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
-
-Outputs:
-* float: the absolute angle that the sub can orient to to face the object.
+3. If all of our search angles failed, then return an invalid angle. If we found the object, then return that absolute angle. 
 
 ## float forwardSweepCheck(int attempts, int task, int camera, int num_sweeps)
 
-This function tries to look for a competition object, and if it can't find it, it will turn left and right to look for it. If it still can't find it on the first sweep, it will move forward and sweep again. Ultimately, it will attempt to return the absolute angle to the object.
+Returns:
+* float: the absolute angle that the sub can orient to to face the object.
+
+Same as sweep check, except if it can't find it on the first sweep, it'll move forward and sweep again until it can find it.
 
 1. Sweep check for the object.
-2. If we find the object, return the absolute angle to it.
+2. If we find the object, return the absolute angle to it. If we don't, move forward and sweep again. Repeat until we find it or we run out of sweeps.
 3. If all of our sweeps failed, then return an invalid angle.
-
-Inputs:
-* int attempts: the number of detections you want to use to find the average angle to the object.
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
-* int num_sweeps: the number of total sweeps the sub should do to look for the object. (If `num_sweeps = 4`, then it will sweep 4 times, moving forward 3 times.)
-
-Outputs:
-* float: the absolute angle that the sub can orient to to face the object.
 
 ## float distance(int attempts, int task, int camera)
 
-This function returns the distance to a competition object, as it can take multiple detections and average out their distances to return the average distance to the object (for more stability/accuracy). Note that to get the distance, you have to set up the calculation for that specific object in sub_vision, which includes writing that code to calculate the distance and providing the relevant object real height (see the places where it's already been written for other tasks.)
+Returns:
+* float: the distance (in meters) to the object.
+
+This function returns the average distance to the object through multiple detections (for more stability/accuracy). Note that to get the distance, you have to set up the calculation for that object in sub_vision's detect.py, which includes providing the object's real height (see the places where it's already been written for other tasks there.)
 
 1. Execute a for loop to collect x amount of detections, add the distances to the total.
 2. If all of our detections were unsuccessful, then we return an invalid distance.
-3. Calculate the average distance to the object.
-
-Inputs:
-* int attempts: the number of detections you want to use to find the average distance to the object.
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
-
-Outputs:
-* float: the distance (in meters) to the object.
+3. Calculate and return the average distance to the object.
 
 ## float distAndAlign(int attempts, int task, int camera)
 
-This function returns the distance to a competition object, but instead of relying on the distance from detections, we move the sub and use math to calculate the distance. However, even though it is hella cool and looks aesthetic in the simulator, this method is deprecated because small inaccuracies of horizontal movement can significantly disrupt the distance calculation. For example, if you tell the sub to move 0.5 meters and it moves 0.25, your calculation will be like 50% off.
+*Deprecated because inaccurate. Small inaccuracies of horizontal movement can significantly disrupt the distance calculation.*
+
+Returns:
+* float: the distance (in meters) to the object.
 
 1. Store the original state of the sub in case we want to return if the calculation is unsuccessful.
 2. Find the relative angle to the object.
@@ -94,29 +101,21 @@ This function returns the distance to a competition object, but instead of relyi
 8. Move left/right to align with the object.
 9. Calculate and return the distance to the object (using the triangles we created).
 
-Inputs:
-* int attempts: the number of detections you want to use to find the average angle to the object.
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
+## int numInstances(int attempts, int task, int camera)
 
-Outputs:
-* float: the distance (in meters) to the object.
+Returns:
+* int: number of objects of that type (instances) in the latest camera image. Returns 0 if there were no objects it could find. 
 
-## bool isValidDistance(float dist)
+Useful for grabbing task, to count how many objects are remaining on the table. If there were less objects than previously, that means we had a successful grab. Otherwise, we'd go back and try to grab again.
 
-This function sees if a detected/calculated distance is valid or sus.
-
-1. If the 0 < distance < 17.5, then the distance is good. Otherwise, it's kinda sus ngl.
-
-Inputs:
-* float dist: the distance that is being checked.
-
-Outputs:
-* bool: true or false depending on whether or not the distance is valid.
+Note that you must first setup this return value in sub_vision's detect.py for your object (see where it's already been done and replicate that).
 
 ## State forwardAlign(float max_dist, int task, int camera, float timeout)
 
-This function continuously moves the sub forward while taking numerous vision detections to readjust the trajectory to an object. Then, when the object is close enough, this function sets the sub to move 2 meters through the object.
+Outputs:
+* State: the final state that the sub was set to be at (or if it failed, the final state of the sub).
+
+Continuously moves the sub forward while taking numerous vision detections to readjust the trajectory through an object. Then, when the object is close enough, sets the sub to move a distance through the object specified inside the function.
 
 1. Record the time when we started so that we can tell later how much time has elapsed inside of the function.
 2. Record the initial state of the AUV to later calculate how much distance we have moved.
@@ -130,14 +129,36 @@ This function continuously moves the sub forward while taking numerous vision de
 10. Repeat steps 3-9 until we've traveled through the object, we took too long, or we traveled too far.
 11. If we took too long or traveled too far, return the current state of the sub.
 
-Inputs:
-* float max_dist: the maximum distance we allow the sub to travel from where the function was called (so we don't have the sub moving like 100 meters forward and crashing into the wall if it can't find the object).
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
-* float timeout: the maximum number of seconds you want the function to run for (so we don't wait for 20 minutes if the sub gets stuck somewhere and can't move forward).
+## Coordinate downAlign(int attempts, int task, int camera)
 
 Outputs:
-* State: the final state that the sub was set to be at (or if it failed, the final state of the sub).
+* Coordinate: a Coordinate object containing the absolute x and y coordinates the sub should move to to be right above the object.
+
+This function does not actually move the sub; it only calculates the coordinates that it should move to to be above the object with the down camera.
+
+1. Set up some variables (eg. x_avg, which is the average x coordinate that we will return later along with the y coordinate).
+2. Record the sub's current state.
+3. Find the distance to the object (this is done using `control_client::depth()`, which returns the distance from the floor or an object directly below the sub to the sub.
+4. Detect the object.
+5. If the detection is valid, then we continue.
+6. Calculate the relative x and y offsets that we need to move to to get above the object.
+7. If we are detecting the bins, then edit the offsets so that we align the dropper to the object instead of the down camera.
+8. Convert relative offsets to absolute coordinates, and add them to the total (that we will average later).
+9. Repeat steps 2-8 until we have attempted the amount of detections that the user has asked for.
+10. If we had no successful detections, then return invalid coordinates.
+11. Average the x and y coordinates and return the averages.
+
+## bool isValidDistance(float dist)
+
+This function sees if a detected/calculated distance is valid or sus.
+
+1. If the 0 < distance < 17.5, then the distance is good. Otherwise, it's kinda sus ngl.
+
+Inputs:
+* float dist: the distance that is being checked.
+
+Outputs:
+* bool: true or false depending on whether or not the distance is valid.
 
 ## Coordinate downAlign(int attempts, int task, int camera)
 
@@ -155,152 +176,62 @@ This function uses the down camera and calculates the absolute coordinates that 
 10. If we had no successful detections, then return invalid coordinates.
 11. Average the x and y coordinates and return the averages.
 
-Inputs:
-* int attempts: the number of detections you want to use to find the average coordinates of the object.
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
-
-Outputs:
-* Coordinate: the absolute x and y coordinates of the object under the sub.
-
 ## bool frontContinuousAlign(float min_seconds, int task, int camera, float thres)
 
-This function continuously aligns the sub to an object in front of it, except instead of using angles and turning the sub to align, it uses offsets to move the sub horizontally and then vertically to align. 
+Returns:
+* bool: returns true or false depending on whether or not the alignment was successful.
 
-1. Vertically align the sub to the object (so the object and the sub are at the same z).
-2. Horizontally align the sub to the object (so the object is right in front of it).
-3. Return true if we successfully aligned, or return False if it was unsuccessful.
+Continuously uses offsets to move the sub horizontally and vertically simultaneously to center the object in the front camera.
 
-Inputs: 
-* float min_seconds: the minimum amount of seconds that you want the sub to vertically align and horizontally align (the minimum seconds applies to each one, not both combined).
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
-* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
+1. Calculate the relative x and y offsets using information returned by sub_vision. 
+3. Move to those offsets by converting relative offsets to an absolute State (position), and telling the sub to move to that position. Uses the writeState() function to avoid blocking (we don't wait for the sub to reach that position, so we can continuously readjust the setpoint while it's moving there).
 
-Outputs:
-* bool: returns true or false depending on whether or not the alignments were successful.
+## bool frontContinuousAlignAtDist(float min_seconds, int task, int camera, float thres, float desiredDist)
 
-## bool frontContinuousValign(float min_seconds, int task, int camera, float thres)
+Returns:
+* bool: returns true or false depending on whether or not the alignment was successful.
 
-This function continuously calls for detections to vertically readjust the sub so that it is at the same z as the detected object.
+Same as frontContinuousAlign(), but it also targets the sub to move to a `desiredDist` away from the object. For example, we could call this function for the torpedo board, to be aligned with it and move to 2 meters away from it at the same time.
 
-1. Set up some useful variables (eg. max_seconds sets the timeout at 30 seconds).
-2. Warmup the ML model so that the warming up speed does not factor into our timing to see how long the function has taken.
-3. Record the starting time to later see how many seconds have elapsed.
-4. Record the current state of the sub.
-5. Detect the object.
-6. If the detected distance to the object is invalid, then we'll just assume the distance is 4 meters.
-7. If the detection is valid, continue.
-8. If we have continuously aligned for past the minimum time requirement and the object is vertically aligned, then hold the current depth and stop the function.
-9. Calculate the offset we need to move the sub vertically for it to be on the same z plane as the object.
-10. Adjust the sub's depth to align with the object.
-11. If the earlier detection wasn't valid, then we record that (if we failed too many times, then we stop the function because it means the object probably wasn't in view).
-12. If we took too long, then stop the function.
-13. Repeat steps 4-12 until the object is aligned or until we have taken too long.
-14. If the alignment was unsuccessful (couldn't detect the object, or we took too long), return false.
+## bool frontContinuousOrientAlign(float min_seconds, int task, int camera, float thres)
 
-Inputs: 
-* float min_seconds: the minimum amount of seconds that you want the sub to vertically align (the minimum seconds applies to each one, not both combined).
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
-* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
+*Work in progress*
 
-Outputs:
-* bool: returns true or false depending on if the alignment was successful or not.
+Returns:
+* bool: returns true or false depending on whether or not the alignment was successful.
 
-## bool frontContinuousHalign(float min_seconds, int task, int camera, float thres)
+Attempts to continuously move the sub to face the object (eg. torp board) perpendicularly/head-on. Work in progress because you need to setup a consistent (relative) orient calculation in sub_vision for your desired object, which we still have yet to make consistent and more accurate.
 
-This function continuously calls for detections to horizontally readjust the sub so that it is directly facing the object straight on.
+## bool perpendicularAlign(int attempts, int task, int camera)
 
-1. Set up some useful variables (eg. max_seconds sets the timeout at 30 seconds).
-2. Warmup the ML model so that the warming up speed does not factor into our timing to see how long the function has taken.
-3. Record the starting time to later see how many seconds have elapsed.
-4. Record the current state of the sub.
-5. Detect the object.
-6. If the detected distance to the object is invalid, then we'll just assume the distance is 4 meters.
-7. If the detection is valid, continue.
-8. If we have continuously aligned for past the minimum time requirement and the object is horizontally aligned, then hold the current position and stop the function.
-9. Calculate the offsets we need to move the sub horizontally for it to be directly in front of the object.
-10. Adjust the sub's position to align with the object.
-11. If the earlier detection wasn't valid, then we record that (if we failed too many times, then we stop the function because it means the object probably wasn't in view).
-12. If we took too long, then stop the function.
-13. Repeat steps 4-12 until the object is aligned or until we have taken too long.
-14. If the alignment was unsuccessful (couldn't detect the object, or we took too long), return false.
+Returns:
+* bool: returns true or false depending on whether or not the alignment was successful.
 
-Inputs: 
-* float min_seconds: the minimum amount of seconds that you want the sub to horizontally align (the minimum seconds applies to each one, not both combined).
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
-* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
+Attempts to align to an object so that the sub is perpendicularly facing it (eg. torp board, to have a higher chance of successful torp firing through the hole). Does this by finding which direction has a lower hw_ratio (because lower height/width ratios of detections means you're facing it more head-on rather than from the side). Knowing the direction, we then know the sign of the orient angle from sub_vision, which we use to calculate where to move to be perpendicularly aligned with the object. Requires that you set up the (relative) orient calculation inside of sub_vision's detect.py for that object.
 
-Outputs:
-* bool: returns true or false depending on if the alignment was successful or not.
-
-## bool frontConsecutiveAngleAlign(int attempts, int task, int camera)
-
-This function takes the angle to an object, turns towards the object, and repeats that process a user-specified amount of times. (This function is if you want to be extra careful that you aligned correctly.)
-
-1. Get the angle to the object.
-2. If the angle is valid, then turn towards the object; otherwise, return false.
-3. Repeat steps 1-2 until we have attempted the amount of times that the user specified.
-4. Return false if our alignment was unsuccessful (if any angle was every invalid).
-
-Inputs:
-* int attempts: the number of detections you want to use to find the average angle to the object. In this case, also the amount of times you want to turn towards the object.
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
-
-Outputs:
-* bool: returns true or false depending on whether or not the consecutive alignment was successful.
+This function is more jank because of difficulties in getting a consistent orient calculation in sub_vision that returns a relative orient with the correct sign, which is why we need to move around first to find what sign the orient should be. Recommended to first call frontContinuousAlignAtDist() to center the object in the camera before using this function. 
 
 ## bool downContinuousAlign(float min_seconds, int task, int camera, float thres)
 
-This function continuously calculates the offsets to align with an object underneath the sub and readjusts the sub's position to move above that object. 
+Returns:
+* bool: returns true or false depending on whether or not the alignment was successful.
 
-1. Set up some useful variables (eg. max_seconds sets the timeout at 30 seconds).
-2. Warmup the ML model so that the warming up speed does not factor into our timing to see how long the function has taken.
-3. Record the starting time to later see how many seconds have elapsed.
-4. Record the current state of the sub.
-5. Get the distance to the object (which is the distance to the floor/anything right below the sub, which is why we use `service_client::altitude()`.
-6. Detect the object.
-7. If the detection is valid, continue.
-8. If we have continuously aligned for past the minimum time requirement and the object is aligned, then stop the function.
-9. Calculate the offsets we need to move the sub for it to be directly above the object.
-10. If we are trying to align on top of the bins, then adjust the offset values so that we align the ball dropper instead of the down camera.
-11. Convert relative offsets to absolute coordinates, and set the sub to move to those coordinates. (Don't block so we can continuously readjust.)
-12. If the earlier detection wasn't valid, then we record that (if we failed too many times, then we stop the function because it means the object probably wasn't in view).
-13. If we couldn't detect the object with 5 tries or took too long, then stop the function.
-14. Repeat steps 4-13 until the object is aligned, we have taken too long, or we couldn't find the object with numerous tries.
-15. If the alignment was unsuccessful (couldn't detect the object, or we took too long), return false.
+One of my favorite functions. 
 
-Inputs: 
-* float min_seconds: the minimum amount of seconds that you want the sub to align for.
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
-* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
+Attempts to continuously move the sub to be directly above an object, centered in the down camera. Does this by using sub_vision detection info and altitude info (from dvl) to calculate relative x y offsets, and moves to those offsets in a loop. Useful for bins, path marker, grabbing tasks. 
 
-Outputs:
-* bool: returns true or false depending on if the alignment was successful or not.
+Terminates if the object is sufficiently centered in image (thres), we timed out, or we couldn't find the object. 
+
+This function by default centers the down camera above an object. However, if you instead want to center the ball dropper above the bins for example, you can add offsets inside this function to move the sub that way. You need to know the x and y distances (in NED coordinates) from the down camera to the apparatus you want to center, and do (calculated x offset) - (apparatus x distance to down cam), and do the same for the y offset. 
+
+You can also offset to apparatuses by first calling this function to align the down camera, then call addCoordinate() with your relative x and y offsets to center your apparatus. 
 
 ## bool testObjIsCentered(int attempts, int task, int camera, float thres)
 
-This function uses the vision system to test if an object is centered in front of the sub's front or down camera.
+Returns:
+* bool: true or false depending on if the object is centered in the camera within the thres. 
 
-1. Set up some useful variables (eg. avg_r will eventually be used to record the average row of the pixel that the object was detected at).
-2. Detect the object.
-3. If the detection is valid, add the pixel coordinates to the total. Otherwise, record that it was an invalid attempt (enough invalid attempts will trigger the function to stop).
-4. Repeat steps 2-3 until we have attempted the number of attempts that the user specified.
-5. Calculate the average coordinates of the detected object in the camera.
-6. If the object is centered satisfactorily within the threshold, then return true. Otherwise, return false.
-
-Inputs: 
-* int attempts: the number of detections you want to use to find the average angle to the object.
-* int task: the object you want to detect (Task::GATE_ML, Task::BOUY_ML, etc. (see sub_vision_interfaces/msg/Task.msg for all the values)).
-* int camera: which camera the detection should be on (FRONT, DOWN).
-* float thres: the threshold of how close the object is to the center of the camera that you are OK with. For example, a threshold of 0.1 means that you want the object to be within 10% of the middle of the camera.
-
-Outputs:
-* bool: returns true or false depending on whether or not the object is centered in the camera.
+Not really used atm. Calculates, with sub_vision detections, if the object is sufficiently centered in the camera. 
 
 ## bool objIsCentered(float r, float c, int camera, float thres)
 
