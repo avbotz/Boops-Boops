@@ -7,6 +7,7 @@ Welcome to the Boops-Boops :dolphin: wiki! Here you will find in depth explanati
 * [sub_sim](./files/sub_sim.md)
 * [Hydrophones](./files/hydrophones.md)
 * [Launch Files](./files/launch_files.md)
+* [Yearly To-Do](./files/yearly_todo.md)
 * [Miscellaneous tutorials](./files/tutorials.md)
 
 ## Overview:
