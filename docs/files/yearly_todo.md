@@ -6,4 +6,6 @@ Every year, software should do these things to get ready for comp:
 3) Pool test. In May/June (preferably earlier if possible), do systems checks, making sure sensors and simple movement systems are working as intended. 
 4) IRL Mission Run. Bug mechanical to create props identical to those at comp, and run through them in a pool as if it were the real competition.  
 
+Extra: Update systems and dependencies to the latest version. (Eg. Ubuntu, ROS versions, update them to the latest version so that later, you'll get access to new packages that are written for these new versions. Not as high priority, but still important if you have time.)
+
 Good luck! Feel free to reach out to any alum if you have any questions. We're always happy to help.
