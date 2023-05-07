@@ -1,7 +1,7 @@
 """
 This file is to run mission_node (controlled by restart_runner node), 
 control_node, vision_node, and acquisition_node for the sub to complete 
-the mission.
+the mission in POOL C (either competition or at a pool test).
 
 This is recommended for competition because if we decide to restart our run, 
 the kill switch will kill the mission, and when the kill switch is turned on again,
@@ -40,9 +40,8 @@ def generate_launch_description():
                 {"GATE": True},
                 {"BUOY": True},
                 {"BINS": True},
-                {"TORP": True}
                 {"OCTAGON": True},
-                {"POOL_A": True},
+                {"POOL_C": True},
             ]
         ),
 

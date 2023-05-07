@@ -10,11 +10,11 @@ function get_model {
 GATE_ID="18RodtGfvfKXPwqY8TSPaB2BxQMSDjJUN"
 BUOY_ID="17bpkjeoXu22Rag2bEVyzTbnZyi-9fClV"
 BINS_ID="1Md1hlqaeyzRoSU-iofml74sxICNaBhoh"
-TORP_ID="1Mxg7V1NugbRiyvadclY5lo3m8FeDCK5l"
+TORP_ID="1Aj2WbU_t_qs5BwA82D42WumvU6QQm2tG"
 OCTAGON_FRONT_ID="1s8Wz99FS49KqaNYjz9cyIPXXjok4xcUw"
 OCTAGON_DOWN_ID="1_KhywObJfsyBUvMKwrwuDaWOQFsS1K5L"
 BOTTLES_ID="18dKo4wAZppFKxs5vw2Uv09GWjMOYQEq2"
-PATH_MARKER_ID="147WSg3n5Wdnxpz8rimX9Kx_EXjUYGcnZ"
+PATH_MARKER_ID="147WSg3n5Wdnxpz8rimX9Kx_EXjUYGcn"Z
 
 get_model gate.pt $GATE_ID
 get_model buoy.pt $BUOY_ID

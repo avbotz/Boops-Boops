@@ -7,16 +7,17 @@ Conventions:
 * depth: distance from the surface
 * altitude: distance from the floor
 * State: an object type containing x, y, z, yaw, pitch, roll values
-* Coordinate: an object type containing x, y, values
+* Coordinate: an object type containing x, y values
 
 ## Explanation of Each File
 * [node.cpp](./node.cpp.md)
 * [mission.cpp](./mission.cpp.md)
 * [restart.cpp](./restart.cpp.md)
-* [tasks.cpp](./tasks.cpp.md)
 * [alignments.cpp](./alignments.cpp.md)
 * [client.cpp](./client.cpp.md)
 * [movements.cpp](./movements.cpp.md)
+* [scans.cpp](./scans.cpp.md)
+* [tasks.cpp](./tasks.cpp.md)
 * [util.cpp](./util.cpp.md)
 
 ## Structure
