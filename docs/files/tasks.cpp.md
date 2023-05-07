@@ -53,9 +53,23 @@ This function controls the AUV to navigate from the gate to the bins, position t
 7. Continuous align 2 more times, each at deeper depths.
 8. Drop the markers.
 
+## void torp()
+
+Navigates from the bins to the torpedo board, and attempts to position the sub to shoot torps through the holes.
+
+1. Set our initial depth.
+2. Turn towards where we think the torpedo board is based on the competition layout.
+3. Try to move toward the torp board.
+4. Keep looking around with a forwardSweepCheck until we can find torp board.
+5. Move toward the torp board.
+6. Align with it, to center it in the front camera.
+7. Align with it, so that the sub is perpendicular to the plane of the torp board (for a higher chance of being able to shoot through the hole).
+8. Align to each individual hole by centering it in the front camera, get within shooting range, offset so that we align the torpedo instead of the front camera, and shoot.
+9. Dip out by moving back. 
+
 ## void octagon()
 
-For 2022 we cheesed the task by using our front camera to detect the octagon and our down camera to align over the octagon stools (in the future you may want to do hydrophones.)
+For 2022 we cheesed the task by using our front camera to detect the octagon and our down camera to align over the octagon stools (in the future you may want to do hydrophones.) Experimental: trying to grab objects underneath the octagon.
 
 Vision-based approach we used at UMD:
 1. Face the starting angle of the course (yaw = 0, our original yaw.)
@@ -64,12 +78,14 @@ Vision-based approach we used at UMD:
 4. Go forward and check again for the stools and turn towards them if you found it.
 5. If at least one of your two checks found the octagon, then proceed, otherwise quit the function and surface.
 6. Keep moving in small steps in the direction of the octagon (getting the front camera angle and readjusting after each step), until you can find the center stool with the down camera (the down camera octagon detection returns a valid angle.)
-7. With the octagon stools in its sights, down continuous align above the center stool, and surface by setting 0 power to the thrusters.
+7. With the octagon stools in its sights, down continuous align above the center stool.
+8. Enter a grabbing loop, where we descend on the object, grab it, ascend, drop it off, repeat. 
+9. Surface by setting 0 power to the thrusters.
 
 Theoretical hydrophone based approach:
 1. Tell the sub to maintain a depth.
 2. Get the angle to the octagon from the FPGA.
-3. Do the same approach where you keep moving in small steps in that direction until you can detect the stools with your down camera, then dodwn continuous align over the center stool.
+3. Do the same approach where you keep moving in small steps in that direction until you can detect the stools with your down camera, then down continuous align over the center stool.
 
 ## void prelim()
 
