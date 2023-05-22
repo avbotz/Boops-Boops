@@ -55,12 +55,12 @@ def generate_launch_description():
             executable='restart',
             output='screen',
             parameters=[
-                # {"GATE": True},
-                # {"BUOY": True},
-                # {"BINS": True},
+                {"GATE": True},
+                {"BUOY": True},
+                {"BINS": True},
                 {"TORP": True},
-                # {"OCTAGON": True},
-                # {"POOL_B": True},
+                {"OCTAGON": True},
+                {"POOL_B": True},
                 {"SIM": True}
             ]
         ),
