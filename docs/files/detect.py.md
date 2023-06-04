@@ -48,3 +48,7 @@ This is another special case function, where we have to do a little bit more pro
 ### run_detection()
 
 This is the mother function, which is the default function for processing vision detections that don't need special case processing. It essentially runs the model to inference on the image, and it returns an Observation object that has the center pixel coordinate and pixel height of the detection information of the detection which we can use to calculate the angles to the object and the distance to the object (if applicable). It only returns an observation if the confidence is above 0.3, so we don't send back bad/false detections. Also, it logs the images before and after the detections for debugging and cool purposes.
+
+### run_detection_torp_hole()
+
+This function helps accomplish the task of shooting the torpedo through the torpedo board. Using OpenCV, this function detects the red circle on the torpedo board and finds the important points on the circle (the top-most point, the bottom-most point, the left-most point, and the right-most point). After calculating the focal length, the dimensions of the image, and the camera matrix, it uses the SolvePnP function to get the rotation and translation vectors. After generating a rotational matrix and applying some math, it returns the orientation of the circle. With this orientation, we are able to align our submarine to the circle, making it much easier to launch the torpedos into the torpedo hole.
