@@ -43,11 +43,6 @@ if [ "${1}" != "skip-install" ]; then
 	sudo sh install_spinnaker.sh
 	cd $ROS_WS_DIR
 
-	# Install local YOLOv5 repo so we can load models without wifi
-	cd $ROS_WS_DIR/weights
-	if [ ! -d "yolov5" ] ; then
-	    git clone "https://github.com/ultralytics/yolov5.git"
-	fi
 else
 	echo "Skipping installation of packages."
 fi
