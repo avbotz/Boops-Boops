@@ -42,7 +42,6 @@ if [ "${1}" != "skip-install" ]; then
 	sudo apt-get install libavcodec58 libavformat58 libswscale5 libswresample3 libavutil56 libusb-1.0-0 libpcre2-16-0 libdouble-conversion3 libxcb-xinput0 libxcb-xinerama0
 	sudo sh install_spinnaker.sh
 	cd $ROS_WS_DIR
-
 else
 	echo "Skipping installation of packages."
 fi

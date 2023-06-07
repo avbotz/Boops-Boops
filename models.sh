@@ -4,7 +4,7 @@
 # Download YOLOv5 ML Models from Craig's Google Drive
 mkdir -p weights
 function get_model {
-	wget -q --show-progress --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate "https://docs.google.com/uc?export=download&id=${2}" -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=${2}" -O weights/$1 && rm -rf /tmp/cookies.txt
+	gdown -O weights/${1} "https://drive.google.com/uc?id=${2}"
 }
 
 GATE_ID="17PscSdU3oLgse5PIPkYnhb_v3SJ0jiBP"
