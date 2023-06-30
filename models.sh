@@ -24,4 +24,3 @@ get_model dhd_front.pt $DHD_FRONT_ID
 get_model dhd_down.pt $DHD_DOWN_ID
 get_model chevron.pt $CHEVRON_ID
 get_model path_marker.pt $PATH_MARKER_ID
-

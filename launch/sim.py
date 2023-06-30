@@ -29,7 +29,7 @@ def generate_launch_description():
         Node(
             package='sub_acquisition',
             executable='acquisition',
-            output='screen',
+            # output='log',
             parameters=[
                 {"SIM": True}
             ]
@@ -37,8 +37,10 @@ def generate_launch_description():
         Node(
             package='sub_vision_yolov8',
             executable='vision',
-            output='screen',
+            # output='log',
             parameters=[
+                {"LOG_FRONT": True},
+                {"LOG_DOWN": True},
                 {"SIM": True}
             ]
         ),
@@ -52,8 +54,8 @@ def generate_launch_description():
         ),
         Node(
             package='sub_mission',
-            executable='restart',
-            output='screen',
+            executable='mission',
+            # output='log',
             parameters=[
                 {"GATE": True},
                 {"BUOY": True},

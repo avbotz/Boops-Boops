@@ -38,6 +38,8 @@ def generate_launch_description():
             node_executable='vision',
             output='screen',
             parameters=[
+                {"LOG_FRONT": True},
+                {"LOG_DOWN": True},
                 {"SIM": True}
             ]
         ),
@@ -54,7 +56,7 @@ def generate_launch_description():
             node_executable='mission',
             output='screen',
             parameters=[
-		{"POOL_TEST": True},
+                {"POOL_TEST": True},
                 {"COIN_FLIP": True},
                 {"GATE": True},
                 {"BUOY": True},
