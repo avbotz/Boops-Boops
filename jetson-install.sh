@@ -39,8 +39,8 @@ if [ "${1}" != "skip-install" ]; then
 	cd ~/Downloads
 	#non-greedy grep finding file id from html in reverse (doesn't work as download link changes per request)
 	#wget -O spinnaker.tar.gz https://flir.app.boxcn.net/v/SpinnakerSDK/file/$(curl -s https://flir.app.boxcn.net/v/SpinnakerSDK/folder/133154514756 | rev | grep -Po 'zg.rat.gkp-46mra-40.02utnubU-.*?-rekannips.*?:"di"' | rev | grep -Po '(?<=:).*?(?=,)' | head -1)
-	# Ryan's google drive
-	wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1OSc0goplIs2CQj7MVlYHpLIfvbIhuMcN' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1OSc0goplIs2CQj7MVlYHpLIfvbIhuMcN" -O spinnaker.tar.gz && rm -rf /tmp/cookies.txt
+	# Craig's google drive
+	wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1xf1N6_TFLRtfEufK5ld9zuh1mylTvVyq' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1xf1N6_TFLRtfEufK5ld9zuh1mylTvVyq" -O spinnaker.tar.gz && rm -rf /tmp/cookies.txt
 	tar xvfz spinnaker.tar.gz
 	cd $(ls -t -d ~/Downloads/spinnaker-*-arm64/ | head -1)
 	sudo apt-get install libavcodec58 libavformat58 libswscale5 libswresample3 libavutil56 libusb-1.0-0 libpcre2-16-0 libdouble-conversion3 libxcb-xinput0 libxcb-xinerama0 qt5-default	
