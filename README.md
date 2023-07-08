@@ -3,9 +3,9 @@
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/9/98/Boga_Galiza.jpg)
 
     Boops-Boops is AVBotz's high level mission control 
-    system. It handles sending movements commands to the 
-    microcontroller, running computer vision models, running 
-    competition tasks and more.
+    system run on the PC/Jetson. It handles sending movements 
+    commands to the microcontroller, running computer vision models, 
+    running competition tasks and more.
 
 ## Documentation
 

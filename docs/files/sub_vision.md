@@ -64,6 +64,12 @@ sub_vision
         └── test_pep257.py
 ```
 
+## Setting up the Cameras
+
+USB FLIR cameras usually don't need any setup.
+
+If you have a Ethernet FLIR camera, then you'll have to [set a persistent IP](https://www.flir.com/support-center/iis/machine-vision/knowledge-base/persistent-ip-in-spinnakerqt/) for that camera.
+
 ## How it Works
 
 First, `sub_vision` has a file that creates a node that handles the main vision detections. This `vision` node creates a service, that when called on by `sub_mission`, performs the detection that it is requested to do. It does this by taking the latest image that it receives from the camera that corresponds with the detection request (these images are constantly being read from the hardware by a separate node called `acquisition` node, which publishes these images onto a topic that `vision` can read from), loading up the ML model that sub_mission requests for, and performing the detection on the image.
