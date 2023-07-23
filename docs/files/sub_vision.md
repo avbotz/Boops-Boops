@@ -86,7 +86,7 @@ The steps to train are as follows:
 * Collect images (see "Image Collection Run" or "Simulated Image Collection Run" sections in README)
 * Annotate the images (use [CVAT](https://github.com/openvinotoolkit/cvat), which has the capability of [interpolating](https://youtu.be/Hc3oudNuDsY) between images to automatically label some images for you, which speeds up the process a ton), and export them into PASCAL VOC format (to put them into one directory with images + corresponding .xml annotation files)
 * Train - Follow this Google Colab [link](https://colab.research.google.com/drive/1fycLmGHs_UIEpiA5fVn3OYPsmNeGVkfa?usp=sharing) to train your model (you may have to upload a .zip file of your images+annotations dataset onto your Google Drive first)
-* Deploy - Upload the best.pt file to Google Drive and paste its file ID into [models.sh](). 
+* Deploy - Upload the best.pt file to Google Drive and paste its file ID into [models.sh](./models.sh). 
 * (put instructions here (maybe download the model, put it into the BB models folder, upload the download models script in BB?)))
 
 ## OpenCV
