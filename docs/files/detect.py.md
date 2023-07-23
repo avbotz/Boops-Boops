@@ -1,4 +1,4 @@
-`detect.py` has the code that handles detections using the YOLOv5s ML models. It detects the pixel coordinates of the center of the bounding box around the object, it uses that information to calculate the angle to the object, and in some cases (i.e. gate, buoys) it also calculates the distance to the object.
+`detect.py` has the code that handles detections using the YOLOv8s ML models. It detects the pixel coordinates of the center of the bounding box around the object, it uses that information to calculate the angle to the object, and in some cases (i.e. gate, buoys) it also calculates the distance to the object.
 
 ### TaskWeights
 
