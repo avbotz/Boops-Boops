@@ -209,7 +209,7 @@ To mimic real life settings, we have a strong water current that jostles Nemo ar
 
 Here are some ways we could improve the simulator:
 * Eventually, we'll have to update the sim to work for Ubuntu versions that are >= 22.04 to keep up with updated packages. However, the simulator package that we use (Plankton) is written for 20.04. When this happens, I can think of two options: 1) Create a fork of Plankton and manually update the code files to work for updated Ubuntu/ROS2 versions; 2) Migrate sim to use Ignition Gazebo.
-* More realistic graphics (migrate to use Unity instead of Gazebo, like Team Inspiration?)
+* More realistic graphics (migrate to use Unity (lmao) instead of Gazebo, like Team Inspiration?)
 * Separate scenarios for each comp task, so that we can test comp tasks individually (would require, restruction sub_mission's tasks.cpp to create new functions in between the main functions that move from spot to spot, so we can have functions that only do the task without first moving to it).
 * Adding Nemo's actual parameters: Right now, Nemo's values (eg. mass, inertia) are not actually Nemo's, but rather they're copied from a uuvsimulator example robot. I tried to put Nemo's actual parameters in before, but it seemed that some of the values were too small (which Gazebo couldn't handle), causing the sim to crash each time. However, I probably did something wrong, and if we could get Nemo's actual specs in there, that would be nice and more realistic.
 
