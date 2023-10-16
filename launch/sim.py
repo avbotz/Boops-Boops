@@ -44,22 +44,22 @@ def generate_launch_description():
                 {"SIM": True}
             ]
         ),
-        """
+        
         Node(
             package='sub_control',
             node_executable='control',
             output='screen',
             parameters=[
-                {"SIM": False}
+                {"SIM": True}
             ]
         ),
-        """
+        
         Node(
             package='sub_mission',
             executable='mission',
             # output='log',
             parameters=[
-                {"GATE": False},
+                {"GATE": True},
                 {"BUOY": True},
                 {"BINS": True},
                 {"TORP": True},
