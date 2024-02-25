@@ -16,7 +16,9 @@ npm install -g npx
 sudo pip3 install -r requirements.txt
 
 # YOLOv8 requirements
-sudo pip3 install -r https://raw.githubusercontent.com/ultralytics/ultralytics/master/requirements.txt
+# sudo pip3 install -r https://raw.githubusercontent.com/ultralytics/ultralytics/master/requirements.txt
+
+sudo pip3 install ultralytics
 
 # For host pc that already installed pytorch with specific cuda version:
 # sudo pip3 install matplotlib>=3.2.2 numpy>=1.18.5 opencv-python>=4.1.1 Pillow>=7.1.2 PyYAML>=5.3.1 requests>=2.23.0 scipy>=1.4.1 tqdm>=4.41.0
@@ -56,23 +58,23 @@ source /usr/share/gazebo-11/setup.sh
 
 ROS2_REPOS=("https://github.com/avbotz/sub_control" "https://github.com/avbotz/sub_vision" "https://github.com/avbotz/sub_mission" "https://github.com/avbotz/sub_interface" "https://github.com/avbotz/sub_sim" "https://www.github.com/Liquid-ai/Plankton")
 
-mkdir -p src
+#mkdir -p src
 if ! [ -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
 	sudo rosdep init
 fi
 
-cd src
-for repo in ${ROS2_REPOS[@]} 
-do
-	if [ ! -d "$repo | grep -oE '[^/]+$'" ];
-	then 
-		git clone --recursive $repo
-	fi
-done
-cd ..
+#cd src
+#for repo in ${ROS2_REPOS[@]} 
+#do
+#	if [ ! -d "$repo | grep -oE '[^/]+$'" ];
+#	then 
+#		git clone --recursive $repo
+#	fi
+#done
+#cd ..
 
 rosdep update
-rosdep install -i --from-path src --rosdistro foxy
+rosdep update --include-eol-distros
 
 colcon build --packages-up-to plankton
 
