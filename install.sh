@@ -48,7 +48,7 @@ else
 	echo "Skipping installation of packages."
 fi
 
-# Download ML models from Craig's Google Drive
+# Download ML models from AVBotz's Google Drive
 cd $ROS_WS_DIR
 ./models.sh
 
@@ -58,23 +58,23 @@ source /usr/share/gazebo-11/setup.sh
 
 ROS2_REPOS=("https://github.com/avbotz/sub_control" "https://github.com/avbotz/sub_vision" "https://github.com/avbotz/sub_mission" "https://github.com/avbotz/sub_interface" "https://github.com/avbotz/sub_sim" "https://www.github.com/Liquid-ai/Plankton")
 
-#mkdir -p src
+mkdir -p src
 if ! [ -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
 	sudo rosdep init
 fi
 
-#cd src
-#for repo in ${ROS2_REPOS[@]} 
-#do
-#	if [ ! -d "$repo | grep -oE '[^/]+$'" ];
-#	then 
-#		git clone --recursive $repo
-#	fi
-#done
-#cd ..
+cd src
+for repo in ${ROS2_REPOS[@]} 
+do
+	if [ ! -d "$repo | grep -oE '[^/]+$'" ];
+	then 
+		git clone --recursive $repo
+	fi
+done
+cd ..
 
 rosdep update
-rosdep update --include-eol-distros
+rosdep install -i --from-path src --rosdistro foxy
 
 colcon build --packages-up-to plankton
 
