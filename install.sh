@@ -38,7 +38,7 @@ if [ "${1}" != "skip-install" ]; then
 		
 	# Download and install Spinnaker SDK from Craig's google drive
 	cd ~/Downloads
-	wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1CQUg4E2cgPBH_IEjRZWVDbr6G3Xipvsu' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1CQUg4E2cgPBH_IEjRZWVDbr6G3Xipvsu" -O ./spinnaker.tar.gz && rm -rf /tmp/cookies.txt
+	wget --load-cookies /tmp/cookies.txt "https://drive.google.com/drive/folders/17oCw82a1vD32yUoM3mqqeNo7CTiSSKNf"(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate) 'https://drive.google.com/drive/folders/17oCw82a1vD32yUoM3mqqeNo7CTiSSKNf' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1CQUg4E2cgPBH_IEjRZWVDbr6G3Xipvsu" -O ./spinnaker.tar.gz && rm -rf /tmp/cookies.txt
 	tar -xzf spinnaker.tar.gz -C .
 	cd $(ls -t -d ~/Downloads/spinnaker-*/ | head -1)
 	sudo apt-get install libavcodec58 libavformat58 libswscale5 libswresample3 libavutil56 libusb-1.0-0 libpcre2-16-0 libdouble-conversion3 libxcb-xinput0 libxcb-xinerama0

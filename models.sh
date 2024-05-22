@@ -10,7 +10,7 @@ function get_model {
 	gdown -O weights/${1} "https://drive.google.com/uc?export=download&id=${2}"
 }
 
-GATE_ID="1L6OworPcBcUqvDRMPb8DDY7aJZ3ibyiP"
+GATE_ID="1L8H6b_PiN5qG7jL7ZOkyPW4ldba-gC23"
 BUOY_ID="1_0fDRlG7czr7XOEjjLIZkN7Hjl29rIB-"
 BINS_ID="13sVRtqkDhirejGSCT2Rhx88O1_eWbfHH"
 TORP_ID="1Qdi9Xasul0z_3fVcz_rMaWGM1fgjhzyT"
