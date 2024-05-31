@@ -59,8 +59,8 @@ def generate_launch_description():
             executable='mission',
             # output='log',
             parameters=[
-                {"GATE": True},
-                {"BUOY": True},
+                {"GATE": False},
+                {"BUOY": False},
                 {"BINS": True},
                 {"TORP": True},
                 {"OCTAGON": True},
