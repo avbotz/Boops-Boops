@@ -27,6 +27,11 @@ def generate_launch_description():
             output='screen',
         ),
         Node(
+            package='hydrophone_sim',
+            executable='hydrophone_sim',
+            output='screen',
+        ),
+        Node(
             package='sub_acquisition',
             executable='acquisition',
             # output='log',
@@ -59,16 +64,12 @@ def generate_launch_description():
             executable='mission',
             # output='log',
             parameters=[
-                {"GATE": True},
-                {"BUOY": True},
-                {"BINS": True},
-                {"TORP": True},
-                {"OCTAGON": True},
-                {"POOL_B": True},
+                {"POOL_TEST": True},
+                {"POOL_A": True},
                 {"SIM": True}
             ]
         ),
-        
+           
         # Launch image display, to access enter:
         # (ip address of computer running BB):5000 in a web browser
         Node(
