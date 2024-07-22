@@ -26,54 +26,53 @@ sudo pip3 install ultralytics
 # sudo pip3 install tensorboard>=2.4.1 pandas>=1.1.4 seaborn>=0.11.0 ipython psutil thop
 
 if [ "${1}" != "skip-install" ]; then
-	# Install ROS2
-	sudo apt-get update && sudo apt-get install curl gnupg2 lsb-release git wget
-	sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg	
-	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
-	sudo apt update
-	sudo apt install ros-foxy-desktop
-	sudo apt install ros-foxy-gazebo-*
-	sudo apt-get install python3-colcon-common-extensions
-	sudo apt-get install python3-rosdep
-		
-	# Download and install Spinnaker SDK from Craig's google drive
-	cd ~/Downloads
-	wget --load-cookies /tmp/cookies.txt "https://drive.google.com/drive/folders/17oCw82a1vD32yUoM3mqqeNo7CTiSSKNf"(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate) 'https://drive.google.com/drive/folders/17oCw82a1vD32yUoM3mqqeNo7CTiSSKNf' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1CQUg4E2cgPBH_IEjRZWVDbr6G3Xipvsu" -O ./spinnaker.tar.gz && rm -rf /tmp/cookies.txt
-	tar -xzf spinnaker.tar.gz -C .
-	cd $(ls -t -d ~/Downloads/spinnaker-*/ | head -1)
-	sudo apt-get install libavcodec58 libavformat58 libswscale5 libswresample3 libavutil56 libusb-1.0-0 libpcre2-16-0 libdouble-conversion3 libxcb-xinput0 libxcb-xinerama0
-	sudo sh install_spinnaker.sh
-	cd $ROS_WS_DIR
+    # Install ROS2
+    sudo apt-get update && sudo apt-get install curl gnupg2 lsb-release git wget
+    sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg   
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+    sudo apt update
+    sudo apt install ros-foxy-desktop
+    sudo apt install ros-foxy-gazebo-*
+    sudo apt-get install python3-colcon-common-extensions
+    sudo apt-get install python3-rosdep
+        
+    # Download and install Spinnaker SDK from Craig's google drive
+    cd ~/Downloads
+    gdown "https://drive.google.com/uc?id=1ovvyZivlXCknb2bTlY62_qDiSiv1Sn2_" -O spinnaker.tar.gz
+    tar -xzf spinnaker.tar.gz -C .
+    cd $(ls -t -d ~/Downloads/spinnaker-*/ | head -1)
+    sudo apt-get install libavcodec58 libavformat58 libswscale5 libswresample3 libavutil56 libusb-1.0-0 libpcre2-16-0 libdouble-conversion3 libxcb-xinput0 libxcb-xinerama0
+    sudo sh install_spinnaker.sh
+    cd $ROS_WS_DIR
 else
-	echo "Skipping installation of packages."
+    echo "Skipping installation of packages."
 fi
 
 # Download ML models from AVBotz's Google Drive
 cd $ROS_WS_DIR
-./models.sh
+# ./models.sh
 
 # Install each subrepo
 source /opt/ros/foxy/setup.sh
 source /usr/share/gazebo-11/setup.sh
 
-ROS2_REPOS=("https://github.com/avbotz/sub_control" "https://github.com/avbotz/sub_vision" "https://github.com/avbotz/sub_mission" "https://github.com/avbotz/sub_interface" "https://github.com/avbotz/sub_sim" "https://www.github.com/Liquid-ai/Plankton")
-
+ROS2_REPOS=()
 mkdir -p src
 if ! [ -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
-	sudo rosdep init
+    sudo rosdep init
 fi
 
 cd src
 for repo in ${ROS2_REPOS[@]} 
 do
-	if [ ! -d "$repo | grep -oE '[^/]+$'" ];
-	then 
-		git clone --recursive $repo
-	fi
+    if [ ! -d "$repo | grep -oE '[^/]+$'" ];
+    then 
+        git clone --recursive $repo
+    fi
 done
 cd ..
 
-rosdep update
+rosdep update --include-eol-distros
 rosdep install -i --from-path src --rosdistro foxy
 
 colcon build --packages-up-to plankton
