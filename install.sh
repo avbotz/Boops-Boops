@@ -59,17 +59,17 @@ source /usr/share/gazebo-11/setup.sh
 ROS2_REPOS=("https://github.com/avbotz/sub_control" "https://github.com/avbotz/sub_vision" "https://github.com/avbotz/sub_mission" "https://github.com/avbotz/sub_interface" "https://github.com/avbotz/sub_sim" "https://www.github.com/Liquid-ai/Plankton")
 mkdir -p src
 if ! [ -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
-	sudo rosdep init
+    sudo rosdep init
 fi
 
 cd src
 
 for repo in ${ROS2_REPOS[@]} 
 do
-	if [ ! -d "$repo | grep -oE '[^/]+$'" ];
-	then 
-		git clone --recursive $repo
-	fi
+    if [ ! -d "$repo | grep -oE '[^/]+$'" ];
+    then 
+        git clone --recursive $repo
+    fi
 done
 cd ..
 
