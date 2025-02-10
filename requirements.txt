@@ -12,3 +12,4 @@ pytailwindcss
 protobuf==3.19.6
 ultralytics
 gdown
+transformers

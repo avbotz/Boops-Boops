@@ -27,3 +27,8 @@ get_model dhd_front.pt $DHD_FRONT_ID
 get_model dhd_down.pt $DHD_DOWN_ID
 get_model chevron.pt $CHEVRON_ID
 get_model path_marker.pt $PATH_MARKER_ID
+
+mkdir weights/depth-anything-v2-small-hf
+wget -O weights/depth-anything-v2-small-hf/config.json https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf/resolve/main/config.json?download=true
+wget -O weights/depth-anything-v2-small-hf/model.safetensors https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf/resolve/main/model.safetensors?download=true
+wget -O weights/depth-anything-v2-small-hf/preprocessor_config.json https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf/resolve/main/preprocessor_config.json?download=true
