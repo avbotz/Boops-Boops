@@ -29,6 +29,9 @@ def generate_launch_description():
             package='sub_sim',
             executable='simulator',
             output='screen',
+            parameters=[
+                {'use_sim_time': True}
+            ]
         ),
         Node(
             package='sub_acquisition',
