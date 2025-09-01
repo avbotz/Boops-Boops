@@ -1,10 +1,7 @@
 #!/bin/bash
-# Author Kush Nayak
 
-# Download YOLOv5 ML Models from AVBotz's Google Drive (Models folder)
+# Download YOLOv8 ML Models from AVBotz's Google Drive (Models folder)
 mkdir -p weights
-
-pip install -U --no-cache-dir gdown --pre
 
 function get_model {
 	gdown -O weights/${1} "https://drive.google.com/uc?export=download&id=${2}"
