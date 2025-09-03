@@ -16,27 +16,27 @@ def generate_launch_description():
         IncludeLaunchDescription(
             XMLLaunchDescriptionSource(
                 os.path.join(
-                    get_package_share_directory('sub_sim'),
-                    'launch/simulator_heads.xml')
+                    get_package_share_directory("sub_sim"),
+                    "launch/simulator_heads.xml")
             )
         ),
         Node(
-            package='sub_sim',
-            executable='simulator',
-            output='screen',
+            package="sub_sim",
+            executable="simulator",
+            output="screen",
         ),
         Node(
-            package='sub_acquisition',
-            node_executable='acquisition',
-            output='screen',
+            package="sub_acquisition",
+            executable="acquisition",
+            output="screen",
             parameters=[
                 {"SIM": True}
             ]
         ),
         Node(
-            package='sub_vision_yolov8',
-            node_executable='vision',
-            output='screen',
+            package="sub_vision_yolov8",
+            executable="vision",
+            output="screen",
             parameters=[
                 {"LOG_FRONT": True},
                 {"LOG_DOWN": True},
@@ -44,17 +44,17 @@ def generate_launch_description():
             ]
         ),
         Node(
-            package='sub_control',
-            node_executable='control',
-            output='screen',
+            package="sub_control",
+            executable="control",
+            output="screen",
             parameters=[
                 {"SIM": True}
             ]
         ),
         Node(
-            package='sub_mission',
-            node_executable='mission',
-            output='screen',
+            package="sub_mission",
+            executable="mission",
+            output="screen",
             parameters=[
                 {"COIN_FLIP": True},
                 {"GATE": True},
@@ -68,8 +68,8 @@ def generate_launch_description():
         # Launch image display, to access enter:
         # (ip address of computer running BB):5000 in a web browser
         Node(
-            package='sub_interface',
-            node_executable='interface',
-            output='screen',
+            package="sub_interface",
+            executable="interface",
+            output="screen",
         )
     ])

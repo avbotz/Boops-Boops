@@ -11,32 +11,32 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='sub_control',
-            node_executable='control',
-            output='screen'
+            package="sub_control",
+            executable="control",
+            output="screen"
         ),
         Node(
-            package='sub_acquisition',
-            node_executable='acquisition',
-            output='screen'
+            package="sub_acquisition",
+            executable="acquisition",
+            output="screen"
         ),
         Node(
-            package='sub_vision_yolov8',
-            node_executable='vision',
-            output='screen',
+            package="sub_vision_yolov8",
+            executable="vision",
+            output="screen",
             parameters=[
                 {"LOG_DOWN": True}
             ]
         ),
-        
+
         # Launch image display, to access enter:
         # (ip address of computer running BB):5000 in a web browser
 
-        # Use the interface's manual control mode to control the sub
+        # Use the interface"s manual control mode to control the sub
         # while the code automatically logs images.
         Node(
-            package='sub_interface',
-            node_executable='interface',
-            output='screen',
+            package="sub_interface",
+            executable="interface",
+            output="screen",
         )
     ])
