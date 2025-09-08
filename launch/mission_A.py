@@ -8,6 +8,11 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     return LaunchDescription([
+        #Node(
+        #    package='dvl_a50_publisher',
+        #    node_executable='dvl_a50_publisher_sensor',
+        #    output='screen'
+        #),
         Node(
             package='sub_acquisition',
             node_executable='acquisition',
@@ -34,9 +39,9 @@ def generate_launch_description():
             parameters=[
                 {"GATE": True},
                 {"BUOY": True},
-                {"BINS": True},
+                {"BINS": False},
                 {"OCTAGON": True},
-                {"POOL_A": True}
+                {"POOL_A": False}
             ]
         ),
 

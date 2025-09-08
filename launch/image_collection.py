@@ -11,6 +11,11 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
+            package='dvl_a50',
+            node_executable='dvl_a50_sensor',
+            output='screen'
+        ),
+        Node(
             package='sub_control',
             node_executable='control',
             output='screen'
