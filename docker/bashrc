@@ -1,0 +1,5 @@
+# Use entrypoint script instead prevents autocomplete from working
+source /opt/ros/foxy/setup.bash
+source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+
+export PATH=~/.local/bin:"$PATH"
