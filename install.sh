@@ -6,24 +6,10 @@ set -e
 ROS_WS_DIR=$(pwd)
 
 # Simple apt-get packages.
-sudo apt-get install libopencv-dev python3-opencv python3-pip git tmux npm nodejs
+sudo apt-get install libopencv-dev python3-opencv python3-pip git tmux
 
-# Install stuff for webserver
-sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
-npm install -g npx
-
-# Pip packages
+# Install pip packages
 sudo pip3 install -r requirements.txt
-
-# YOLOv8 requirements
-# sudo pip3 install -r https://raw.githubusercontent.com/ultralytics/ultralytics/master/requirements.txt
-
-sudo pip3 install ultralytics
-
-# For host pc that already installed pytorch with specific cuda version:
-# sudo pip3 install matplotlib>=3.2.2 numpy>=1.18.5 opencv-python>=4.1.1 Pillow>=7.1.2 PyYAML>=5.3.1 requests>=2.23.0 scipy>=1.4.1 tqdm>=4.41.0
-# sudo pip3 install protobuf==3.20.1 
-# sudo pip3 install tensorboard>=2.4.1 pandas>=1.1.4 seaborn>=0.11.0 ipython psutil thop
 
 if [ "${1}" != "skip-install" ]; then
     # Install ROS2
@@ -43,7 +29,7 @@ if [ "${1}" != "skip-install" ]; then
     cd $(ls -t -d ~/Downloads/spinnaker-*/ | head -1)
     sudo apt-get install libavcodec58 libavformat58 libswscale5 libswresample3 libavutil56 libusb-1.0-0 libpcre2-16-0 libdouble-conversion3 libxcb-xinput0 libxcb-xinerama0
     sudo sh install_spinnaker.sh
-    cd $ROS_WS_DIR
+    cd $ROS_WS_DIR 
 else
     echo "Skipping installation of packages."
 fi
@@ -56,22 +42,11 @@ cd $ROS_WS_DIR
 source /opt/ros/foxy/setup.sh
 source /usr/share/gazebo-11/setup.sh
 
-ROS2_REPOS=("https://github.com/avbotz/sub_control" "https://github.com/avbotz/sub_vision" "https://github.com/avbotz/sub_mission" "https://github.com/avbotz/sub_interface" "https://github.com/avbotz/sub_sim" "https://www.github.com/Liquid-ai/Plankton")
-mkdir -p src
 if ! [ -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
     sudo rosdep init
 fi
 
-cd src
-
-for repo in ${ROS2_REPOS[@]} 
-do
-    if [ ! -d "$repo | grep -oE '[^/]+$'" ];
-    then 
-        git clone --recursive $repo
-    fi
-done
-cd ..
+./clone_repos.sh
 
 rosdep update --include-eol-distros
 rosdep install -i --from-path src --rosdistro foxy
