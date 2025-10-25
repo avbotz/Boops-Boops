@@ -30,3 +30,10 @@ If you are getting an error like this:
 [gzserver-4] [Wrn] [RenderEngine.cc:89] Unable to create X window. Rendering will be disabled
 ```
 Open a terminal outside of the devcontainer and run `./docker_perms.sh`. 
+
+If you are geting an error relating to Plankton not being built, you may need to run:
+```
+colcon build --packages-up-to Plankton
+colcon build
+```
+Instead of just `colcon build`.
